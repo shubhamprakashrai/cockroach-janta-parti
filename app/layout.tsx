@@ -51,6 +51,13 @@ export const metadata: Metadata = {
     languages: { "en-IN": "/", "hi-IN": "/hindi" },
   },
   category: "politics",
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "CJP Fan HQ",
+  },
+  formatDetection: { telephone: false },
 };
 
 export const viewport: Viewport = {
