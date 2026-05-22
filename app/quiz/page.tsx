@@ -40,11 +40,11 @@ export default function QuizPage() {
             {/* Intro Stage */}
             {stage === 'intro' && (
                 <div className="flex-1 flex flex-col items-center justify-center p-8 text-center max-w-4xl mx-auto animate-in zoom-in duration-500">
-                    <Link href="/" className="font-mono text-sm uppercase text-text-secondary hover:text-white absolute top-8 left-8">← BACK TO HOME</Link>
+                    <Link href="/" className="font-mono text-sm uppercase text-text-secondary hover:text-rich-black absolute top-8 left-8">← BACK TO HOME</Link>
 
                     <div className="relative mb-12">
                         <div className="text-[12rem] md:text-[16rem] leading-none animate-pulse">🪳</div>
-                        <div className="absolute top-0 right-0 bg-alert text-black font-mono font-bold text-xs uppercase px-4 py-2 border-4 border-black rotate-12 shadow-[4px_4px_0_0_#FFF]">
+                        <div className="absolute top-0 right-0 bg-alert text-white font-mono font-bold text-xs uppercase px-4 py-2 border-4 border-black rotate-12 shadow-[4px_4px_0_0_#000]">
                             100% SCIENTIFIC
                         </div>
                     </div>
@@ -58,7 +58,7 @@ export default function QuizPage() {
 
                     <button
                         onClick={() => setStage('quiz')}
-                        className="bg-accent text-black font-display text-4xl uppercase px-12 py-6 border-4 border-black shadow-[8px_8px_0_0_#FFF] hover:scale-105 hover:bg-white hover:shadow-[12px_12px_0_0_#FFD60A] transition-all flex items-center justify-center gap-4"
+                        className="bg-accent text-black font-display text-4xl uppercase px-12 py-6 border-4 border-black shadow-[8px_8px_0_0_#000] hover:scale-105 hover:bg-white hover:shadow-[12px_12px_0_0_#FFD60A] transition-all flex items-center justify-center gap-4"
                     >
                         <Play size={40} className="fill-black" /> START THE QUIZ
                     </button>
@@ -77,7 +77,7 @@ export default function QuizPage() {
 
                     {/* Question Content */}
                     <div className="flex-1 flex flex-col justify-center mb-12">
-                        <h2 className="font-display text-4xl md:text-6xl uppercase text-white mb-12 leading-tight text-center">
+                        <h2 className="font-display text-4xl md:text-6xl uppercase text-rich-black mb-12 leading-tight text-center">
                             {questions[currentQ].text}
                         </h2>
 
@@ -88,7 +88,7 @@ export default function QuizPage() {
                                     <button
                                         key={i}
                                         onClick={handleAnswer}
-                                        className="w-full text-left bg-card border-4 border-text-primary p-6 font-mono text-xl md:text-2xl uppercase hover:bg-text-primary hover:text-black hover:-translate-y-1 hover:shadow-[8px_8px_0_0_#FFD60A] transition-all group relative overflow-hidden"
+                                        className="w-full text-left bg-card border-4 border-text-primary p-6 font-mono text-xl md:text-2xl uppercase hover:bg-text-primary hover:text-bg hover:-translate-y-1 hover:shadow-[8px_8px_0_0_#FFD60A] transition-all group relative overflow-hidden"
                                     >
                                         <span className="relative z-10 font-bold block">{opt}</span>
                                         <div className="absolute inset-y-0 left-0 w-0 bg-accent transition-all duration-300 group-hover:w-full z-0 opacity-20"></div>
@@ -103,7 +103,7 @@ export default function QuizPage() {
                                     <button
                                         key={i}
                                         onClick={handleAnswer}
-                                        className="aspect-square bg-card border-4 border-text-primary hover:border-accent flex flex-col items-center justify-center p-4 hover:-translate-y-2 transition-transform hover:shadow-[8px_8px_0_0_#FFF] relative group overflow-hidden"
+                                        className="aspect-square bg-card border-4 border-text-primary hover:border-accent flex flex-col items-center justify-center p-4 hover:-translate-y-2 transition-transform hover:shadow-[8px_8px_0_0_#000] relative group overflow-hidden"
                                     >
                                         <div className="text-[5rem] mb-4 group-hover:scale-125 transition-transform opacity-30 group-hover:opacity-100 mix-blend-screen group-hover:hue-rotate-90">
                                             {i === 0 ? '🏚️' : i === 1 ? '🚰' : i === 2 ? '🍕' : '💻'}
@@ -133,7 +133,7 @@ export default function QuizPage() {
                                 </div>
                                 <button
                                     onClick={handleAnswer}
-                                    className="bg-accent text-black font-display text-3xl uppercase px-12 py-4 border-4 border-black hover:bg-white hover:-translate-y-1 shadow-[8px_8px_0_0_#FFF] transition-all"
+                                    className="bg-accent text-black font-display text-3xl uppercase px-12 py-4 border-4 border-black hover:bg-white hover:-translate-y-1 shadow-[8px_8px_0_0_#000] transition-all"
                                 >
                                     CONFIRM RATING
                                 </button>
@@ -149,7 +149,7 @@ export default function QuizPage() {
 
                     <div className="text-center mb-8">
                         <p className="font-mono font-bold text-text-secondary uppercase tracking-widest mb-2 border-b-2 border-text-primary inline-block pb-1">DIAGNOSIS COMPLETE</p>
-                        <h1 className="font-display text-5xl md:text-7xl uppercase text-white leading-tight">
+                        <h1 className="font-display text-5xl md:text-7xl uppercase text-rich-black leading-tight">
                             YOU ARE THE <br />
                             <span className="text-accent bg-black px-4 lg:inline-block border-4 border-accent mt-2 shadow-[8px_8px_0_0_#FFD60A] -rotate-1">PIZZA-BOX COCKROACH</span>
                         </h1>
@@ -164,7 +164,7 @@ export default function QuizPage() {
                         </div>
 
                         <div className="w-full md:w-2/3">
-                            <h2 className="font-display text-3xl uppercase text-white mb-4 border-l-8 border-accent pl-4">DESCRIPTION</h2>
+                            <h2 className="font-display text-3xl uppercase text-rich-black mb-4 border-l-8 border-accent pl-4">DESCRIPTION</h2>
                             <p className="font-hindi text-lg mb-8 text-text-secondary leading-relaxed">
                                 You thrive on leftover scraps of political gossip and cold pizza. While others are fighting in the streets, you observe chaos from the safety of your greasy cardboard haven. You are chronically online, deeply cynical, but oddly comfortable in the current economic collapse.
                             </p>
@@ -184,12 +184,12 @@ export default function QuizPage() {
 
                     <div className="mt-12 flex flex-col md:flex-row gap-6 w-full max-w-2xl mx-auto">
                         {/* Share PNG logic visual hook */}
-                        <button className="flex-1 bg-accent text-black font-display text-3xl uppercase py-5 border-4 border-black hover:bg-white hover:-translate-y-1 shadow-[8px_8px_0_0_#FFF] transition-all flex justify-center items-center gap-3">
+                        <button className="flex-1 bg-accent text-black font-display text-3xl uppercase py-5 border-4 border-black hover:bg-white hover:-translate-y-1 shadow-[8px_8px_0_0_#000] transition-all flex justify-center items-center gap-3">
                             <Share2 size={28} /> SHARE RESULT
                         </button>
                         <button
                             onClick={handleRestart}
-                            className="flex-1 bg-bg text-text-primary font-display text-3xl uppercase py-5 border-4 border-text-primary hover:bg-text-primary hover:text-black hover:-translate-y-1 shadow-[8px_8px_0_0_#FFD60A] transition-all flex justify-center items-center gap-3"
+                            className="flex-1 bg-bg text-text-primary font-display text-3xl uppercase py-5 border-4 border-text-primary hover:bg-text-primary hover:text-bg hover:-translate-y-1 shadow-[8px_8px_0_0_#FFD60A] transition-all flex justify-center items-center gap-3"
                         >
                             <RotateCcw size={28} /> TRY AGAIN
                         </button>

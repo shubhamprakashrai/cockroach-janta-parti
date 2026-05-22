@@ -29,11 +29,11 @@ export default function HindiHomepage() {
                 </div>
 
                 <div className="relative z-10 max-w-5xl mx-auto flex flex-col items-center">
-                    <div className="inline-block bg-alert text-black font-hindi font-bold uppercase px-4 py-2 border-4 border-black shadow-[4px_4px_0_0_#FFF] mb-8 rotate-[-2deg]">
+                    <div className="inline-block bg-alert text-white font-hindi font-bold uppercase px-4 py-2 border-4 border-black shadow-[4px_4px_0_0_#000] mb-8 rotate-[-2deg]">
                         महान भारतीय राजनीतिक प्रयोग।
                     </div>
 
-                    <h1 className="font-display text-7xl md:text-[10rem] xl:text-[12rem] uppercase leading-[0.8] tracking-tighter text-white drop-shadow-[0_8px_0_var(--accent)] mb-8">
+                    <h1 className="font-display text-7xl md:text-[10rem] xl:text-[12rem] uppercase leading-[0.8] tracking-tighter text-rich-black drop-shadow-[0_8px_0_var(--accent)] mb-8">
                         <span className="block">मैं भी</span>
                         <span className="block text-accent">कॉकरोच।</span>
                     </h1>
@@ -43,10 +43,10 @@ export default function HindiHomepage() {
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-6 w-full max-w-2xl">
-                        <Link href="/hindi/manifesto" className="flex-1 bg-accent text-black font-display text-3xl md:text-4xl uppercase py-6 border-4 border-text-primary shadow-[8px_8px_0_0_#FFF] hover:-translate-y-1 hover:shadow-[12px_12px_0_0_#000] transition-all flex items-center justify-center gap-2">
+                        <Link href="/hindi/manifesto" className="flex-1 bg-accent text-black font-display text-3xl md:text-4xl uppercase py-6 border-4 border-text-primary shadow-[8px_8px_0_0_#000] hover:-translate-y-1 hover:shadow-[12px_12px_0_0_#000] transition-all flex items-center justify-center gap-2">
                             घोषणापत्र पढ़ें <BookOpen size={30} />
                         </Link>
-                        <Link href="/join" className="flex-1 bg-bg text-white font-display text-3xl md:text-4xl uppercase py-6 border-4 border-text-primary shadow-[8px_8px_0_0_#FFD60A] hover:bg-white hover:text-black hover:-translate-y-1 transition-all flex items-center justify-center gap-2">
+                        <Link href="/join" className="flex-1 bg-bg text-rich-black font-display text-3xl md:text-4xl uppercase py-6 border-4 border-text-primary shadow-[8px_8px_0_0_#FFD60A] hover:bg-white hover:text-black hover:-translate-y-1 transition-all flex items-center justify-center gap-2">
                             झुंड में शामिल हों <Users size={30} />
                         </Link>
                     </div>
@@ -66,7 +66,7 @@ export default function HindiHomepage() {
 
                     <div className="bg-bg border-8 border-text-primary p-8 md:p-12 shadow-[16px_16px_0_0_#000] relative overflow-hidden group">
                         <div className="absolute -right-10 -bottom-10 text-[10rem] opacity-10 group-hover:scale-110 transition-transform">🎧</div>
-                        <h2 className="font-display text-5xl uppercase mb-6 text-white relative z-10 line-clamp-1">पार्टी गान</h2>
+                        <h2 className="font-display text-5xl uppercase mb-6 text-rich-black relative z-10 line-clamp-1">पार्टी गान</h2>
                         <p className="font-hindi text-xl text-text-secondary mb-8 relative z-10">सुनें आधिकारिक "एक कदम उठाओ" एंथम और अपना खुद का रीमिक्स बनाएं।</p>
                         <Link href="/anthem" className="relative z-10 inline-flex bg-accent text-black font-display text-2xl uppercase px-8 py-4 border-4 border-black hover:bg-white hover:-translate-y-1 transition-transform">
                             गान चलाएं <Play className="ml-2" fill="currentColor" />

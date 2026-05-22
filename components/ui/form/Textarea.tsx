@@ -32,7 +32,7 @@ export default function Textarea({
             rows={rows}
             disabled={disabled}
             className={cn(
-                'w-full bg-bg border-4 border-text-primary p-4 font-mono text-2xl uppercase text-white placeholder-text-secondary focus:border-accent focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed resize-none',
+                'w-full bg-bg border-4 border-text-primary p-4 font-mono text-2xl uppercase text-rich-black placeholder-text-secondary focus:border-accent focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed resize-none',
                 className
             )}
         />

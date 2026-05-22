@@ -31,7 +31,7 @@ export default function NewsAggregatorPage() {
 
             {/* Header */}
             <header className="px-4 py-12 md:py-20 border-b-4 border-text-primary bg-bg text-center">
-                <h1 className="font-display text-5xl md:text-7xl uppercase mb-6 tracking-wide text-white">THE ROACH <span className="text-accent">REPORT</span></h1>
+                <h1 className="font-display text-5xl md:text-7xl uppercase mb-6 tracking-wide text-rich-black">THE ROACH <span className="text-accent">REPORT</span></h1>
                 <p className="font-mono text-xl uppercase tracking-widest text-text-secondary border-b-2 border-text-primary inline-block pb-1">Aggregated News. Zero BS.</p>
             </header>
 
@@ -46,13 +46,13 @@ export default function NewsAggregatorPage() {
                                 <button
                                     key={f}
                                     onClick={() => setActiveFilter(f)}
-                                    className={`font-mono font-bold uppercase text-xs px-4 py-2 border-2 border-text-primary hover:bg-text-primary hover:text-black transition-colors ${activeFilter === f ? 'bg-text-primary text-black' : 'bg-card text-white'}`}
+                                    className={`font-mono font-bold uppercase text-xs px-4 py-2 border-2 border-text-primary hover:bg-text-primary hover:text-bg transition-colors ${activeFilter === f ? 'bg-text-primary text-bg' : 'bg-card text-rich-black'}`}
                                 >
                                     {f}
                                 </button>
                             ))}
                         </div>
-                        <select className="bg-card font-mono text-xs uppercase border-2 border-text-primary px-4 py-2 outline-none text-white appearance-none cursor-pointer">
+                        <select className="bg-card font-mono text-xs uppercase border-2 border-text-primary px-4 py-2 outline-none text-rich-black appearance-none cursor-pointer">
                             {sources.map(s => <option key={s}>{s}</option>)}
                         </select>
                     </div>
@@ -61,7 +61,7 @@ export default function NewsAggregatorPage() {
                     <div className="p-4 md:p-8">
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                             {newsItems.map((news, i) => (
-                                <div key={i} className="bg-card border-4 border-text-primary shadow-[8px_8px_0_0_#FFF] hover:shadow-[8px_8px_0_0_#FFD60A] hover:-translate-y-2 transition-all flex flex-col group cursor-pointer">
+                                <div key={i} className="bg-card border-4 border-text-primary shadow-[8px_8px_0_0_#000] hover:shadow-[8px_8px_0_0_#FFD60A] hover:-translate-y-2 transition-all flex flex-col group cursor-pointer">
                                     {/* Thumbnail */}
                                     <div className={`w-full aspect-video ${news.img} border-b-4 border-text-primary relative overflow-hidden flex items-center justify-center`}>
                                         <div className="font-display text-4xl opacity-50 group-hover:scale-110 transition-transform">MEDIA</div>
@@ -122,9 +122,9 @@ export default function NewsAggregatorPage() {
                         {[1, 2, 3, 4, 5].map((_, i) => (
                             <div key={i} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
                                 <div className="flex items-center justify-center w-6 h-6 rounded-full border-4 border-black bg-accent z-10 relative"></div>
-                                <div className="w-[calc(100%-2.5rem)] md:w-[calc(50%-1.5rem)] bg-bg p-4 border-2 border-text-primary shadow-[4px_4px_0_0_#FFF] ml-4 md:ml-0 md:group-odd:mr-8 md:group-even:ml-8 hover:-translate-y-1 transition-transform cursor-pointer">
+                                <div className="w-[calc(100%-2.5rem)] md:w-[calc(50%-1.5rem)] bg-bg p-4 border-2 border-text-primary shadow-[4px_4px_0_0_#000] ml-4 md:ml-0 md:group-odd:mr-8 md:group-even:ml-8 hover:-translate-y-1 transition-transform cursor-pointer">
                                     <div className="font-mono text-[10px] text-text-secondary uppercase mb-2">10 mins ago</div>
-                                    <div className="font-hindi text-sm text-white font-bold mb-1">Youth protests across 5 cities demanding jobs.</div>
+                                    <div className="font-hindi text-sm text-rich-black font-bold mb-1">Youth protests across 5 cities demanding jobs.</div>
                                     <div className="font-mono text-[10px] text-accent">Source: PTI</div>
                                 </div>
                             </div>

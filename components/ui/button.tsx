@@ -18,7 +18,7 @@ const baseStyles = 'font-mono uppercase font-bold tracking-wide transition-all d
 
 const variantStyles: Record<ButtonVariant, string> = {
     primary: 'bg-accent text-black border-4 border-black hover:bg-white hover:text-black shadow-[4px_4px_0_0_#000] hover:shadow-[8px_8px_0_0_#FFD60A] active:translate-y-0 active:shadow-none',
-    secondary: 'bg-bg text-text-primary border-4 border-text-primary hover:bg-text-primary hover:text-black shadow-[4px_4px_0_0_#000]',
+    secondary: 'bg-bg text-text-primary border-4 border-text-primary hover:bg-text-primary hover:text-bg shadow-[4px_4px_0_0_#000]',
     ghost: 'bg-transparent text-accent border-0 hover:bg-accent/10 shadow-none',
     destructive: 'bg-alert text-white border-4 border-black hover:bg-white hover:text-alert shadow-[4px_4px_0_0_#000]',
 };

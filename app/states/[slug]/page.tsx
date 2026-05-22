@@ -14,7 +14,7 @@ export default function StateChapterPage({ params }: { params: { slug: string } 
         <main className="min-h-screen bg-bg text-text-primary pb-24">
 
             {/* Navbar Map Pointer */}
-            <nav className="sticky top-0 z-50 bg-bg border-b-4 border-text-primary px-4 py-3 flex justify-between items-center shadow-[0_4px_0_0_#FFF]">
+            <nav className="sticky top-0 z-50 bg-bg border-b-4 border-text-primary px-4 py-3 flex justify-between items-center shadow-[0_4px_0_0_#000]">
                 <Link href="/" className="font-display text-2xl uppercase tracking-widest hover:text-accent">🪳 DIR</Link>
                 <div className="font-mono text-sm font-bold uppercase bg-card border-2 border-text-primary px-4 py-1 flex items-center gap-2">
                     <MapPin size={16} className="text-accent" /> {stateName} CHAPTER
@@ -32,7 +32,7 @@ export default function StateChapterPage({ params }: { params: { slug: string } 
                 </div>
 
                 <div className="relative z-10 max-w-4xl mx-auto">
-                    <div className="inline-flex bg-alert text-black font-mono font-bold text-xs uppercase px-3 py-1 border-2 border-black mb-6 rotate-2 shadow-[2px_2px_0_0_#FFF]">
+                    <div className="inline-flex bg-alert text-white font-mono font-bold text-xs uppercase px-3 py-1 border-2 border-black mb-6 rotate-2 shadow-[2px_2px_0_0_#000]">
                         ⚠️ ACTIVE INFESTATION ZONE
                     </div>
                     <h1 className="font-display text-6xl md:text-8xl uppercase tracking-widest mb-6 leading-none">
@@ -40,23 +40,23 @@ export default function StateChapterPage({ params }: { params: { slug: string } 
                     </h1>
 
                     <div className="flex flex-col sm:flex-row justify-center items-center gap-8 mt-12 mb-8">
-                        <div className="flex items-center gap-4 bg-bg border-4 border-text-primary p-4 shadow-[4px_4px_0_0_#FFF]">
+                        <div className="flex items-center gap-4 bg-bg border-4 border-text-primary p-4 shadow-[4px_4px_0_0_#000]">
                             <Users size={32} className="text-success" />
                             <div className="text-left font-mono">
-                                <div className="text-3xl font-display text-white">{Math.floor(Math.random() * 80 + 20).toFixed(1)}k+</div>
+                                <div className="text-3xl font-display text-rich-black">{Math.floor(Math.random() * 80 + 20).toFixed(1)}k+</div>
                                 <div className="text-[10px] font-bold uppercase text-text-secondary">VERIFIED MEMBERS</div>
                             </div>
                         </div>
-                        <div className="flex items-center gap-4 bg-bg border-4 border-text-primary p-4 shadow-[4px_4px_0_0_#FFF]">
+                        <div className="flex items-center gap-4 bg-bg border-4 border-text-primary p-4 shadow-[4px_4px_0_0_#000]">
                             <TrendingUp size={32} className="text-accent" />
                             <div className="text-left font-mono">
-                                <div className="text-3xl font-display text-white">+{Math.floor(Math.random() * 15 + 2).toFixed(1)}k</div>
+                                <div className="text-3xl font-display text-rich-black">+{Math.floor(Math.random() * 15 + 2).toFixed(1)}k</div>
                                 <div className="text-[10px] font-bold uppercase text-text-secondary">JOINED THIS WEEK</div>
                             </div>
                         </div>
                     </div>
 
-                    <Link href="/join" className="inline-block bg-accent text-black font-display text-3xl uppercase px-12 py-5 border-4 border-black shadow-[8px_8px_0_0_#FFF] hover:-translate-y-1 hover:shadow-[12px_12px_0_0_#FFD60A] transition-all">
+                    <Link href="/join" className="inline-block bg-accent text-black font-display text-3xl uppercase px-12 py-5 border-4 border-black shadow-[8px_8px_0_0_#000] hover:-translate-y-1 hover:shadow-[12px_12px_0_0_#FFD60A] transition-all">
                         JOIN THE {stateName.toUpperCase()} HORDE 🪳
                     </Link>
                 </div>
@@ -76,7 +76,7 @@ export default function StateChapterPage({ params }: { params: { slug: string } 
                                 <div className="flex items-center gap-4">
                                     <div className="w-12 h-12 bg-bg border-2 border-text-primary flex items-center justify-center font-display text-xl">{idx}</div>
                                     <div>
-                                        <div className="font-mono font-bold uppercase text-sm text-white">@roach_{idx}x4{Math.floor(Math.random() * 99)}</div>
+                                        <div className="font-mono font-bold uppercase text-sm text-rich-black">@roach_{idx}x4{Math.floor(Math.random() * 99)}</div>
                                         <div className="font-mono text-[10px] text-text-secondary">Joined May '26</div>
                                     </div>
                                 </div>
@@ -116,13 +116,13 @@ export default function StateChapterPage({ params }: { params: { slug: string } 
             <section className="bg-black py-16 border-y-4 border-text-primary mt-12">
                 <div className="max-w-[1600px] mx-auto px-4">
                     <div className="text-center mb-12">
-                        <h2 className="font-display text-5xl uppercase text-white mb-2 tracking-widest">LOCAL GUTTER DROPS</h2>
+                        <h2 className="font-display text-5xl uppercase text-rich-black mb-2 tracking-widest">LOCAL GUTTER DROPS</h2>
                         <p className="font-mono text-text-secondary uppercase">Memes targeting local politicians specifically.</p>
                     </div>
 
                     <div className="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
                         {[...Array(8)].map((_, i) => (
-                            <div key={i} className={`break-inside-avoid bg-card border-4 border-text-primary shadow-[4px_4px_0_0_#FFF] relative overflow-hidden group ${i % 2 === 0 ? 'aspect-square' : 'aspect-[3/4]'}`}>
+                            <div key={i} className={`break-inside-avoid bg-card border-4 border-text-primary shadow-[4px_4px_0_0_#000] relative overflow-hidden group ${i % 2 === 0 ? 'aspect-square' : 'aspect-[3/4]'}`}>
                                 <div className="absolute inset-0 bg-bg flex items-center justify-center">
                                     <div className="text-[4rem] group-hover:scale-150 transition-transform duration-500 opacity-20">🪳</div>
                                 </div>

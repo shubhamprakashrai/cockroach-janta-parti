@@ -8,13 +8,21 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        bg: "#0A0A0A",
-        card: "#1A1A1A",
-        accent: "#FFD60A",
-        alert: "#FF3B30",
-        success: "#00FF88",
-        text: { primary: "#F5F5F5", secondary: "#A0A0A0" },
-        border: "#2A2A2A",
+        // Stitch palette — Satirical Neo-Editorial / Brutalist Light
+        bg: "#FCF8F8",          // warm cream (was #0A0A0A)
+        card: "#FFFFFF",        // pure white card surface (was #1A1A1A)
+        accent: "#FF6B00",      // saffron primary (was #FFD60A)
+        mustard: "#FFD60A",     // mustard yellow secondary highlight
+        alert: "#E63946",       // revolution red (was #FF3B30)
+        success: "#00A86B",     // deeper green readable on cream
+        text: {
+          primary: "#0A0A0A",   // rich black (was #F5F5F5)
+          secondary: "#5A4136", // warm brown muted (was #A0A0A0)
+        },
+        border: "#0A0A0A",      // rich black borders (was #2A2A2A)
+        cream: "#FCF8F8",
+        "rich-black": "#0A0A0A",
+        saffron: "#FF6B00",
       },
       fontFamily: {
         display: ["Anton", "Bebas Neue", "sans-serif"],
@@ -23,9 +31,14 @@ const config: Config = {
         mono: ["JetBrains Mono", "monospace"],
       },
       boxShadow: {
-        brutal: "4px 4px 0 0 #000000",
-        "brutal-yellow": "4px 4px 0 0 #FFD60A",
-        "brutal-lg": "8px 8px 0 0 #000000",
+        // Hard offset black shadows — Stitch "Physicality" principle
+        brutal: "4px 4px 0 0 #0A0A0A",
+        "brutal-sm": "2px 2px 0 0 #0A0A0A",
+        "brutal-lg": "8px 8px 0 0 #0A0A0A",
+        "brutal-xl": "16px 16px 0 0 #0A0A0A",
+        "brutal-saffron": "4px 4px 0 0 #FF6B00",
+        "brutal-mustard": "4px 4px 0 0 #FFD60A",
+        "brutal-red": "4px 4px 0 0 #E63946",
       },
       animation: {
         ticker: "ticker 30s linear infinite",

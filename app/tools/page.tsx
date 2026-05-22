@@ -17,13 +17,13 @@ export default function ToolsHubPage() {
     return (
         <main className="min-h-screen bg-bg text-text-primary pb-24">
             {/* Top Nav */}
-            <nav className="sticky top-0 z-40 bg-card border-b-4 border-text-primary px-4 py-4 shadow-[0_4px_0_0_#FFF] flex justify-between items-center">
+            <nav className="sticky top-0 z-40 bg-card border-b-4 border-text-primary px-4 py-4 shadow-[0_4px_0_0_#000] flex justify-between items-center">
                 <Link href="/" className="font-display text-3xl uppercase tracking-widest hover:text-accent">🪳 CJP HUB</Link>
             </nav>
 
             {/* Hero */}
-            <header className="px-4 py-16 md:py-24 text-center border-b-4 border-text-primary bg-bg text-white relative">
-                <div className="inline-flex bg-text-primary text-black p-4 rounded-full border-4 border-black shadow-[4px_4px_0_0_#FFF] mb-6 animate-pulse">
+            <header className="px-4 py-16 md:py-24 text-center border-b-4 border-text-primary bg-bg text-rich-black relative">
+                <div className="inline-flex bg-text-primary text-bg p-4 rounded-full border-4 border-black shadow-[4px_4px_0_0_#000] mb-6 animate-pulse">
                     <Wrench size={32} />
                 </div>
                 <h1 className="font-display text-6xl md:text-8xl uppercase tracking-widest mb-6">THE ARSENAL</h1>
@@ -40,7 +40,7 @@ export default function ToolsHubPage() {
                                 <div className="absolute top-4 right-4 bg-white/20 px-2 py-1 border-2 border-black font-mono text-[10px] font-bold uppercase backdrop-blur-md">FREE</div>
                             </div>
                             <div className="p-8 w-full bg-bg z-10 flex flex-col h-full flex-grow">
-                                <h2 className="font-display text-4xl uppercase mb-3 text-white group-hover:text-accent transition-colors leading-none">{tool.name}</h2>
+                                <h2 className="font-display text-4xl uppercase mb-3 text-rich-black group-hover:text-accent transition-colors leading-none">{tool.name}</h2>
                                 <p className="font-mono text-sm text-text-secondary leading-relaxed mb-8 font-bold">{tool.desc}</p>
 
                                 <div className="mt-auto font-display text-xl uppercase tracking-widest text-text-primary flex items-center gap-2 group-hover:text-accent group-hover:underline decoration-2 underline-offset-4 w-fit">
@@ -53,7 +53,7 @@ export default function ToolsHubPage() {
                     {/* Missing Tool Teaser */}
                     <div className="col-span-1 md:col-span-2 lg:col-span-1 bg-bg border-4 border-dashed border-text-primary min-h-[300px] flex flex-col items-center justify-center p-8 text-center hover:border-accent group cursor-pointer transition-colors shadow-none">
                         <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">🛠️</div>
-                        <h2 className="font-display text-3xl uppercase mb-2 text-text-secondary group-hover:text-white transition-colors">SUGGEST A TOOL</h2>
+                        <h2 className="font-display text-3xl uppercase mb-2 text-text-secondary group-hover:text-rich-black transition-colors">SUGGEST A TOOL</h2>
                         <p className="font-mono text-sm text-text-secondary/50 group-hover:text-text-secondary font-bold">Have an idea for a weapon of mass satire? Tell us on X.</p>
                     </div>
                 </div>

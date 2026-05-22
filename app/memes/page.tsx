@@ -12,9 +12,9 @@ export default function MemeWallPage() {
     return (
         <main className="min-h-screen bg-bg text-text-primary pb-20 relative">
             {/* Top Nav */}
-            <nav className="sticky top-0 z-40 bg-bg border-b-4 border-text-primary px-4 py-3 flex justify-between items-center shadow-[0_4px_0_0_#FFF]">
+            <nav className="sticky top-0 z-40 bg-bg border-b-4 border-text-primary px-4 py-3 flex justify-between items-center shadow-[0_4px_0_0_#000]">
                 <Link href="/" className="font-display text-2xl uppercase tracking-widest hover:text-accent">🪳 MEMES</Link>
-                <Link href="/tools/meme-generator" className="bg-accent text-black font-display uppercase tracking-widest px-6 py-2 border-2 border-black hover:bg-white transition-colors text-lg shadow-[2px_2px_0_0_#FFF]">
+                <Link href="/tools/meme-generator" className="bg-accent text-black font-display uppercase tracking-widest px-6 py-2 border-2 border-black hover:bg-white transition-colors text-lg shadow-[2px_2px_0_0_#000]">
                     GENERATOR →
                 </Link>
             </nav>
@@ -25,7 +25,7 @@ export default function MemeWallPage() {
                 <p className="font-mono text-xl max-w-2xl mx-auto text-text-secondary mb-12">Drop your finest cockroaches. If it's funny, it stays. If it hurts politicians, it gets pinned.</p>
 
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button onClick={() => setIsUploadModalOpen(true)} className="bg-alert text-black font-display text-3xl uppercase px-10 py-5 border-4 border-text-primary shadow-[8px_8px_0_0_#FFF] hover:scale-105 transition-transform flex items-center justify-center gap-3">
+                    <button onClick={() => setIsUploadModalOpen(true)} className="bg-alert text-white font-display text-3xl uppercase px-10 py-5 border-4 border-text-primary shadow-[8px_8px_0_0_#000] hover:scale-105 transition-transform flex items-center justify-center gap-3">
                         <UploadCloud size={32} /> DROP YOUR MEME
                     </button>
                     <button className="bg-bg text-text-primary font-display text-3xl uppercase px-10 py-5 border-4 border-text-primary shadow-[8px_8px_0_0_#FFD60A] hover:scale-105 transition-transform flex items-center justify-center gap-3">
@@ -40,7 +40,7 @@ export default function MemeWallPage() {
                     <button
                         key={f}
                         onClick={() => setActiveTab(f)}
-                        className={`snap-center whitespace-nowrap font-display uppercase text-xl px-6 py-2 border-2 border-text-primary transition-all shadow-[2px_2px_0_0_#FFF] ${activeTab === f ? 'bg-text-primary text-black translate-y-1 shadow-none' : 'bg-card text-white hover:bg-accent hover:text-black'}`}
+                        className={`snap-center whitespace-nowrap font-display uppercase text-xl px-6 py-2 border-2 border-text-primary transition-all shadow-[2px_2px_0_0_#000] ${activeTab === f ? 'bg-text-primary text-bg translate-y-1 shadow-none' : 'bg-card text-rich-black hover:bg-accent hover:text-black'}`}
                     >
                         {f}
                     </button>
@@ -56,7 +56,7 @@ export default function MemeWallPage() {
                         </button>
 
                         <div className="p-8 border-b-4 border-text-primary bg-bg text-center">
-                            <h2 className="font-display text-5xl uppercase text-white tracking-widest leading-none">DROP IT.</h2>
+                            <h2 className="font-display text-5xl uppercase text-rich-black tracking-widest leading-none">DROP IT.</h2>
                         </div>
 
                         <div className="p-8 space-y-6">
@@ -67,7 +67,7 @@ export default function MemeWallPage() {
 
                             <div>
                                 <label className="font-mono text-xs uppercase text-accent font-bold mb-2 block">CAPTION (KEEP IT GUTTER)</label>
-                                <input type="text" placeholder="I made this instead of applying for jobs..." className="w-full bg-bg border-4 border-text-primary p-4 font-mono text-white focus:outline-none focus:border-white" />
+                                <input type="text" placeholder="I made this instead of applying for jobs..." className="w-full bg-bg border-4 border-text-primary p-4 font-mono text-rich-black focus:outline-none focus:border-white" />
                             </div>
 
                             <button onClick={() => setIsUploadModalOpen(false)} className="w-full bg-accent text-black font-display text-3xl uppercase py-4 border-4 border-text-primary shadow-[8px_8px_0_0_#000] hover:-translate-y-1 hover:shadow-[12px_12px_0_0_#000] transition-all">
@@ -82,11 +82,11 @@ export default function MemeWallPage() {
             <section className="px-4 py-8 md:py-12 max-w-[1600px] mx-auto z-10 relative">
                 <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-6 space-y-6">
                     {/* Mock Pinned Meme */}
-                    <div className="break-inside-avoid bg-accent p-2 border-4 border-black shadow-[8px_8px_0_0_#FFF] mb-6 relative group">
+                    <div className="break-inside-avoid bg-accent p-2 border-4 border-black shadow-[8px_8px_0_0_#000] mb-6 relative group">
                         <div className="absolute -top-4 -right-4 bg-black text-accent p-2 border-4 border-black rounded-full animate-bounce z-10"><Crown size={24} /></div>
                         <div className="bg-black w-full aspect-[4/5] flex items-center justify-center border-4 border-black relative overflow-hidden">
                             <div className="text-[6rem]">🤡</div>
-                            <div className="absolute inset-x-0 bottom-4 text-center font-display text-4xl text-white uppercase drop-shadow-[0_4px_4px_rgba(0,0,0,1)]">EMPLOYED?</div>
+                            <div className="absolute inset-x-0 bottom-4 text-center font-display text-4xl text-rich-black uppercase drop-shadow-[0_4px_4px_rgba(0,0,0,1)]">EMPLOYED?</div>
                         </div>
                         <div className="pt-3 pb-2 px-2 flex justify-between items-center text-black font-mono">
                             <span className="font-bold uppercase tracking-widest text-xs">@cjp_memer</span>
@@ -107,7 +107,7 @@ export default function MemeWallPage() {
                                     <span className="text-6xl opacity-20 group-hover:scale-150 transition-transform">🪳</span>
                                     {/* Hover Overlay */}
                                     <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 flex items-center justify-center gap-4 transition-opacity z-10">
-                                        <Link href={`/tools/meme-generator?template=${i}`} className="bg-accent text-black p-3 border-4 border-black hover:scale-110 shadow-[4px_4px_0_0_#FFF]" title="Remix this template">
+                                        <Link href={`/tools/meme-generator?template=${i}`} className="bg-accent text-black p-3 border-4 border-black hover:scale-110 shadow-[4px_4px_0_0_#000]" title="Remix this template">
                                             <Repeat2 size={24} />
                                         </Link>
                                         <button className="bg-white text-black p-3 border-4 border-black hover:scale-110 shadow-[4px_4px_0_0_#FFD60A]" title="Like text">

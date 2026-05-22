@@ -53,7 +53,7 @@ export default function HomePage() {
       </div>
 
       {/* 2. NAVIGATION BAR */}
-      <nav className="sticky top-[36px] z-40 bg-bg border-b-4 border-text-primary px-4 py-3 flex justify-between items-center shadow-[0_8px_0_0_#FFF]">
+      <nav className="sticky top-[36px] z-40 bg-bg border-b-4 border-text-primary px-4 py-3 flex justify-between items-center shadow-[0_8px_0_0_#000]">
         <Link href="/" className="font-display text-2xl md:text-3xl tracking-widest uppercase hover:text-accent transition-colors">
           🪳 Cockroch Janta Parti
         </Link>
@@ -63,7 +63,7 @@ export default function HomePage() {
           {["Manifesto", "News", "Memes", "Tools", "Blog"].map(item => (
             <Link key={item} href={`/${item.toLowerCase()}`} className="hover:text-accent hover:underline decoration-4 underline-offset-4">{item}</Link>
           ))}
-          <Link href="/join" className="bg-accent text-black px-6 py-2 border-4 border-black shadow-[4px_4px_0_0_#FFF] hover:translate-y-[2px] hover:shadow-[2px_2px_0_0_#FFF] transition-all">
+          <Link href="/join" className="bg-accent text-black px-6 py-2 border-4 border-black shadow-[4px_4px_0_0_#000] hover:translate-y-[2px] hover:shadow-[2px_2px_0_0_#000] transition-all">
             JOIN THE PARTI
           </Link>
         </div>
@@ -75,7 +75,7 @@ export default function HomePage() {
       </nav>
 
       {/* Mobile Menu Dropdown & Bottom Bar */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-bg border-t-4 border-text-primary flex justify-around p-3 font-mono text-xs uppercase shadow-[0_-4px_0_0_#FFF]">
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-bg border-t-4 border-text-primary flex justify-around p-3 font-mono text-xs uppercase shadow-[0_-4px_0_0_#000]">
         {["Home", "News", "Memes", "Quiz", "Profile"].map(tab => (
           <div key={tab} className="flex flex-col items-center gap-1 active:text-accent">
             <div className="text-xl">🪳</div>
@@ -103,16 +103,16 @@ export default function HomePage() {
         </div>
 
         <div className="z-10 bg-bg/80 backdrop-blur-sm p-4 md:p-12 border-4 border-text-primary shadow-[16px_16px_0_0_#FFD60A]">
-          <h1 className="font-display text-7xl md:text-[8rem] uppercase leading-none tracking-tighter mb-4 text-white">
+          <h1 className="font-display text-7xl md:text-[8rem] uppercase leading-none tracking-tighter mb-4 text-rich-black">
             MAIN BHI<br />
-            <span className="text-accent underline decoration-8 underline-offset-8 group-hover:text-white transition-colors">COCKROACH.</span>
+            <span className="text-accent underline decoration-8 underline-offset-8 group-hover:text-rich-black transition-colors">COCKROACH.</span>
           </h1>
           <h2 className="font-hindi text-xl md:text-3xl text-text-secondary mb-10 max-w-3xl">
             Tum bhi banno. India's loudest Gen Z movement.
           </h2>
 
           <div className="flex flex-col md:flex-row gap-6 justify-center mb-10">
-            <Link href="/join" className="bg-accent text-black font-display text-2xl md:text-3xl uppercase tracking-widest px-8 md:px-12 py-4 md:py-6 border-4 border-text-primary shadow-[8px_8px_0_0_#FFF] hover:translate-y-1 hover:shadow-[4px_4px_0_0_#FFF] transition-all">
+            <Link href="/join" className="bg-accent text-black font-display text-2xl md:text-3xl uppercase tracking-widest px-8 md:px-12 py-4 md:py-6 border-4 border-text-primary shadow-[8px_8px_0_0_#000] hover:translate-y-1 hover:shadow-[4px_4px_0_0_#000] transition-all">
               JOIN THE PARTI →
             </Link>
             <Link href="/tools/card" className="bg-bg text-accent font-display text-xl md:text-2xl uppercase tracking-widest px-6 md:px-8 py-4 md:py-6 border-4 border-accent shadow-[8px_8px_0_0_#FFD60A] hover:translate-y-1 hover:shadow-[4px_4px_0_0_#FFD60A] transition-all">
@@ -166,7 +166,7 @@ export default function HomePage() {
         {/* Mobile uses flex container for horizontal scroll, desktop is grid */}
         <div className="flex overflow-x-auto md:grid md:grid-cols-3 gap-6 pb-8 snap-x">
           {newsItems.map((news, i) => (
-            <div key={i} className="min-w-[85vw] md:min-w-0 flex-shrink-0 snap-center bg-card border-4 border-text-primary p-6 shadow-[8px_8px_0_0_#FFF] flex flex-col justify-between group hover:-translate-y-2 transition-transform cursor-pointer">
+            <div key={i} className="min-w-[85vw] md:min-w-0 flex-shrink-0 snap-center bg-card border-4 border-text-primary p-6 shadow-[8px_8px_0_0_#000] flex flex-col justify-between group hover:-translate-y-2 transition-transform cursor-pointer">
               <div>
                 <div className="flex justify-between items-start mb-6">
                   <span className="bg-text-primary text-bg font-bold font-mono px-3 py-1 text-xs uppercase shadow-[4px_4px_0_0_#FFD60A]">{news.source}</span>
@@ -184,7 +184,7 @@ export default function HomePage() {
           ))}
         </div>
         <div className="text-center mt-4">
-          <Link href="/news" className="font-mono font-bold uppercase text-accent hover:text-white underline decoration-2 underline-offset-4 text-lg">See all news →</Link>
+          <Link href="/news" className="font-mono font-bold uppercase text-accent hover:text-rich-black underline decoration-2 underline-offset-4 text-lg">See all news →</Link>
         </div>
       </section>
 
@@ -192,7 +192,7 @@ export default function HomePage() {
       <section className="px-4 py-24 bg-card border-b-4 border-text-primary">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="font-display text-6xl md:text-8xl uppercase tracking-tight text-white mb-4">5 DEMANDS.</h2>
+            <h2 className="font-display text-6xl md:text-8xl uppercase tracking-tight text-rich-black mb-4">5 DEMANDS.</h2>
             <h3 className="font-display text-5xl md:text-6xl text-alert uppercase tracking-widest bg-black inline-block px-4 py-2 border-4 border-alert">NON-NEGOTIABLE.</h3>
           </div>
 
@@ -202,20 +202,20 @@ export default function HomePage() {
                 <div className="absolute -top-4 -right-4 font-display text-[8rem] text-text-primary opacity-10 leading-none">{`0${point.id}`}</div>
                 <div className="z-10 flex-1">
                   <div className="font-display text-4xl uppercase mb-3 text-accent tracking-wide">{point.title}</div>
-                  <p className="text-text-primary font-mono text-lg mb-8 bg-black/50 p-2 inline-block border-l-4 border-alert">{point.desc}</p>
+                  <p className="text-bg font-mono text-lg mb-8 bg-rich-black p-2 inline-block border-l-4 border-alert">{point.desc}</p>
                 </div>
 
                 <div className="z-10 mt-auto">
                   <div className="flex items-center gap-4 mb-4">
                     <button
                       onClick={() => handleVote(point.id, 'agree')}
-                      className={`flex-1 font-display text-2xl uppercase py-3 border-4 border-text-primary shadow-[4px_4px_0_0_#FFF] transition-all ${manifestoVotes[point.id] === 'agree' ? 'bg-success text-black translate-y-1 shadow-none' : 'bg-bg text-white hover:bg-success hover:text-black'}`}
+                      className={`flex-1 font-display text-2xl uppercase py-3 border-4 border-text-primary shadow-[4px_4px_0_0_#000] transition-all ${manifestoVotes[point.id] === 'agree' ? 'bg-success text-white translate-y-1 shadow-none' : 'bg-card text-rich-black hover:bg-success hover:text-white'}`}
                     >
                       AGREE {manifestoVotes[point.id] === 'agree' && '✓'}
                     </button>
                     <button
                       onClick={() => handleVote(point.id, 'disagree')}
-                      className={`flex-1 font-display text-2xl uppercase py-3 border-4 border-text-primary shadow-[4px_4px_0_0_#FFF] transition-all ${manifestoVotes[point.id] === 'disagree' ? 'bg-alert text-black translate-y-1 shadow-none' : 'bg-bg text-white hover:bg-alert hover:text-black'}`}
+                      className={`flex-1 font-display text-2xl uppercase py-3 border-4 border-text-primary shadow-[4px_4px_0_0_#000] transition-all ${manifestoVotes[point.id] === 'disagree' ? 'bg-alert text-white translate-y-1 shadow-none' : 'bg-card text-rich-black hover:bg-alert hover:text-white'}`}
                     >
                       DISAGREE {manifestoVotes[point.id] === 'disagree' && '✗'}
                     </button>
@@ -225,7 +225,7 @@ export default function HomePage() {
                     <div className="text-accent font-bold">{calculatePercentage(point.id, point.baseAgree)}% AGREE</div>
                     <div className="flex gap-4">
                       <button className="hover:text-success underline decoration-2 underline-offset-4 flex items-center gap-1"><Share2 size={14} /> WA SHARE</button>
-                      <Link href="/manifesto" className="text-text-secondary hover:text-white underline decoration-2 underline-offset-4">DEEP DIVE →</Link>
+                      <Link href="/manifesto" className="text-text-secondary hover:text-rich-black underline decoration-2 underline-offset-4">DEEP DIVE →</Link>
                     </div>
                   </div>
                 </div>
@@ -233,10 +233,10 @@ export default function HomePage() {
             ))}
 
             {/* 6th Card: Call to action for full manifesto */}
-            <div className="bg-accent border-4 border-text-primary p-6 shadow-[12px_12px_0_0_#FFF] flex flex-col items-center justify-center text-center">
+            <div className="bg-accent border-4 border-text-primary p-6 shadow-[12px_12px_0_0_#000] flex flex-col items-center justify-center text-center">
               <h3 className="font-display text-5xl uppercase text-black mb-4">WANT MORE?</h3>
               <p className="font-mono text-black font-bold mb-6">Read the full roasting of the political class.</p>
-              <Link href="/manifesto" className="bg-black text-accent font-display text-3xl px-8 py-4 uppercase border-4 border-black hover:bg-bg hover:text-white transition-colors shadow-[8px_8px_0_0_#FFF]">
+              <Link href="/manifesto" className="bg-rich-black text-accent font-display text-3xl px-8 py-4 uppercase border-4 border-rich-black hover:bg-bg hover:text-rich-black transition-colors shadow-[8px_8px_0_0_#000]">
                 VIEW FULL MANIFESTO
               </Link>
             </div>
@@ -249,7 +249,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center mb-16 gap-6 text-center md:text-left">
             <h2 className="font-display text-6xl md:text-8xl uppercase tracking-tighter">MEME WALL</h2>
-            <Link href="/tools/meme-generator" className="bg-alert text-black font-display text-2xl uppercase px-8 py-4 border-4 border-text-primary shadow-[8px_8px_0_0_#FFF] hover:scale-105 transition-transform flex items-center gap-2">
+            <Link href="/tools/meme-generator" className="bg-alert text-white font-display text-2xl uppercase px-8 py-4 border-4 border-text-primary shadow-[8px_8px_0_0_#000] hover:scale-105 transition-transform flex items-center gap-2">
               <span>Open Meme Generator 🪳</span>
             </Link>
           </div>
@@ -257,7 +257,7 @@ export default function HomePage() {
           {/* Pinterest Masonry layout via columns */}
           <div className="columns-2 md:columns-4 gap-6 space-y-6">
             {/* Pinned Card */}
-            <div className="break-inside-avoid relative bg-accent border-4 border-text-primary p-2 md:p-4 shadow-[8px_8px_0_0_#FFF] mb-6">
+            <div className="break-inside-avoid relative bg-accent border-4 border-text-primary p-2 md:p-4 shadow-[8px_8px_0_0_#000] mb-6">
               <div className="absolute -top-5 -right-5 bg-black text-accent p-3 rounded-full border-4 border-accent animate-bounce">
                 <Crown size={24} />
               </div>
@@ -284,7 +284,7 @@ export default function HomePage() {
             })}
           </div>
           <div className="text-center mt-12">
-            <Link href="/memes" className="font-mono font-bold uppercase text-accent hover:text-white hover:underline decoration-2 text-lg">Load More Gutters →</Link>
+            <Link href="/memes" className="font-mono font-bold uppercase text-accent hover:text-rich-black hover:underline decoration-2 text-lg">Load More Gutters →</Link>
           </div>
         </div>
       </section>
@@ -294,9 +294,9 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-12 items-center">
 
           <div className="flex-1 text-center md:text-left">
-            <h2 className="font-display text-6xl uppercase mb-6 tracking-widest bg-black text-accent inline-block px-4 border-4 border-black shadow-[8px_8px_0_0_#FFF]">THE ANTHEM</h2>
+            <h2 className="font-display text-6xl uppercase mb-6 tracking-widest bg-black text-accent inline-block px-4 border-4 border-black shadow-[8px_8px_0_0_#000]">THE ANTHEM</h2>
 
-            <div className="bg-bg border-4 border-black p-8 shadow-[16px_16px_0_0_#FFF] mb-8">
+            <div className="bg-bg border-4 border-black p-8 shadow-[16px_16px_0_0_#000] mb-8">
               <div className="text-accent text-6xl font-display uppercase tracking-widest leading-none mb-6">TAKE A STEP<br />NOW</div>
               <div className="flex items-center gap-4">
                 <button className="bg-accent text-black p-4 rounded-full border-4 border-black hover:scale-110 transition-transform">
@@ -326,7 +326,7 @@ export default function HomePage() {
 
       {/* 9. VERIFIED MEMBERS WALL */}
       <section className="px-4 py-24 bg-card border-b-4 border-text-primary">
-        <h2 className="font-display text-7xl uppercase text-center mb-16 tracking-widest text-white">WHO'S IN</h2>
+        <h2 className="font-display text-7xl uppercase text-center mb-16 tracking-widest text-rich-black">WHO'S IN</h2>
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {[
             { name: "MAHUA MOITRA", role: "TMC MP", date: "Joined: May 2026", quote: "I'm officially a cockroach." },
@@ -337,7 +337,7 @@ export default function HomePage() {
             { name: "AKASH BANERJEE", role: "Creator", date: "Joined: May 2026", quote: "Deshbakt now a Cockroach." }
           ].map((m, i) => (
             <div key={i} className="bg-bg border-4 border-text-primary p-6 shadow-[8px_8px_0_0_#FFD60A] relative hover:-translate-y-2 transition-transform">
-              <div className="absolute -top-4 -right-4 bg-success text-black p-2 border-4 border-text-primary rounded-full">
+              <div className="absolute -top-4 -right-4 bg-success text-white p-2 border-4 border-text-primary rounded-full">
                 <CheckCircle2 fill="black" stroke="lime" size={32} />
               </div>
               <div className="w-20 h-20 bg-text-primary border-4 border-text-primary flex items-center justify-center text-4xl mb-4 bg-cover bg-center">👤</div>
@@ -355,17 +355,17 @@ export default function HomePage() {
       {/* 10. STATE CHAPTERS MAP */}
       <section className="px-4 py-24 bg-bg border-b-4 border-text-primary">
         <div className="max-w-6xl mx-auto flex flex-col items-center">
-          <h2 className="font-display text-7xl uppercase text-white mb-6 text-center border-b-8 border-accent pb-2">STATE CHAPTERS MAP</h2>
-          <p className="font-mono text-text-secondarytext-center max-w-2xl mb-12 uppercase text-lg text-center">Interactive map coming soon. For now, click a state to see member count and top meme.</p>
+          <h2 className="font-display text-7xl uppercase text-rich-black mb-6 text-center border-b-8 border-accent pb-2">STATE CHAPTERS MAP</h2>
+          <p className="font-mono text-text-secondary max-w-2xl mb-12 uppercase text-lg text-center">Interactive map coming soon. For now, click a state to see member count and top meme.</p>
 
           {/* Abstract Map Grid */}
           <div className="w-full max-w-4xl flex flex-wrap justify-center gap-3">
             {["JK", "HP", "PB", "CH", "HR", "UK", "DL", "RJ", "UP", "BR", "SK", "AR", "AS", "NL", "MN", "MZ", "TR", "ML", "WB", "JH", "OR", "CG", "MP", "GJ", "MH", "GA", "KA", "TS", "AP", "KL", "TN"].map((code, idx) => (
-              <Link href={`/states/${code}`} key={code} className="bg-card w-16 h-16 md:w-20 md:h-20 flex flex-col items-center justify-center border-4 border-text-primary font-display text-2xl uppercase hover:bg-accent hover:text-black transition-colors shadow-[4px_4px_0_0_#FFF] group relative">
+              <Link href={`/states/${code}`} key={code} className="bg-card w-16 h-16 md:w-20 md:h-20 flex flex-col items-center justify-center border-4 border-text-primary font-display text-2xl uppercase hover:bg-accent hover:text-black transition-colors shadow-[4px_4px_0_0_#000] group relative">
                 {code}
                 {/* Hover tooltip logic simulation */}
-                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 bg-text-primary text-black font-mono text-xs p-2 hidden group-hover:block whitespace-nowrap border-4 border-black z-10 w-32 shadow-[8px_8px_0_0_#FFD60A]">
-                  <div className="font-bold text-center border-b-2 border-black pb-1 mb-1">{code} CHAPTER</div>
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 bg-rich-black text-bg font-mono text-xs p-2 hidden group-hover:block whitespace-nowrap border-4 border-rich-black z-10 w-32 shadow-[8px_8px_0_0_#FFD60A]">
+                  <div className="font-bold text-center border-b-2 border-bg pb-1 mb-1">{code} CHAPTER</div>
                   <div className="text-center">{Math.floor(Math.random() * 50 + 10)}K Members</div>
                 </div>
               </Link>
@@ -383,21 +383,21 @@ export default function HomePage() {
 
           {/* Join Form */}
           <div className="bg-bg border-4 border-accent p-8 md:p-12 shadow-[16px_16px_0_0_#FFD60A]">
-            <h2 className="font-display text-6xl uppercase text-white mb-8 border-l-8 border-accent pl-4">JOIN FORM</h2>
+            <h2 className="font-display text-6xl uppercase text-rich-black mb-8 border-l-8 border-accent pl-4">JOIN FORM</h2>
             <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
               <div>
                 <label className="font-mono uppercase font-bold text-sm block mb-2 text-accent">NAME</label>
-                <input type="text" className="w-full bg-card border-4 border-text-primary p-4 font-mono text-xl uppercase focus:border-accent focus:outline-none text-white placeholder-text-secondary" placeholder="YOUR NAME" />
+                <input type="text" className="w-full bg-card border-4 border-text-primary p-4 font-mono text-xl uppercase focus:border-accent focus:outline-none text-rich-black placeholder-text-secondary" placeholder="YOUR NAME" />
               </div>
               <div>
                 <label className="font-mono uppercase font-bold text-sm block mb-2 text-accent">CITY</label>
-                <input type="text" className="w-full bg-card border-4 border-text-primary p-4 font-mono text-xl uppercase focus:border-accent focus:outline-none text-white placeholder-text-secondary" placeholder="WHERE DO YOU LURK?" />
+                <input type="text" className="w-full bg-card border-4 border-text-primary p-4 font-mono text-xl uppercase focus:border-accent focus:outline-none text-rich-black placeholder-text-secondary" placeholder="WHERE DO YOU LURK?" />
               </div>
               <div>
                 <label className="font-mono uppercase font-bold text-sm block mb-2 text-accent">WHY ARE YOU A COCKROACH?</label>
-                <input type="text" className="w-full bg-card border-4 border-text-primary p-4 font-mono text-xl uppercase focus:border-accent focus:outline-none text-white placeholder-text-secondary" placeholder="1 LINE ONLY" />
+                <input type="text" className="w-full bg-card border-4 border-text-primary p-4 font-mono text-xl uppercase focus:border-accent focus:outline-none text-rich-black placeholder-text-secondary" placeholder="1 LINE ONLY" />
               </div>
-              <button className="w-full bg-accent text-black font-display text-3xl uppercase py-6 border-4 border-black hover:bg-text-primary hover:text-black transition-colors shadow-[8px_8px_0_0_#FFF] active:translate-y-2 active:shadow-none">
+              <button className="w-full bg-accent text-rich-black font-display text-3xl uppercase py-6 border-4 border-rich-black hover:bg-rich-black hover:text-accent transition-colors shadow-[8px_8px_0_0_#000] active:translate-y-2 active:shadow-none">
                 GENERATE MY MEMBERSHIP CARD
               </button>
             </form>
@@ -408,29 +408,29 @@ export default function HomePage() {
             {/* 12. BLOG TEASER */}
             <div>
               <div className="flex justify-between items-center mb-8 border-b-4 border-text-primary pb-4">
-                <h2 className="font-display text-5xl text-white">BLOG TEASER</h2>
+                <h2 className="font-display text-5xl text-rich-black">BLOG TEASER</h2>
                 <Link href="/blog" className="font-mono uppercase text-sm text-accent hover:underline decoration-2"><ArrowRight size={24} /></Link>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 {[1, 2, 3, 4].map((i) => (
-                  <Link href={`/blog/post-${i}`} key={i} className="group bg-bg p-4 border-4 border-text-primary hover:border-accent shadow-[4px_4px_0_0_#FFF] transition-all">
+                  <Link href={`/blog/post-${i}`} key={i} className="group bg-bg p-4 border-4 border-text-primary hover:border-accent shadow-[4px_4px_0_0_#000] transition-all">
                     <div className="h-24 bg-card mb-3 border-2 border-text-primary flex items-center justify-center font-display text-2xl text-text-secondary group-hover:bg-accent/20">IMG</div>
                     <h4 className="font-bold font-hindi line-clamp-2 leading-snug group-hover:text-accent">Why being lazy is actually a political statement in 2026</h4>
                   </Link>
                 ))}
               </div>
-              <Link href="/blog" className="inline-block mt-8 font-mono font-bold uppercase text-accent hover:text-white hover:underline decoration-2 text-lg">
+              <Link href="/blog" className="inline-block mt-8 font-mono font-bold uppercase text-accent hover:text-rich-black hover:underline decoration-2 text-lg">
                 READ MORE COCKROACH WISDOM →
               </Link>
             </div>
 
             {/* 13. NEWSLETTER CTA */}
-            <div className="bg-alert p-8 border-4 border-black shadow-[16px_16px_0_0_#FFF] text-black">
+            <div className="bg-alert p-8 border-4 border-black shadow-[16px_16px_0_0_#000] text-black">
               <h2 className="font-display text-5xl uppercase mb-2">ROACH REPORT<br />— Weekly Drop</h2>
               <p className="font-mono font-bold mb-6 text-xl">No spam. Bas roach gyaan.</p>
               <form className="flex flex-col md:flex-row gap-4" onSubmit={e => e.preventDefault()}>
                 <input type="email" placeholder="ENTER EMAIL" className="flex-1 bg-white border-4 border-black p-4 font-mono text-xl uppercase focus:border-white focus:outline-none placeholder-text-secondary" />
-                <button className="bg-black text-white font-display text-2xl uppercase px-8 border-4 border-black hover:bg-bg transition-colors">
+                <button className="bg-rich-black text-white font-display text-2xl uppercase px-8 border-4 border-rich-black hover:bg-bg hover:text-rich-black transition-colors">
                   SUBSCRIBE
                 </button>
               </form>
@@ -446,8 +446,8 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-16 mb-16 relative z-10">
 
           <div className="flex-1 max-w-xl">
-            <div className="font-display text-7xl text-white mb-6 uppercase tracking-widest border-b-4 border-accent pb-4 inline-block">🪳 CJP</div>
-            <div className="bg-alert text-black font-display text-3xl uppercase p-4 border-4 border-text-primary shadow-[8px_8px_0_0_#FFF] mb-6">
+            <div className="font-display text-7xl text-rich-black mb-6 uppercase tracking-widest border-b-4 border-accent pb-4 inline-block">🪳 CJP</div>
+            <div className="bg-alert text-white font-display text-3xl uppercase p-4 border-4 border-text-primary shadow-[8px_8px_0_0_#000] mb-6">
               Fan-built. Not affiliated with CJP or ECI.
             </div>
             <p className="font-mono text-text-secondary text-lg">Made with 🪳 in India. For the lazy, by the lazy.</p>
@@ -461,7 +461,7 @@ export default function HomePage() {
               <Link href="/quiz" className="hover:text-accent">Quiz</Link>
             </div>
             <div className="flex flex-col gap-4">
-              <Link href="/join" className="text-accent hover:text-white">Join Form</Link>
+              <Link href="/join" className="text-accent hover:text-rich-black">Join Form</Link>
               <Link href="/tools" className="hover:text-accent">Generators</Link>
               <Link href="/states" className="hover:text-accent">State Chapters</Link>
               <Link href="/blog" className="hover:text-accent">Blog Teaser</Link>
@@ -471,8 +471,8 @@ export default function HomePage() {
         </div>
 
         {/* Social Icons & Bottom Text */}
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center pt-8 border-t-4 border-card z-10 relative">
-          <div className="flex gap-6 mb-6 md:mb-0 text-white font-mono font-bold text-xl hover:[&>a]:text-accent">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center pt-8 border-t-4 border-rich-black z-10 relative">
+          <div className="flex gap-6 mb-6 md:mb-0 text-rich-black font-mono font-bold text-xl hover:[&>a]:text-accent">
             <a href="#">INSTAGRAM</a>
             <a href="#">X (TWITTER)</a>
             <a href="#">YOUTUBE</a>

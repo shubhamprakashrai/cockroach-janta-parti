@@ -85,10 +85,10 @@ export default function ManifestoPage() {
     return (
         <main className="min-h-screen bg-bg text-text-primary pb-20">
             {/* Top Bar Navigation */}
-            <nav className="sticky top-0 z-50 bg-bg border-b-4 border-text-primary px-4 py-3 flex justify-between items-center shadow-[0_4px_0_0_#FFF]">
+            <nav className="sticky top-0 z-50 bg-bg border-b-4 border-text-primary px-4 py-3 flex justify-between items-center shadow-[0_4px_0_0_#000]">
                 <Link href="/" className="font-display text-2xl uppercase tracking-widest hover:text-accent">🪳 HOME</Link>
                 <div className="flex gap-4">
-                    <button className="font-mono text-sm uppercase border-2 border-text-primary px-4 py-1 hover:bg-text-primary hover:text-black">
+                    <button className="font-mono text-sm uppercase border-2 border-text-primary px-4 py-1 hover:bg-text-primary hover:text-bg">
                         Toggle Hind / Eng
                     </button>
                     <button className="bg-accent text-black font-mono font-bold text-sm uppercase border-2 border-black px-4 py-1 flex items-center gap-2 hover:bg-white">
@@ -113,7 +113,7 @@ export default function ManifestoPage() {
             {/* Demands List */}
             <div className="max-w-6xl mx-auto px-4 py-12 space-y-24">
                 {demands.map((demand, index) => (
-                    <section key={demand.id} className="relative bg-bg border-4 border-text-primary shadow-[16px_16px_0_0_#FFD60A] hover:shadow-[16px_16px_0_0_#FFF] transition-all grid lg:grid-cols-3">
+                    <section key={demand.id} className="relative bg-bg border-4 border-text-primary shadow-[16px_16px_0_0_#FFD60A] hover:shadow-[16px_16px_0_0_#000] transition-all grid lg:grid-cols-3">
 
                         {/* Left Col - Content */}
                         <div className="lg:col-span-2 p-8 md:p-12 border-b-4 lg:border-b-0 lg:border-r-4 border-text-primary">
@@ -137,17 +137,17 @@ export default function ManifestoPage() {
 
                             {/* Vote Actions */}
                             <div className="bg-card p-6 border-4 border-black shadow-[8px_8px_0_0_#000]">
-                                <h4 className="font-display text-2xl uppercase mb-4 tracking-widest text-white">VOICE YOUR VOTE</h4>
+                                <h4 className="font-display text-2xl uppercase mb-4 tracking-widest text-rich-black">VOICE YOUR VOTE</h4>
                                 <div className="flex flex-col sm:flex-row gap-4 mb-4">
                                     <button
                                         onClick={() => setVotes(prev => ({ ...prev, [demand.id]: 'agree' }))}
-                                        className={`flex-1 flex justify-center items-center gap-2 font-display text-3xl uppercase py-4 border-4 border-black transition-all ${votes[demand.id] === 'agree' ? 'bg-success text-black' : 'bg-bg text-white hover:bg-success hover:text-black shadow-[4px_4px_0_0_#FFF]'}`}
+                                        className={`flex-1 flex justify-center items-center gap-2 font-display text-3xl uppercase py-4 border-4 border-black transition-all ${votes[demand.id] === 'agree' ? 'bg-success text-white' : 'bg-bg text-rich-black hover:bg-success hover:text-white shadow-[4px_4px_0_0_#000]'}`}
                                     >
                                         <Check size={28} /> AGREE
                                     </button>
                                     <button
                                         onClick={() => setVotes(prev => ({ ...prev, [demand.id]: 'disagree' }))}
-                                        className={`flex-1 flex justify-center items-center gap-2 font-display text-3xl uppercase py-4 border-4 border-black transition-all ${votes[demand.id] === 'disagree' ? 'bg-alert text-black' : 'bg-bg text-white hover:bg-alert hover:text-black shadow-[4px_4px_0_0_#FFF]'}`}
+                                        className={`flex-1 flex justify-center items-center gap-2 font-display text-3xl uppercase py-4 border-4 border-black transition-all ${votes[demand.id] === 'disagree' ? 'bg-alert text-white' : 'bg-bg text-rich-black hover:bg-alert hover:text-white shadow-[4px_4px_0_0_#000]'}`}
                                     >
                                         <X size={28} /> DISAGREE
                                     </button>
@@ -166,7 +166,7 @@ export default function ManifestoPage() {
                         {/* Right Col - Context & News */}
                         <div className="p-8 md:p-12 bg-black flex flex-col justify-between">
                             <div>
-                                <h3 className="font-display text-3xl uppercase mb-6 text-white border-b-4 border-text-primary pb-2">RELATED NEWS</h3>
+                                <h3 className="font-display text-3xl uppercase mb-6 text-rich-black border-b-4 border-text-primary pb-2">RELATED NEWS</h3>
                                 <div className="space-y-6">
                                     {demand.news.map((n, i) => (
                                         <a href="#" key={i} className="block group border-l-4 border-accent pl-4 py-2 hover:bg-card">

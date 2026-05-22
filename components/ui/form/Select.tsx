@@ -28,12 +28,12 @@ export default function Select({
             onChange={onChange}
             disabled={disabled}
             className={cn(
-                'w-full bg-bg border-4 border-text-primary p-4 font-mono text-2xl uppercase text-white focus:border-accent focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed',
+                'w-full bg-bg border-4 border-text-primary p-4 font-mono text-2xl uppercase text-rich-black focus:border-accent focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed',
                 className
             )}
         >
             {options.map(opt => (
-                <option key={opt.value} value={opt.value} className="bg-bg text-white">
+                <option key={opt.value} value={opt.value} className="bg-bg text-rich-black">
                     {opt.label}
                 </option>
             ))}

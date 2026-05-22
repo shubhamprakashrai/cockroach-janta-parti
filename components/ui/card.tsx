@@ -28,7 +28,7 @@ export const NewsCard = ({ title, excerpt, image, href }: { title: string; excer
                     <img src={image} alt={title} className="w-full h-full object-cover" loading="lazy" />
                 </div>
             )}
-            <h3 className="font-display text-2xl uppercase text-white mb-2">{title}</h3>
+            <h3 className="font-display text-2xl uppercase text-rich-black mb-2">{title}</h3>
             <p className="font-mono text-sm text-text-secondary flex-1">{excerpt}</p>
         </Card>
     </a>
@@ -44,7 +44,7 @@ export const MemberCard = ({ name, city, avatar }: { name: string; city: string;
     <Card className="flex items-center gap-4">
         {avatar && <img src={avatar} alt={name} className="w-12 h-12 rounded-full" loading="lazy" />}
         <div>
-            <p className="font-display text-xl uppercase text-white">{name}</p>
+            <p className="font-display text-xl uppercase text-rich-black">{name}</p>
             <p className="font-mono text-xs uppercase text-text-secondary">{city}</p>
         </div>
     </Card>
@@ -53,7 +53,7 @@ export const MemberCard = ({ name, city, avatar }: { name: string; city: string;
 export const StateCard = ({ state, membersCount, img }: { state: string; membersCount: number; img?: string }) => (
     <Card className="text-center">
         {img && <img src={img} alt={state} className="w-full h-32 object-cover mb-4" loading="lazy" />}
-        <h3 className="font-display text-2xl uppercase text-white mb-2">{state}</h3>
+        <h3 className="font-display text-2xl uppercase text-rich-black mb-2">{state}</h3>
         <p className="font-mono text-sm text-text-secondary">{membersCount.toLocaleString()} members</p>
     </Card>
 );

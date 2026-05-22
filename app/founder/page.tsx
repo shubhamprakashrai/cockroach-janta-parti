@@ -20,7 +20,7 @@ export default function FounderProfilePage() {
     return (
         <main className="min-h-screen bg-bg text-text-primary pb-24">
             {/* Top Nav */}
-            <nav className="sticky top-0 z-50 bg-bg border-b-4 border-text-primary px-4 py-4 flex justify-center shadow-[0_4px_0_0_#FFF]">
+            <nav className="sticky top-0 z-50 bg-bg border-b-4 border-text-primary px-4 py-4 flex justify-center shadow-[0_4px_0_0_#000]">
                 <div className="font-mono text-sm font-bold uppercase tracking-widest text-text-secondary">CJP ARCHIVES / SUBJECT 001</div>
             </nav>
 
@@ -41,7 +41,7 @@ export default function FounderProfilePage() {
                     </div>
 
                     <div className="text-left">
-                        <h1 className="font-display text-5xl md:text-8xl uppercase leading-none tracking-tighter mb-4 text-white">
+                        <h1 className="font-display text-5xl md:text-8xl uppercase leading-none tracking-tighter mb-4 text-rich-black">
                             ABHIJEET <span className="text-accent">DIPKE.</span>
                         </h1>
                         <p className="font-mono text-xl md:text-2xl font-bold uppercase bg-black inline-block px-4 py-2 text-white border-2 border-text-primary">
@@ -57,7 +57,7 @@ export default function FounderProfilePage() {
                 <div className="space-y-12">
 
                     <div className="bg-card border-4 border-text-primary p-8 shadow-[8px_8px_0_0_#000]">
-                        <h2 className="font-display text-3xl uppercase text-white mb-6 border-b-4 border-text-primary pb-2 flex justify-between">
+                        <h2 className="font-display text-3xl uppercase text-rich-black mb-6 border-b-4 border-text-primary pb-2 flex justify-between">
                             BACKGROUND <span className="text-accent text-3xl">🎓</span>
                         </h2>
                         <div className="space-y-6 font-mono text-sm leading-relaxed text-text-secondary font-bold">
@@ -88,16 +88,16 @@ export default function FounderProfilePage() {
 
                     {/* Timeline */}
                     <div>
-                        <h2 className="font-display text-4xl uppercase text-white mb-8 border-b-4 border-text-primary pb-2">THE GENESIS TIMELINE</h2>
+                        <h2 className="font-display text-4xl uppercase text-rich-black mb-8 border-b-4 border-text-primary pb-2">THE GENESIS TIMELINE</h2>
                         <div className="space-y-6 relative before:absolute before:inset-0 before:ml-2 before:-translate-x-px before:h-full before:w-1 before:bg-text-primary">
                             {timeline.map((item, i) => (
                                 <div key={i} className="relative flex items-center justify-between group">
                                     <div className="flex flex-col items-center justify-center w-6 z-10 relative left-0">
                                         <div className={`w-4 h-4 rounded-full border-4 border-black ${i === 0 ? 'bg-alert w-6 h-6' : 'bg-accent'}`}></div>
                                     </div>
-                                    <div className="w-[calc(100%-2rem)] bg-card p-6 border-4 border-text-primary shadow-[4px_4px_0_0_#FFF] hover:-translate-y-1 transition-transform cursor-pointer hover:shadow-[4px_4px_0_0_#FFD60A] hover:border-accent">
+                                    <div className="w-[calc(100%-2rem)] bg-card p-6 border-4 border-text-primary shadow-[4px_4px_0_0_#000] hover:-translate-y-1 transition-transform cursor-pointer hover:shadow-[4px_4px_0_0_#FFD60A] hover:border-accent">
                                         <div className="font-mono text-[10px] text-accent uppercase font-bold mb-2 tracking-widest">{item.date}</div>
-                                        <h3 className="font-display text-2xl uppercase text-white mb-2">{item.title}</h3>
+                                        <h3 className="font-display text-2xl uppercase text-rich-black mb-2">{item.title}</h3>
                                         <p className="font-hindi text-text-secondary text-sm">{item.desc}</p>
                                     </div>
                                 </div>
@@ -107,7 +107,7 @@ export default function FounderProfilePage() {
 
                     {/* Press */}
                     <div className="bg-black border-4 border-text-primary p-8">
-                        <h2 className="font-display text-3xl uppercase text-white mb-6 border-b-4 border-text-primary pb-2 flex items-center justify-between">
+                        <h2 className="font-display text-3xl uppercase text-rich-black mb-6 border-b-4 border-text-primary pb-2 flex items-center justify-between">
                             MEDIA DOSSIER <span className="animate-pulse">🔴</span>
                         </h2>
                         <div className="space-y-4 font-mono">
@@ -116,7 +116,7 @@ export default function FounderProfilePage() {
                                     <LinkIcon size={16} className="text-text-secondary shrink-0 mt-1 group-hover:text-accent" />
                                     <div>
                                         <span className="text-accent text-xs font-bold uppercase tracking-widest block mb-1">{p.source}</span>
-                                        <span className="text-white hover:underline">{p.title}</span>
+                                        <span className="text-rich-black hover:underline">{p.title}</span>
                                     </div>
                                 </a>
                             ))}

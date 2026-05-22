@@ -5,26 +5,29 @@
 @tailwind utilities;
 
 :root {
-  --bg: #0A0A0A;
-  --accent: #FFD60A;
-  --alert: #FF3B30;
+  --bg: #FCF8F8;
+  --card: #FFFFFF;
+  --accent: #FF6B00;
+  --mustard: #FFD60A;
+  --alert: #E63946;
+  --text: #0A0A0A;
 }
 
 * { -webkit-tap-highlight-color: transparent; }
 
 html, body {
   background: var(--bg);
-  color: #F5F5F5;
+  color: var(--text);
   font-family: 'Inter', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
-::selection { background: var(--accent); color: #000; }
+::selection { background: var(--accent); color: #FFF; }
 
 .brutal-card {
-  @apply border-2 border-text-primary bg-card shadow-brutal;
+  @apply border-2 border-rich-black bg-card shadow-brutal;
 }
 
 .brutal-btn {
-  @apply bg-accent text-bg font-bold uppercase tracking-wide px-6 py-3 border-2 border-bg shadow-brutal hover:-translate-y-1 hover:shadow-brutal-lg active:translate-y-0 active:shadow-none transition-all;
+  @apply bg-accent text-white font-bold uppercase tracking-wide px-6 py-3 border-2 border-rich-black shadow-brutal hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-brutal-sm active:translate-x-1 active:translate-y-1 active:shadow-none transition-all;
 }
