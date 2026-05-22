@@ -37,9 +37,39 @@ export default function HomePage() {
   ];
 
   const newsItems = [
-    { source: "BusinessToday", title: "CJP Surpasses BJP on Instagram with 9.3M Followers", time: "Read in 30s", thumb: "📈" },
-    { source: "ThePrint", title: "Over 3.5 Lakh Youth Drop Resumes to Join Cockroach Janta Party", time: "Read in 1m", thumb: "🤯" },
-    { source: "The Wire", title: "Mahua Moitra officially verified as CJP member", time: "Read in 45s", thumb: "🔥" },
+    { source: "BusinessToday", title: "CJP Surpasses BJP on Instagram with 9.3M Followers", time: "Read in 30s", img: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=800&q=80&auto=format&fit=crop" },
+    { source: "ThePrint", title: "Over 3.5 Lakh Youth Drop Resumes to Join Cockroach Janta Party", time: "Read in 1m", img: "https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=800&q=80&auto=format&fit=crop" },
+    { source: "The Wire", title: "Mahua Moitra officially verified as CJP member", time: "Read in 45s", img: "https://images.unsplash.com/photo-1495020689067-958852a7765e?w=800&q=80&auto=format&fit=crop" },
+  ];
+
+  const members = [
+    { name: "MAHUA MOITRA", role: "TMC MP", date: "Joined: May 2026", quote: "I'm officially a cockroach.", avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80&auto=format&fit=crop" },
+    { name: "KIRTI AZAD", role: "TMC MP", date: "Joined: May 2026", quote: "From the gutters, we speak.", avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80&auto=format&fit=crop" },
+    { name: "KUNAL KAMRA", role: "Comedian", date: "Joined: May 2026", quote: "Vistara banned me, CJP accepted me.", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80&auto=format&fit=crop" },
+    { name: "ABHIJEET DIPKE", role: "Founder", date: "Joined: May 15, 2026", quote: "Main bhi cockroach.", avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400&q=80&auto=format&fit=crop" },
+    { name: "RAVISH KUMAR", role: "Journalist", date: "Joined: May 2026", quote: "Kaun jaat ho bhai? Cockroach.", avatar: "https://images.unsplash.com/photo-1463453091185-61582044d556?w=400&q=80&auto=format&fit=crop" },
+    { name: "AKASH BANERJEE", role: "Creator", date: "Joined: May 2026", quote: "Deshbakt now a Cockroach.", avatar: "https://images.unsplash.com/photo-1542178243-bc20204b769f?w=400&q=80&auto=format&fit=crop" },
+  ];
+
+  const memeImages = [
+    "https://images.unsplash.com/photo-1542728928-1413d1894ed1?w=600&q=80&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1488229297570-58520851e868?w=600&q=80&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1604079628040-94301bb21b91?w=600&q=80&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1532375810709-75b1da00537c?w=600&q=80&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=600&q=80&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?w=600&q=80&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1599054735388-bcb07bdd3574?w=600&q=80&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1577962917302-cd874c4e31d2?w=600&q=80&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1605640840605-14ac1855827b?w=600&q=80&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1517021897933-0e0319cfbc28?w=600&q=80&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1518604666860-9ed391f76460?w=600&q=80&auto=format&fit=crop",
+  ];
+
+  const blogPosts = [
+    { title: "Why being lazy is actually a political statement in 2026", img: "https://images.unsplash.com/photo-1611605698335-8b1569810432?w=600&q=80&auto=format&fit=crop" },
+    { title: "The cockroach economy: How 3.5L joined in one week", img: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&q=80&auto=format&fit=crop" },
+    { title: "Decoding the CJI remark that birthed a movement", img: "https://images.unsplash.com/photo-1589994965851-a8f479c573a9?w=600&q=80&auto=format&fit=crop" },
+    { title: "Inside the meme war: CJP vs the Establishment", img: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&q=80&auto=format&fit=crop" },
   ];
 
   return (
@@ -85,47 +115,47 @@ export default function HomePage() {
       </div>
 
       {/* 3. HERO SECTION */}
-      <section className="relative min-h-[90vh] flex flex-col items-center justify-center text-center px-4 overflow-hidden border-b-4 border-text-primary">
-        {/* Swarm Background */}
-        <div className="absolute inset-0 z-0 opacity-20 pointer-events-none overflow-hidden">
-          {/* Abstract India Map Shape representation via scattered roaches */}
-          {[...Array(30)].map((_, i) => (
-            <motion.div
-              key={i}
-              initial={{ x: Math.random() * 100 - 50 + "vw", y: Math.random() * 100 - 50 + "vh" }}
-              animate={{ x: Math.random() * 100 - 50 + "vw", y: Math.random() * 100 - 50 + "vh" }}
-              transition={{ duration: Math.random() * 10 + 10, repeat: Infinity, repeatType: "mirror" }}
-              className="absolute text-5xl md:text-7xl"
-            >
-              🪳
-            </motion.div>
-          ))}
+      <section className="relative min-h-[92vh] flex flex-col items-center justify-center text-center px-4 overflow-hidden border-b-4 border-text-primary">
+        {/* Hero photo background */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src="https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=2000&q=80&auto=format&fit=crop"
+            alt="A youth-led protest movement in India"
+            className="w-full h-full object-cover"
+            loading="eager"
+          />
+          <div className="absolute inset-0 bg-rich-black/65"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-rich-black/30 via-transparent to-rich-black/70"></div>
         </div>
 
-        <div className="z-10 bg-bg/80 backdrop-blur-sm p-4 md:p-12 border-4 border-text-primary shadow-[16px_16px_0_0_#FFD60A]">
-          <h1 className="font-display text-7xl md:text-[8rem] uppercase leading-none tracking-tighter mb-4 text-rich-black">
+        <div className="z-10 max-w-5xl mx-auto px-4">
+          <div className="inline-block bg-accent text-rich-black px-4 py-1 mb-6 font-mono text-xs md:text-sm font-bold uppercase tracking-[0.2em] border-2 border-rich-black shadow-[4px_4px_0_0_#000]">
+            India's Loudest Gen Z Movement
+          </div>
+          <h1 className="font-display text-6xl sm:text-7xl md:text-[9rem] uppercase leading-[0.85] tracking-tighter mb-6 text-white">
             MAIN BHI<br />
-            <span className="text-accent underline decoration-8 underline-offset-8 group-hover:text-rich-black transition-colors">COCKROACH.</span>
+            <span className="text-accent underline decoration-8 underline-offset-[12px]">COCKROACH.</span>
           </h1>
-          <h2 className="font-hindi text-xl md:text-3xl text-text-secondary mb-10 max-w-3xl">
-            Tum bhi banno. India's loudest Gen Z movement.
-          </h2>
+          <p className="font-hindi text-lg md:text-2xl text-white/90 mb-10 max-w-2xl mx-auto leading-relaxed">
+            Tum bhi banno. From the gutters, from the stain — we rise.
+          </p>
 
-          <div className="flex flex-col md:flex-row gap-6 justify-center mb-10">
-            <Link href="/join" className="bg-accent text-black font-display text-2xl md:text-3xl uppercase tracking-widest px-8 md:px-12 py-4 md:py-6 border-4 border-text-primary shadow-[8px_8px_0_0_#000] hover:translate-y-1 hover:shadow-[4px_4px_0_0_#000] transition-all">
+          <div className="flex flex-col md:flex-row gap-4 md:gap-6 justify-center mb-12">
+            <Link href="/join" className="bg-accent text-rich-black font-display text-2xl md:text-3xl uppercase tracking-widest px-8 md:px-12 py-4 md:py-5 border-4 border-rich-black shadow-[8px_8px_0_0_#000] hover:translate-x-1 hover:translate-y-1 hover:shadow-[4px_4px_0_0_#000] transition-all">
               JOIN THE PARTI →
             </Link>
-            <Link href="/tools/card" className="bg-bg text-accent font-display text-xl md:text-2xl uppercase tracking-widest px-6 md:px-8 py-4 md:py-6 border-4 border-accent shadow-[8px_8px_0_0_#FFD60A] hover:translate-y-1 hover:shadow-[4px_4px_0_0_#FFD60A] transition-all">
-              GENERATE MY COCKROACH CARD 🪳
+            <Link href="/tools/card" className="bg-white text-rich-black font-display text-xl md:text-2xl uppercase tracking-widest px-6 md:px-8 py-4 md:py-5 border-4 border-rich-black shadow-[8px_8px_0_0_#FFD60A] hover:translate-x-1 hover:translate-y-1 hover:shadow-[4px_4px_0_0_#FFD60A] transition-all">
+              GET YOUR CARD
             </Link>
           </div>
 
-          <div className="inline-block border-2 border-text-primary bg-card/50 p-4 font-mono text-sm md:text-base">
-            <div className="flex flex-col md:flex-row gap-4 justify-between items-center text-text-secondary">
-              <div><span className="text-accent font-bold">MEMBERS:</span> {memberCount.toLocaleString()} 📈</div>
-              <div className="hidden md:block">|</div>
-              <div><span className="text-alert font-bold">DAYS SINCE CJI REMARK:</span> 6</div>
+          <div className="inline-flex flex-col md:flex-row gap-3 md:gap-6 items-center bg-white/10 backdrop-blur-md border border-white/20 px-5 py-3 font-mono text-xs md:text-sm text-white">
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 bg-success rounded-full animate-pulse"></span>
+              <span><span className="font-bold text-accent">MEMBERS:</span> {memberCount.toLocaleString()}</span>
             </div>
+            <span className="hidden md:block text-white/30">|</span>
+            <div><span className="font-bold text-alert">DAY 6:</span> Since the CJI remark.</div>
           </div>
         </div>
       </section>
@@ -145,7 +175,7 @@ export default function HomePage() {
               { label: "TOTAL MEMBERS", value: "3.5L", src: "VERIFIED" },
               { label: "VS BJP GAP", value: "+600K", src: "LEAD" }
             ].map((stat, i) => (
-              <div key={i} className="bg-bg text-text-primary p-6 md:p-8 border-4 border-bg shadow-[8px_8px_0_0_#FF0000] hover:scale-105 transition-transform group">
+              <div key={i} className="bg-bg text-text-primary p-6 md:p-8 border-4 border-bg shadow-[8px_8px_0_0_#FF6B00] hover:scale-105 transition-transform group">
                 <div className="font-display text-4xl md:text-7xl text-accent mb-2 tracking-tighter truncate">{stat.value}</div>
                 <div className="font-mono text-xs md:text-sm font-bold text-text-secondary mb-4">{stat.label}</div>
                 <div className="inline-block bg-accent text-bg px-2 py-1 font-mono text-[10px] md:text-xs font-bold">{stat.src}</div>
@@ -166,19 +196,19 @@ export default function HomePage() {
         {/* Mobile uses flex container for horizontal scroll, desktop is grid */}
         <div className="flex overflow-x-auto md:grid md:grid-cols-3 gap-6 pb-8 snap-x">
           {newsItems.map((news, i) => (
-            <div key={i} className="min-w-[85vw] md:min-w-0 flex-shrink-0 snap-center bg-card border-4 border-text-primary p-6 shadow-[8px_8px_0_0_#000] flex flex-col justify-between group hover:-translate-y-2 transition-transform cursor-pointer">
-              <div>
-                <div className="flex justify-between items-start mb-6">
-                  <span className="bg-text-primary text-bg font-bold font-mono px-3 py-1 text-xs uppercase shadow-[4px_4px_0_0_#FFD60A]">{news.source}</span>
-                  <span className="text-4xl">{news.thumb}</span>
-                </div>
-                <h3 className="font-bold text-2xl md:text-3xl mb-6 font-hindi leading-tight group-hover:text-accent transition-colors">{news.title}</h3>
+            <div key={i} className="min-w-[85vw] md:min-w-0 flex-shrink-0 snap-center bg-card border-4 border-text-primary shadow-[8px_8px_0_0_#000] flex flex-col group hover:-translate-y-2 transition-transform cursor-pointer overflow-hidden">
+              <div className="relative h-52 overflow-hidden border-b-4 border-text-primary">
+                <img src={news.img} alt={news.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                <span className="absolute top-3 left-3 bg-rich-black text-white font-bold font-mono px-3 py-1 text-xs uppercase tracking-widest shadow-[4px_4px_0_0_#FFD60A]">{news.source}</span>
               </div>
-              <div className="flex justify-between items-center border-t-4 border-text-primary pt-4">
-                <span className="text-accent font-mono text-sm font-bold uppercase">{news.time}</span>
-                <button className="text-text-primary hover:text-accent transition-colors" title="Share News">
-                  <Share2 size={20} />
-                </button>
+              <div className="p-6 flex flex-col flex-1 justify-between">
+                <h3 className="font-bold text-xl md:text-2xl mb-6 font-hindi leading-tight group-hover:text-accent transition-colors">{news.title}</h3>
+                <div className="flex justify-between items-center border-t-2 border-text-primary/20 pt-4">
+                  <span className="text-accent font-mono text-xs font-bold uppercase tracking-widest">{news.time}</span>
+                  <button className="text-text-primary hover:text-accent transition-colors" title="Share News">
+                    <Share2 size={20} />
+                  </button>
+                </div>
               </div>
             </div>
           ))}
@@ -249,34 +279,34 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center mb-16 gap-6 text-center md:text-left">
             <h2 className="font-display text-6xl md:text-8xl uppercase tracking-tighter">MEME WALL</h2>
-            <Link href="/tools/meme-generator" className="bg-alert text-white font-display text-2xl uppercase px-8 py-4 border-4 border-text-primary shadow-[8px_8px_0_0_#000] hover:scale-105 transition-transform flex items-center gap-2">
-              <span>Open Meme Generator 🪳</span>
+            <Link href="/tools/meme-generator" className="bg-alert text-white font-display text-2xl uppercase px-8 py-4 border-4 border-rich-black shadow-[8px_8px_0_0_#000] hover:translate-x-1 hover:translate-y-1 hover:shadow-[4px_4px_0_0_#000] transition-all">
+              Open Meme Generator →
             </Link>
           </div>
 
           {/* Pinterest Masonry layout via columns */}
           <div className="columns-2 md:columns-4 gap-6 space-y-6">
             {/* Pinned Card */}
-            <div className="break-inside-avoid relative bg-accent border-4 border-text-primary p-2 md:p-4 shadow-[8px_8px_0_0_#000] mb-6">
-              <div className="absolute -top-5 -right-5 bg-black text-accent p-3 rounded-full border-4 border-accent animate-bounce">
+            <div className="break-inside-avoid relative bg-accent border-4 border-text-primary p-2 md:p-3 shadow-[8px_8px_0_0_#000] mb-6">
+              <div className="absolute -top-5 -right-5 bg-rich-black text-accent p-3 rounded-full border-4 border-accent animate-bounce z-20">
                 <Crown size={24} />
               </div>
-              <div className="h-64 bg-black flex items-center justify-center overflow-hidden relative">
-                {/* Fake Meme Imagery */}
-                <div className="text-[6rem]">🤡</div>
-                <div className="absolute bottom-4 left-0 right-0 text-center font-display text-3xl uppercase text-white drop-shadow-[0_4px_4px_rgba(0,0,0,1)]">MEME OF<br />THE DAY</div>
+              <div className="h-64 overflow-hidden relative border-2 border-rich-black">
+                <img src="https://images.unsplash.com/photo-1542728928-1413d1894ed1?w=800&q=80&auto=format&fit=crop" alt="Meme of the day" className="w-full h-full object-cover" loading="lazy" />
+                <div className="absolute inset-0 bg-rich-black/40"></div>
+                <div className="absolute bottom-3 left-0 right-0 text-center font-display text-3xl uppercase text-white drop-shadow-[0_4px_4px_rgba(0,0,0,1)] tracking-widest">MEME OF<br />THE DAY</div>
               </div>
-              <p className="mt-3 font-mono text-black font-bold uppercase text-xs text-center border-t-2 border-black pt-2">By @lazyroach</p>
+              <p className="mt-3 font-mono text-rich-black font-bold uppercase text-xs text-center border-t-2 border-rich-black pt-2 tracking-widest">By @lazyroach</p>
             </div>
 
             {/* Other 11 Thumbnails */}
-            {[...Array(11)].map((_, i) => {
-              const heights = ['h-40', 'h-56', 'h-48', 'h-72', 'h-64'];
+            {memeImages.map((src, i) => {
+              const heights = ['h-44', 'h-60', 'h-52', 'h-72', 'h-64'];
               const height = heights[i % heights.length];
               return (
                 <div key={i} className={`break-inside-avoid relative bg-card border-4 border-text-primary shadow-[8px_8px_0_0_#FFD60A] group overflow-hidden ${height}`}>
-                  <div className="absolute inset-0 flex items-center justify-center text-[4rem] opacity-20 group-hover:scale-125 transition-transform">🪳</div>
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/80 flex items-center justify-center transition-colors">
+                  <img src={src} alt={`Meme ${i + 1}`} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+                  <div className="absolute inset-0 bg-rich-black/0 group-hover:bg-rich-black/80 flex items-center justify-center transition-colors">
                     <span className="opacity-0 group-hover:opacity-100 font-display text-2xl text-accent uppercase tracking-widest text-center transition-opacity">View<br />Meme</span>
                   </div>
                 </div>
@@ -326,29 +356,29 @@ export default function HomePage() {
 
       {/* 9. VERIFIED MEMBERS WALL */}
       <section className="px-4 py-24 bg-card border-b-4 border-text-primary">
-        <h2 className="font-display text-7xl uppercase text-center mb-16 tracking-widest text-rich-black">WHO'S IN</h2>
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {[
-            { name: "MAHUA MOITRA", role: "TMC MP", date: "Joined: May 2026", quote: "I'm officially a cockroach." },
-            { name: "KIRTI AZAD", role: "TMC MP", date: "Joined: May 2026", quote: "From the gutters, we speak." },
-            { name: "KUNAL KAMRA", role: "Comedian", date: "Joined: May 2026", quote: "Vistara banned me, CJP accepted me." },
-            { name: "ABHIJEET DIPKE", role: "Founder", date: "Joined: May 15, 2026", quote: "Main bhi cockroach." },
-            { name: "RAVISH KUMAR", role: "Journalist", date: "Joined: May 2026", quote: "Kaun jaat ho bhai? Cockroach." },
-            { name: "AKASH BANERJEE", role: "Creator", date: "Joined: May 2026", quote: "Deshbakt now a Cockroach." }
-          ].map((m, i) => (
-            <div key={i} className="bg-bg border-4 border-text-primary p-6 shadow-[8px_8px_0_0_#FFD60A] relative hover:-translate-y-2 transition-transform">
-              <div className="absolute -top-4 -right-4 bg-success text-white p-2 border-4 border-text-primary rounded-full">
-                <CheckCircle2 fill="black" stroke="lime" size={32} />
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <div className="inline-block bg-rich-black text-accent px-4 py-1 mb-4 font-mono text-xs font-bold uppercase tracking-[0.2em]">Verified Roaches</div>
+            <h2 className="font-display text-6xl md:text-7xl uppercase tracking-widest text-rich-black">WHO'S IN</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {members.map((m, i) => (
+              <div key={i} className="bg-bg border-4 border-text-primary p-6 shadow-[8px_8px_0_0_#FFD60A] relative hover:-translate-y-2 transition-transform">
+                <div className="absolute -top-4 -right-4 bg-success p-2 border-4 border-text-primary rounded-full z-10">
+                  <CheckCircle2 fill="white" stroke="white" size={28} />
+                </div>
+                <div className="w-24 h-24 border-4 border-text-primary mb-4 overflow-hidden shadow-[4px_4px_0_0_#000]">
+                  <img src={m.avatar} alt={m.name} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" loading="lazy" />
+                </div>
+                <h3 className="font-display text-3xl uppercase tracking-wider mb-1">{m.name}</h3>
+                <p className="font-mono text-xs font-bold uppercase tracking-widest mb-4 inline-block bg-rich-black text-accent px-2 py-1">{m.role}</p>
+                <div className="border-t-2 border-rich-black/20 pt-4 mt-2">
+                  <p className="font-hindi text-lg italic text-text-primary mb-2 leading-snug">&ldquo;{m.quote}&rdquo;</p>
+                  <p className="font-mono text-xs text-text-secondary uppercase tracking-widest">{m.date}</p>
+                </div>
               </div>
-              <div className="w-20 h-20 bg-text-primary border-4 border-text-primary flex items-center justify-center text-4xl mb-4 bg-cover bg-center">👤</div>
-              <h3 className="font-display text-3xl uppercase tracking-wider mb-1">{m.name}</h3>
-              <p className="font-mono text-accent uppercase font-bold text-sm mb-4 bg-black/50 inline-block px-2">{m.role}</p>
-              <div className="border-t-4 border-border pt-4 mt-2">
-                <p className="font-hindi text-lg italic text-text-primary mb-2">"{m.quote}"</p>
-                <p className="font-mono text-xs text-text-secondary uppercase">{m.date}</p>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </section>
 
@@ -412,10 +442,12 @@ export default function HomePage() {
                 <Link href="/blog" className="font-mono uppercase text-sm text-accent hover:underline decoration-2"><ArrowRight size={24} /></Link>
               </div>
               <div className="grid grid-cols-2 gap-4">
-                {[1, 2, 3, 4].map((i) => (
-                  <Link href={`/blog/post-${i}`} key={i} className="group bg-bg p-4 border-4 border-text-primary hover:border-accent shadow-[4px_4px_0_0_#000] transition-all">
-                    <div className="h-24 bg-card mb-3 border-2 border-text-primary flex items-center justify-center font-display text-2xl text-text-secondary group-hover:bg-accent/20">IMG</div>
-                    <h4 className="font-bold font-hindi line-clamp-2 leading-snug group-hover:text-accent">Why being lazy is actually a political statement in 2026</h4>
+                {blogPosts.map((post, i) => (
+                  <Link href={`/blog/post-${i + 1}`} key={i} className="group bg-bg border-4 border-text-primary hover:border-accent shadow-[4px_4px_0_0_#000] transition-all overflow-hidden">
+                    <div className="h-28 overflow-hidden border-b-2 border-text-primary">
+                      <img src={post.img} alt={post.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+                    </div>
+                    <h4 className="font-bold font-hindi line-clamp-2 leading-snug group-hover:text-accent p-3 text-sm">{post.title}</h4>
                   </Link>
                 ))}
               </div>
@@ -441,16 +473,18 @@ export default function HomePage() {
       </section>
 
       {/* 14. FOOTER */}
-      <footer className="bg-bg px-4 pt-24 pb-12 text-center md:text-left border-t-8 border-black relative overflow-hidden">
-        <div className="absolute -bottom-20 -right-20 text-[20rem] opacity-5 pointer-events-none rotate-12">🪳</div>
+      <footer className="bg-rich-black px-4 pt-24 pb-12 text-center md:text-left border-t-8 border-accent relative overflow-hidden text-white">
+        <div className="absolute inset-0 opacity-10 pointer-events-none">
+          <img src="https://images.unsplash.com/photo-1532375810709-75b1da00537c?w=1600&q=80&auto=format&fit=crop" alt="" className="w-full h-full object-cover" />
+        </div>
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start gap-16 mb-16 relative z-10">
 
           <div className="flex-1 max-w-xl">
-            <div className="font-display text-7xl text-rich-black mb-6 uppercase tracking-widest border-b-4 border-accent pb-4 inline-block">🪳 CJP</div>
-            <div className="bg-alert text-white font-display text-3xl uppercase p-4 border-4 border-text-primary shadow-[8px_8px_0_0_#000] mb-6">
+            <div className="font-display text-7xl text-white mb-6 uppercase tracking-widest border-b-4 border-accent pb-4 inline-block">CJP</div>
+            <div className="bg-alert text-white font-display text-2xl md:text-3xl uppercase p-4 border-4 border-white shadow-[8px_8px_0_0_#FFD60A] mb-6">
               Fan-built. Not affiliated with CJP or ECI.
             </div>
-            <p className="font-mono text-text-secondary text-lg">Made with 🪳 in India. For the lazy, by the lazy.</p>
+            <p className="font-mono text-white/70 text-base">Made in India. For the lazy, by the lazy.</p>
           </div>
 
           <div className="flex-1 w-full grid grid-cols-2 gap-8 font-display text-2xl uppercase tracking-widest">
@@ -461,23 +495,23 @@ export default function HomePage() {
               <Link href="/quiz" className="hover:text-accent">Quiz</Link>
             </div>
             <div className="flex flex-col gap-4">
-              <Link href="/join" className="text-accent hover:text-rich-black">Join Form</Link>
+              <Link href="/join" className="text-accent hover:text-white">Join Form</Link>
               <Link href="/tools" className="hover:text-accent">Generators</Link>
               <Link href="/states" className="hover:text-accent">State Chapters</Link>
-              <Link href="/blog" className="hover:text-accent">Blog Teaser</Link>
+              <Link href="/blog" className="hover:text-accent">Blog</Link>
             </div>
           </div>
 
         </div>
 
         {/* Social Icons & Bottom Text */}
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center pt-8 border-t-4 border-rich-black z-10 relative">
-          <div className="flex gap-6 mb-6 md:mb-0 text-rich-black font-mono font-bold text-xl hover:[&>a]:text-accent">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/20 z-10 relative">
+          <div className="flex gap-6 mb-6 md:mb-0 text-white font-mono font-bold text-sm md:text-base hover:[&>a]:text-accent">
             <a href="#">INSTAGRAM</a>
             <a href="#">X (TWITTER)</a>
             <a href="#">YOUTUBE</a>
           </div>
-          <div className="font-mono text-text-secondary text-sm">
+          <div className="font-mono text-white/50 text-xs md:text-sm">
             © 2026 COCKROCH JANTA PARTI
           </div>
         </div>
