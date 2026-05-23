@@ -17,6 +17,10 @@ export default function JoinPage() {
     const submitToFormspree = async () => {
         setIsSubmitting(true);
         setSubmitError(null);
+        // Save to localStorage so /tools/card can pre-fill
+        try {
+            window.localStorage.setItem("cjp_join_form_v1", JSON.stringify({ name: formData.name, city: formData.city, why: formData.why }));
+        } catch {}
         // Write to Firestore (live counter + members collection) — graceful no-op if unconfigured
         joinMember({ name: formData.name, email: formData.email, city: formData.city, why: formData.why }).catch(() => {});
         try {

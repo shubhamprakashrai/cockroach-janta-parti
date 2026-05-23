@@ -54,8 +54,10 @@ function CardGeneratorInner() {
         reader.readAsDataURL(file);
     };
 
+    const canDownload = formData.name.trim().length >= 2;
+
     const downloadCard = async () => {
-        if (!cardRef.current) return;
+        if (!cardRef.current || !canDownload) return;
         setIsGenerating(true);
         try {
             const dataUrl = await toPng(cardRef.current, {
@@ -64,7 +66,7 @@ function CardGeneratorInner() {
                 backgroundColor: "#FCF8F8",
             });
             const link = document.createElement("a");
-            const safeName = (formData.name || "ANONYMOUS_ROACH").replace(/\s+/g, "_").toUpperCase();
+            const safeName = formData.name.replace(/[^a-zA-Z0-9]+/g, "_").toUpperCase();
             link.download = `cjp-card-${safeName}-${memberId}.png`;
             link.href = dataUrl;
             link.click();
@@ -104,6 +106,10 @@ function CardGeneratorInner() {
                     </div>
 
                     <div className="bg-card border-4 border-text-primary p-6 md:p-8 shadow-[12px_12px_0_0_#FFD60A]">
+                        <div className="bg-accent text-rich-black border-2 border-rich-black px-4 py-3 mb-6 font-mono text-xs md:text-sm font-bold uppercase tracking-widest flex items-center gap-2">
+                            <span className={`w-2 h-2 rounded-full ${canDownload ? "bg-success animate-pulse" : "bg-alert animate-pulse"}`}></span>
+                            <span>{canDownload ? `Card preview ready · ${formData.name.toUpperCase()}` : "Type your name below — preview updates live →"}</span>
+                        </div>
                         <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
 
                             {/* Card Style Picker */}
@@ -236,15 +242,16 @@ function CardGeneratorInner() {
                         <button
                             type="button"
                             onClick={downloadCard}
-                            disabled={isGenerating}
-                            className="w-full bg-accent text-rich-black font-display text-2xl uppercase py-5 border-4 border-rich-black hover:bg-white transition-colors shadow-[8px_8px_0_0_#000] hover:translate-x-1 hover:translate-y-1 hover:shadow-[4px_4px_0_0_#000] flex justify-center items-center gap-3 disabled:opacity-50 disabled:cursor-wait"
+                            disabled={isGenerating || !canDownload}
+                            className="w-full bg-accent text-rich-black font-display text-2xl uppercase py-5 border-4 border-rich-black hover:bg-white transition-colors shadow-[8px_8px_0_0_#000] hover:translate-x-1 hover:translate-y-1 hover:shadow-[4px_4px_0_0_#000] flex justify-center items-center gap-3 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-accent disabled:hover:translate-x-0 disabled:hover:translate-y-0 disabled:hover:shadow-[8px_8px_0_0_#000]"
                         >
-                            <Download size={24} /> {isGenerating ? "GENERATING..." : "DOWNLOAD PNG"}
+                            <Download size={24} /> {isGenerating ? "GENERATING..." : canDownload ? "DOWNLOAD PNG" : "TYPE YOUR NAME FIRST"}
                         </button>
                         <button
                             type="button"
                             onClick={shareOnWhatsApp}
-                            className="w-full bg-success text-white font-mono font-bold text-sm uppercase py-4 border-4 border-rich-black hover:bg-white hover:text-success flex justify-center items-center gap-2 shadow-[4px_4px_0_0_#000]"
+                            disabled={!canDownload}
+                            className="w-full bg-success text-white font-mono font-bold text-sm uppercase py-4 border-4 border-rich-black hover:bg-white hover:text-success flex justify-center items-center gap-2 shadow-[4px_4px_0_0_#000] disabled:opacity-40 disabled:cursor-not-allowed"
                         >
                             <Smartphone size={18} /> SHARE ON WHATSAPP
                         </button>
