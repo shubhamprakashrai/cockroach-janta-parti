@@ -11,7 +11,7 @@ const FORMSPREE_ENDPOINT = `https://formspree.io/f/${FORMSPREE_ID}`;
 
 export default function HomePage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [memberCount, setMemberCount] = useState(1);
+  const [memberCount, setMemberCount] = useState(0);
   const [manifestoVotes, setManifestoVotes] = useState<Record<number, 'agree' | 'disagree'>>({});
   const [joinForm, setJoinForm] = useState({ name: "", city: "", why: "" });
   const [joinStatus, setJoinStatus] = useState<"idle" | "submitting" | "ok" | "error">("idle");
@@ -412,7 +412,7 @@ export default function HomePage() {
           {members.length === 0 ? (
             <div className="bg-rich-black text-white p-8 md:p-16 border-4 border-rich-black shadow-[16px_16px_0_0_#FFD60A] text-center">
               <div className="font-display text-7xl md:text-9xl uppercase mb-4 leading-none">
-                0<span className="text-text-secondary/40">/50</span>
+                {memberCount}<span className="text-text-secondary/40">/50</span>
               </div>
               <p className="font-mono text-xs md:text-sm uppercase tracking-[0.3em] text-white/70 mb-8">
                 Founding cohort spots claimed.
@@ -425,7 +425,7 @@ export default function HomePage() {
                 href="/join"
                 className="inline-block bg-accent text-rich-black font-display text-3xl md:text-4xl uppercase px-10 md:px-16 py-5 md:py-6 border-4 border-accent hover:bg-white transition-colors shadow-[8px_8px_0_0_#FFD60A] hover:translate-x-1 hover:translate-y-1 hover:shadow-[4px_4px_0_0_#FFD60A]"
               >
-                CLAIM #001 →
+                CLAIM #{(memberCount + 1).toString().padStart(3, "0")} →
               </Link>
               <p className="font-mono text-[10px] md:text-xs uppercase tracking-widest text-white/50 mt-6">
                 Whoever fills the join form first locks the #001 spot.

@@ -1,4 +1,4 @@
-// One-off: reset meta/stats to Day-0. Run when you want a truly fresh count.
+// One-off: reset meta/stats to truly Day-0. First real join becomes #001.
 import { initializeApp } from "firebase/app";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 
@@ -14,6 +14,6 @@ const config = {
 const app = initializeApp(config);
 const db = getFirestore(app);
 
-await setDoc(doc(db, "meta", "stats"), { members: 1 });
-console.log("✓ Counter reset to 1 (you, the founder)");
+await setDoc(doc(db, "meta", "stats"), { members: 0 });
+console.log("✓ Counter reset to 0. First real join becomes #001.");
 process.exit(0);
