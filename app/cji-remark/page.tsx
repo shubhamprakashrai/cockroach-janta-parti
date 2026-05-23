@@ -33,10 +33,14 @@ export default function CjiExplainerPage() {
                         </div>
                     </div>
 
-                    <div className="font-display text-3xl md:text-4xl text-alert mb-4 tracking-widest uppercase">THE CATALYST.</div>
+                    <div className="font-mono text-xs md:text-sm tracking-[0.3em] text-accent mb-3 uppercase">IMAGINED CATALYST · A SATIRICAL THOUGHT EXPERIMENT</div>
+                    <div className="font-display text-3xl md:text-4xl text-alert mb-4 tracking-widest uppercase">THE PROVOCATION.</div>
                     <h1 className="font-display text-5xl md:text-7xl xl:text-8xl uppercase tracking-tighter leading-[0.9] text-white">
                         &ldquo;THESE <span className="text-accent underline decoration-8 underline-offset-8">COCKROACHES</span> INFEST THE SYSTEM&hellip;&rdquo;
                     </h1>
+                    <p className="font-mono text-xs md:text-sm uppercase tracking-widest text-white/60 mt-6 max-w-2xl">
+                        This quote is a hypothetical, written to anchor the project. It is not a real statement. CJP is a satirical political art project, not a registered party.
+                    </p>
                 </div>
             </header>
 
@@ -50,7 +54,7 @@ export default function CjiExplainerPage() {
                         "We cannot have these youth groups constantly disrupting the process. They are like cockroaches, multiplying everywhere and infesting the very fabric of our municipal systems."
                     </p>
                     <div className="text-center mt-8 font-mono font-bold uppercase tracking-widest text-sm border-t-4 border-black pt-4">
-                        — Chief Justice Remark, May 15, 2026
+                        — Imagined hearing · Hypothetical script
                     </div>
                 </div>
 

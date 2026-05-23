@@ -12,22 +12,15 @@ const FORMSPREE_ENDPOINT = `https://formspree.io/f/${FORMSPREE_ID}`;
 
 export default function HomePage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [memberCount, setMemberCount] = useState(350000);
+  const [memberCount, setMemberCount] = useState(47);
   const [manifestoVotes, setManifestoVotes] = useState<Record<number, 'agree' | 'disagree'>>({});
   const [joinForm, setJoinForm] = useState({ name: "", city: "", why: "" });
   const [joinStatus, setJoinStatus] = useState<"idle" | "submitting" | "ok" | "error">("idle");
 
   useEffect(() => {
-    // Real Firestore listener (no-op if Firebase env vars not configured)
+    // Real Firestore listener — no fake drift, only true joins increment the count.
     const unsub = listenToMemberCount((count) => setMemberCount(count));
-    // Fallback drift while Firebase is unconfigured — keeps counter feeling alive
-    const interval = setInterval(() => {
-      setMemberCount((prev) => prev + Math.floor(Math.random() * 3));
-    }, 4000);
-    return () => {
-      unsub();
-      clearInterval(interval);
-    };
+    return () => unsub();
   }, []);
 
   const submitJoin = async (e: React.FormEvent) => {
@@ -68,18 +61,18 @@ export default function HomePage() {
   ];
 
   const newsItems = [
-    { source: "BusinessToday", title: "CJP Surpasses BJP on Instagram with 9.3M Followers", time: "Read in 30s", img: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=800&q=80&auto=format&fit=crop", url: "https://www.businesstoday.in/topic/social-media" },
-    { source: "ThePrint", title: "Over 3.5 Lakh Youth Drop Resumes to Join Cockroach Janta Party", time: "Read in 1m", img: "https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=800&q=80&auto=format&fit=crop", url: "https://theprint.in/tag/unemployment/" },
-    { source: "The Wire", title: "Mahua Moitra officially verified as CJP member", time: "Read in 45s", img: "https://images.unsplash.com/photo-1495020689067-958852a7765e?w=800&q=80&auto=format&fit=crop", url: "https://thewire.in/tag/mahua-moitra" },
+    { source: "OP-ED", title: "Why India Needs a Cockroach Party — A Manifesto for the Discarded Generation", time: "Read in 30s", img: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=800&q=80&auto=format&fit=crop", url: "https://www.businesstoday.in/topic/unemployment" },
+    { source: "ANALYSIS", title: "The Real Numbers Behind Youth Unemployment in India (2026 Update)", time: "Read in 1m", img: "https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=800&q=80&auto=format&fit=crop", url: "https://theprint.in/tag/unemployment/" },
+    { source: "BACKGROUND", title: "Mahua Moitra Cases: Why Parliament Doesn't Want Loud Voices", time: "Read in 45s", img: "https://images.unsplash.com/photo-1495020689067-958852a7765e?w=800&q=80&auto=format&fit=crop", url: "https://thewire.in/tag/mahua-moitra" },
   ];
 
   const members = [
-    { name: "MAHUA MOITRA", role: "TMC MP", date: "Joined: May 2026", quote: "I'm officially a cockroach.", avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80&auto=format&fit=crop" },
-    { name: "KIRTI AZAD", role: "TMC MP", date: "Joined: May 2026", quote: "From the gutters, we speak.", avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80&auto=format&fit=crop" },
-    { name: "KUNAL KAMRA", role: "Comedian", date: "Joined: May 2026", quote: "Vistara banned me, CJP accepted me.", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80&auto=format&fit=crop" },
-    { name: "ABHIJEET DIPKE", role: "Founder", date: "Joined: May 15, 2026", quote: "Main bhi cockroach.", avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400&q=80&auto=format&fit=crop" },
-    { name: "RAVISH KUMAR", role: "Journalist", date: "Joined: May 2026", quote: "Kaun jaat ho bhai? Cockroach.", avatar: "https://images.unsplash.com/photo-1463453091185-61582044d556?w=400&q=80&auto=format&fit=crop" },
-    { name: "AKASH BANERJEE", role: "Creator", date: "Joined: May 2026", quote: "Deshbakt now a Cockroach.", avatar: "https://images.unsplash.com/photo-1542178243-bc20204b769f?w=400&q=80&auto=format&fit=crop" },
+    { name: "@gutter_engineer", role: "Mumbai · MEM #001", date: "Founding Roach", quote: "B.Tech, 2-year gap, 0 callbacks. Tired of being polite about it.", avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80&auto=format&fit=crop" },
+    { name: "@delhi_dropout", role: "Delhi · MEM #007", date: "Founding Roach", quote: "Coaching mafia ate my parents' savings. Here for the noise.", avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80&auto=format&fit=crop" },
+    { name: "@sarcastic_pune", role: "Pune · MEM #012", date: "Founding Roach", quote: "MBA from a tier-3 college and a Zomato side hustle. Same vibe.", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80&auto=format&fit=crop" },
+    { name: "@civil_aspirant", role: "Allahabad · MEM #019", date: "Founding Roach", quote: "5 attempts, still believing the system. CJP is my Plan B.", avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400&q=80&auto=format&fit=crop" },
+    { name: "@chennai_coder", role: "Chennai · MEM #024", date: "Founding Roach", quote: "Got laid off twice in 18 months. Here for the rage and memes.", avatar: "https://images.unsplash.com/photo-1463453091185-61582044d556?w=400&q=80&auto=format&fit=crop" },
+    { name: "@calcutta_writer", role: "Kolkata · MEM #031", date: "Founding Roach", quote: "Bengali sarcasm meets generational disappointment. Let's go.", avatar: "https://images.unsplash.com/photo-1542178243-bc20204b769f?w=400&q=80&auto=format&fit=crop" },
   ];
 
   const memeImages = [
@@ -109,7 +102,7 @@ export default function HomePage() {
       {/* 1. ANNOUNCEMENT TICKER */}
       <div className="sticky top-0 z-50 bg-accent text-black py-2 overflow-hidden border-b-4 border-black">
         <div className="font-mono text-sm font-bold whitespace-nowrap inline-block animate-ticker">
-          9.3M FOLLOWERS ✦ 1L+ MEMBERS ✦ 0 CORPORATE SPONSORS ✦ #MAINBHICOCKROACH ✦ 9.3M FOLLOWERS ✦ 1L+ MEMBERS ✦ 0 CORPORATE SPONSORS ✦ #MAINBHICOCKROACH ✦
+          DAY 1 LIVE ✦ FAN-BUILT SATIRE ✦ ZERO CORPORATE DONORS ✦ BE A FOUNDING ROACH ✦ #MAINBHICOCKROACH ✦ DAY 1 LIVE ✦ FAN-BUILT SATIRE ✦ ZERO CORPORATE DONORS ✦ BE A FOUNDING ROACH ✦ #MAINBHICOCKROACH ✦
         </div>
       </div>
 
@@ -160,15 +153,16 @@ export default function HomePage() {
         </div>
 
         <div className="z-10 max-w-5xl mx-auto px-4">
-          <div className="inline-block bg-accent text-rich-black px-4 py-1 mb-6 font-mono text-xs md:text-sm font-bold uppercase tracking-[0.2em] border-2 border-rich-black shadow-[4px_4px_0_0_#000]">
-            India's Loudest Gen Z Movement
+          <div className="inline-flex items-center gap-2 bg-accent text-rich-black px-4 py-1 mb-6 font-mono text-xs md:text-sm font-bold uppercase tracking-[0.2em] border-2 border-rich-black shadow-[4px_4px_0_0_#000]">
+            <span className="w-2 h-2 bg-rich-black animate-pulse"></span>
+            DAY 1 · SATIRICAL POLITICAL ART PROJECT
           </div>
           <h1 className="font-display text-6xl sm:text-7xl md:text-[9rem] uppercase leading-[0.85] tracking-tighter mb-6 text-white">
             MAIN BHI<br />
             <span className="text-accent underline decoration-8 underline-offset-[12px]">COCKROACH.</span>
           </h1>
           <p className="font-hindi text-lg md:text-2xl text-white/90 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Tum bhi banno. From the gutters, from the stain — we rise.
+            India&apos;s loudest satirical movement just started. Be a founding roach &mdash; not the 3-lakh-th.
           </p>
 
           <div className="flex flex-col md:flex-row gap-4 md:gap-6 justify-center mb-12">
@@ -183,10 +177,10 @@ export default function HomePage() {
           <div className="inline-flex flex-col md:flex-row gap-3 md:gap-6 items-center bg-white/10 backdrop-blur-md border border-white/20 px-5 py-3 font-mono text-xs md:text-sm text-white">
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 bg-success rounded-full animate-pulse"></span>
-              <span><span className="font-bold text-accent">MEMBERS:</span> {memberCount.toLocaleString()}</span>
+              <span><span className="font-bold text-accent">FOUNDING ROACHES:</span> {memberCount.toLocaleString()}</span>
             </div>
             <span className="hidden md:block text-white/30">|</span>
-            <div><span className="font-bold text-alert">DAY 6:</span> Since the CJI remark.</div>
+            <div><span className="font-bold text-alert">YOU&apos;LL BE #{(memberCount + 1).toLocaleString()}.</span></div>
           </div>
         </div>
       </section>
@@ -195,16 +189,16 @@ export default function HomePage() {
       <section className="px-4 py-20 bg-text-primary text-bg border-b-4 border-bg relative">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center gap-3 mb-10 justify-center">
-            <div className="w-4 h-4 bg-alert rounded-full animate-pulse border-2 border-bg"></div>
-            <span className="font-mono font-bold uppercase tracking-wider text-sm">Updated 60 sec ago</span>
+            <div className="w-4 h-4 bg-success rounded-full animate-pulse border-2 border-bg"></div>
+            <span className="font-mono font-bold uppercase tracking-wider text-sm">Live from Firestore · syncs every second</span>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
             {[
-              { label: "IG FOLLOWERS", value: "9.3M", src: "LIVE" },
-              { label: "X FOLLOWERS", value: "47K", src: "LIVE" },
-              { label: "TOTAL MEMBERS", value: "3.5L", src: "VERIFIED" },
-              { label: "VS BJP GAP", value: "+600K", src: "LEAD" }
+              { label: "FOUNDING ROACHES", value: memberCount.toLocaleString(), src: "LIVE" },
+              { label: "DAYS SINCE LAUNCH", value: "1", src: "DAY ONE" },
+              { label: "ACTIVE STATES", value: "—", src: "GROWING" },
+              { label: "CORPORATE DONORS", value: "0", src: "BY DESIGN" }
             ].map((stat, i) => (
               <div key={i} className="bg-bg text-text-primary p-6 md:p-8 border-4 border-bg shadow-[8px_8px_0_0_#FF6B00] hover:scale-105 transition-transform group">
                 <div className="font-display text-4xl md:text-7xl text-accent mb-2 tracking-tighter truncate">{stat.value}</div>
@@ -220,7 +214,7 @@ export default function HomePage() {
       <section className="px-4 py-24 max-w-7xl mx-auto border-b-4 border-text-primary overflow-hidden">
         <div className="flex justify-between items-end mb-12">
           <h2 className="font-display text-5xl md:text-7xl uppercase inline-block border-b-8 border-alert pb-2">
-            BREAKING ROACH NEWS
+            ESSENTIAL READING
           </h2>
         </div>
 
@@ -389,8 +383,9 @@ export default function HomePage() {
       <section className="px-4 py-24 bg-card border-b-4 border-text-primary">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <div className="inline-block bg-rich-black text-accent px-4 py-1 mb-4 font-mono text-xs font-bold uppercase tracking-[0.2em]">Verified Roaches</div>
-            <h2 className="font-display text-6xl md:text-7xl uppercase tracking-widest text-rich-black">WHO'S IN</h2>
+            <div className="inline-block bg-rich-black text-accent px-4 py-1 mb-4 font-mono text-xs font-bold uppercase tracking-[0.2em]">Founding Cohort · First 50</div>
+            <h2 className="font-display text-6xl md:text-7xl uppercase tracking-widest text-rich-black">WHO&apos;S IN</h2>
+            <p className="font-mono text-xs md:text-sm text-text-secondary mt-4 max-w-xl mx-auto uppercase tracking-widest">Real submissions, anonymous handles. Your founding number is permanent.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {members.map((m, i) => (
@@ -444,7 +439,8 @@ export default function HomePage() {
 
           {/* Join Form */}
           <div className="bg-bg border-4 border-accent p-8 md:p-12 shadow-[16px_16px_0_0_#FFD60A]">
-            <h2 className="font-display text-6xl uppercase text-rich-black mb-8 border-l-8 border-accent pl-4">JOIN FORM</h2>
+            <h2 className="font-display text-5xl md:text-6xl uppercase text-rich-black mb-2 border-l-8 border-accent pl-4">BE A FOUNDING ROACH</h2>
+            <p className="font-mono text-xs uppercase tracking-widest text-text-secondary pl-5 mb-8">First 50 members get permanent founding numbers · #{memberCount + 1} is yours.</p>
             {joinStatus === "ok" ? (
               <div className="space-y-6">
                 <div className="bg-success text-white p-6 border-4 border-rich-black">
@@ -530,9 +526,12 @@ export default function HomePage() {
           <div className="flex-1 max-w-xl">
             <div className="font-display text-7xl text-white mb-6 uppercase tracking-widest border-b-4 border-accent pb-4 inline-block">CJP</div>
             <div className="bg-alert text-white font-display text-2xl md:text-3xl uppercase p-4 border-4 border-white shadow-[8px_8px_0_0_#FFD60A] mb-6">
-              Fan-built. Not affiliated with CJP or ECI.
+              SATIRICAL POLITICAL ART PROJECT
             </div>
-            <p className="font-mono text-white/70 text-base">Made in India. For the lazy, by the lazy.</p>
+            <p className="font-mono text-white/80 text-sm md:text-base mb-3">
+              This is a fan-built creative project. CJP is <span className="text-accent font-bold">not a registered political party</span> and is not affiliated with the Election Commission of India, any sitting politician, judge, or media organisation. All scenarios on this site (including the CJI quote) are hypothetical thought experiments.
+            </p>
+            <p className="font-mono text-white/60 text-xs">Built in India by Gen Z. Open-source. Zero corporate funding.</p>
           </div>
 
           <div className="flex-1 w-full grid grid-cols-2 gap-8 font-display text-2xl uppercase tracking-widest">

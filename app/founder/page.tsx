@@ -5,16 +5,16 @@ import { ArrowRight, Quote, Link as LinkIcon, Download } from "lucide-react";
 
 export default function FounderProfilePage() {
     const timeline = [
-        { date: "May 15, 2026", title: "THE SPARK", desc: "CJI refers to local politicians as cockroaches during a public hearing on employment." },
-        { date: "May 16, 2026", title: "THE FORM LAUNCH", desc: "Abhijeet launches a Google Form asking 'Are you a cockroach too?'. It goes viral within 4 hours." },
-        { date: "May 19, 2026", title: "ONE LAKH MEMBERS", desc: "CJP surpasses 100,000 verified roaches. Mainstream media picks up the story." },
-        { date: "May 20, 2026", title: "MANIFESTO DROP", desc: "The definitive 5-point manifesto is released, terrifying local sitting MLAs." }
+        { date: "Phase 0", title: "THE PROVOCATION", desc: "A hypothetical CJI remark calls youth groups 'cockroaches'. The thought experiment begins." },
+        { date: "Phase 1", title: "THE GOOGLE FORM", desc: "Site launches with a single question: Are you a cockroach too? Anyone can sign up, anonymously." },
+        { date: "Phase 2", title: "FOUNDING COHORT", desc: "First 50 founding roaches get permanent numbers + cards. Cohort fills up fast." },
+        { date: "Phase 3 — Next", title: "STATE CHAPTERS", desc: "Once 5,000 sign-ups across 5 states, regional chapters open. WhatsApp groups, local meet-ups." }
     ];
 
     const press = [
-        { source: "TheWire", title: "How a 'Cockroach' form united a generation." },
-        { source: "Newslaundry", title: "Abhijeet Dipke: The man orchestrating the pest epidemic." },
-        { source: "Republic", title: "Foreign hand? Boston University grad behind CJP?" }
+        { source: "EDITORIAL NOTE", title: "Press coverage will appear here as we earn it — not before." },
+        { source: "GOAL", title: "Mainstream pickup by Day 90. Get featured on TheWire / Newslaundry / Mojo." },
+        { source: "PROCESS", title: "No paid PR. Only organic earned media." }
     ];
 
     return (
@@ -46,8 +46,11 @@ export default function FounderProfilePage() {
                         <h1 className="font-display text-5xl md:text-8xl uppercase leading-none tracking-tighter mb-4 text-rich-black">
                             ABHIJEET <span className="text-accent">DIPKE.</span>
                         </h1>
-                        <p className="font-mono text-xl md:text-2xl font-bold uppercase bg-black inline-block px-4 py-2 text-white border-2 border-text-primary">
-                            THE ORIGINAL ROACH
+                        <p className="font-mono text-xl md:text-2xl font-bold uppercase bg-rich-black inline-block px-4 py-2 text-white border-2 border-text-primary mb-3">
+                            CREATOR · CJP
+                        </p>
+                        <p className="font-mono text-xs uppercase tracking-widest text-text-secondary max-w-md">
+                            Fan-built satirical political art project. Started solo, growing as a cohort.
                         </p>
                     </div>
                 </div>
