@@ -1,11 +1,13 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect, Suspense } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { Download, QrCode, Upload, Smartphone, Film } from "lucide-react";
 import { toPng } from "html-to-image";
 
-export default function CardGeneratorPage() {
+function CardGeneratorInner() {
+    const searchParams = useSearchParams();
     const [formData, setFormData] = useState({ name: "", city: "", state: "", age: "", tagline: "Main bhi cockroach." });
     const [imgUrl, setImgUrl] = useState<string | null>(null);
     const [cardStyle, setCardStyle] = useState("classic");
@@ -13,6 +15,27 @@ export default function CardGeneratorPage() {
     const [isGenerating, setIsGenerating] = useState(false);
     const cardRef = useRef<HTMLDivElement | null>(null);
     const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+    // Hydrate from URL params (homepage join form passes ?name=&city=&why=) or localStorage fallback
+    useEffect(() => {
+        if (typeof window === "undefined") return;
+        const fromUrl = {
+            name: searchParams.get("name") || "",
+            city: searchParams.get("city") || "",
+            why: searchParams.get("why") || "",
+        };
+        let stored: { name?: string; city?: string; why?: string } = {};
+        try {
+            const raw = window.localStorage.getItem("cjp_join_form_v1");
+            if (raw) stored = JSON.parse(raw);
+        } catch {}
+        const name = fromUrl.name || stored.name || "";
+        const city = fromUrl.city || stored.city || "";
+        const tagline = fromUrl.why || stored.why || "Main bhi cockroach.";
+        if (name || city || (tagline && tagline !== "Main bhi cockroach.")) {
+            setFormData((prev) => ({ ...prev, name, city, tagline }));
+        }
+    }, [searchParams]);
 
     const styles = [
         { id: "classic", name: "Classic Brutal", classes: "bg-bg border-accent" },
@@ -238,5 +261,13 @@ export default function CardGeneratorPage() {
                 </div>
             </div>
         </main>
+    );
+}
+
+export default function CardGeneratorPage() {
+    return (
+        <Suspense fallback={<main className="min-h-screen bg-bg" />}>
+            <CardGeneratorInner />
+        </Suspense>
     );
 }

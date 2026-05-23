@@ -27,6 +27,8 @@ export default function HomePage() {
     e.preventDefault();
     if (joinStatus === "submitting") return;
     setJoinStatus("submitting");
+    // Save to localStorage so /tools/card can pre-fill from this submission
+    try { window.localStorage.setItem("cjp_join_form_v1", JSON.stringify(joinForm)); } catch {}
     // Submit to Firestore (live counter + members collection) — graceful no-op if unconfigured
     joinMember(joinForm).catch(() => {});
     try {
@@ -40,6 +42,15 @@ export default function HomePage() {
     } catch {
       setJoinStatus("error");
     }
+  };
+
+  const cardLinkWithData = () => {
+    const params = new URLSearchParams();
+    if (joinForm.name) params.set("name", joinForm.name);
+    if (joinForm.city) params.set("city", joinForm.city);
+    if (joinForm.why) params.set("why", joinForm.why);
+    const qs = params.toString();
+    return qs ? `/tools/card?${qs}` : "/tools/card";
   };
 
   const handleVote = (id: number, type: 'agree' | 'disagree') => {
@@ -447,9 +458,10 @@ export default function HomePage() {
                   <p className="font-display text-3xl uppercase">Welcome to the gutter, {joinForm.name || "Roach"}.</p>
                   <p className="font-mono text-sm uppercase mt-2 tracking-widest">You&apos;re in. Now make it official.</p>
                 </div>
-                <Link href="/tools/card" className="block text-center bg-accent text-rich-black font-display text-2xl uppercase py-5 border-4 border-rich-black hover:bg-white transition-colors shadow-[8px_8px_0_0_#000]">
+                <Link href={cardLinkWithData()} className="block text-center bg-accent text-rich-black font-display text-2xl uppercase py-5 border-4 border-rich-black hover:bg-white transition-colors shadow-[8px_8px_0_0_#000]">
                   GENERATE YOUR ID CARD →
                 </Link>
+                <p className="text-center font-mono text-xs uppercase tracking-widest text-text-secondary">Your name + city auto-fill in the card. Add state + age there.</p>
               </div>
             ) : (
               <form className="space-y-6" onSubmit={submitJoin}>
