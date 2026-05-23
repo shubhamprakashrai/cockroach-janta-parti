@@ -31,5 +31,35 @@ service cloud.firestore {
                     && request.resource.data.text is string
                     && request.resource.data.text.size() <= 800;
     }
+
+    // Admin-managed blogs — read public, write gated by /admin passcode (app-layer).
+    match /blogs/{blogId} {
+      allow read: if true;
+      allow create: if request.resource.data.title is string
+                    && request.resource.data.slug is string
+                    && request.resource.data.title.size() <= 200
+                    && request.resource.data.slug.size() <= 120;
+      allow update, delete: if false;
+    }
+
+    // Admin-managed reels — read public, write gated by /admin passcode (app-layer).
+    match /reels/{reelId} {
+      allow read: if true;
+      allow create: if request.resource.data.title is string
+                    && request.resource.data.videoUrl is string
+                    && request.resource.data.title.size() <= 200
+                    && request.resource.data.videoUrl.size() <= 500;
+      allow update, delete: if false;
+    }
+
+    // Admin-managed news — read public, write gated by /admin passcode (app-layer).
+    match /news/{newsId} {
+      allow read: if true;
+      allow create: if request.resource.data.title is string
+                    && request.resource.data.url is string
+                    && request.resource.data.title.size() <= 200
+                    && request.resource.data.url.size() <= 500;
+      allow update, delete: if false;
+    }
   }
 }

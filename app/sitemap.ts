@@ -18,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { p: "manifesto", priority: 0.9 },
     { p: "join", priority: 0.9 },
     { p: "memes", priority: 0.9 },
+    { p: "reels", priority: 0.9 },
     { p: "news", priority: 0.9 },
     { p: "anthem", priority: 0.8 },
     { p: "founder", priority: 0.8 },

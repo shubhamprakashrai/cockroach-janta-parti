@@ -125,7 +125,7 @@ export default function HomePage() {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-6 font-display text-xl uppercase tracking-widest">
-          {["Manifesto", "News", "Memes", "Tools", "Blog"].map(item => (
+          {["Manifesto", "News", "Reels", "Memes", "Tools", "Blog"].map(item => (
             <Link key={item} href={`/${item.toLowerCase()}`} className="hover:text-accent hover:underline decoration-4 underline-offset-4">{item}</Link>
           ))}
           <Link href="/join" className="bg-accent text-black px-6 py-2 border-4 border-black shadow-[4px_4px_0_0_#000] hover:translate-y-[2px] hover:shadow-[2px_2px_0_0_#000] transition-all">

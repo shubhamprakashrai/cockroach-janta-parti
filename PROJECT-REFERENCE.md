@@ -2,7 +2,21 @@
 
 > Single source of truth. Open this first whenever you (or anyone helping you) sits down at the project. Everything you need to operate, deploy, debug, or hand off CJP lives here.
 
-Last updated after **Phase 2.5 trust rebrand** — Day-1 launch positioning, anonymous founding members, honest live counter (currently 47).
+Last updated after **Phase 3 admin panel** — `/admin` route, `/reels` public page, blog + news + reels can be published live without redeploying.
+
+---
+
+## 🚨 ADMIN PANEL — UPLOAD NEW CONTENT
+
+**URL**: https://cockrochjantaparti.com/admin
+**Passcode**: `mainBhiCockroach2026` (change anytime via Vercel → Settings → Env Vars → `NEXT_PUBLIC_ADMIN_PASSCODE`)
+
+What you can publish from here:
+- **Blog posts** — body in paragraphs, `## ` for headings, picks up SEO automatically
+- **Reels / Videos** — paste an Instagram Reel, YouTube Short, or X video URL → embed appears on `/reels`
+- **News items** — external link to any article → shows on `/news` (newest first)
+
+Everything goes live the moment you hit publish. No code change, no redeploy.
 
 ---
 
@@ -91,6 +105,7 @@ Add to **Production + Preview + Development** in Vercel → Settings → Environ
 | `NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET` | `cockroach-janta-parti-cjp.firebasestorage.app` | |
 | `NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID` | `688516789905` | |
 | `NEXT_PUBLIC_FIREBASE_APP_ID` | `1:688516789905:web:8c22195f8e573518287130` | |
+| `NEXT_PUBLIC_ADMIN_PASSCODE` | `mainBhiCockroach2026` | Passcode for `/admin` — change to keep upload access private. |
 
 All `NEXT_PUBLIC_*` values are baked into the JS bundle at build time — they are public by design. Actual security lives in `firestore.rules` (see `FIREBASE-SETUP.md`).
 

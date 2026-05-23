@@ -1,12 +1,36 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Search, Clock, ArrowRight } from "lucide-react";
-import { blogPosts } from "@/lib/blog";
+import { blogPosts, type BlogPost } from "@/lib/blog";
+import { listenToAdminBlogs, type AdminBlogPost } from "@/lib/firebase-actions";
 
 export default function BlogIndexPage() {
-    const categories = ["News", "Memes", "History", "Tools", "Hindi", "Marathi", "Bengali"];
-    const posts = blogPosts;
+    const categories = ["News", "Memes", "History", "Tools", "Hindi", "Marathi", "Bengali", "Opinion"];
+
+    const [adminPosts, setAdminPosts] = useState<AdminBlogPost[]>([]);
+    useEffect(() => {
+        const unsub = listenToAdminBlogs(setAdminPosts);
+        return () => unsub();
+    }, []);
+
+    // Merge: admin-uploaded (newest first by createdAt) on top, then static archive.
+    const merged: BlogPost[] = [
+        ...adminPosts.map((p) => ({
+            slug: p.slug,
+            title: p.title,
+            cat: p.cat,
+            excerpt: p.excerpt,
+            body: p.body,
+            author: p.author,
+            date: new Date(p.createdAtMs ?? Date.now()).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }),
+            readTime: p.readTime,
+            img: p.img,
+        })),
+        ...blogPosts,
+    ];
+    const posts = merged;
 
     return (
         <main className="min-h-screen bg-bg text-text-primary pb-24">

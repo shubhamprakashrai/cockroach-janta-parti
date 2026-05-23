@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Clock, Facebook, Instagram, Twitter, MessageSquare, Quote, Send } from "lucide-react";
-import { getPostBySlug, getRelatedPosts } from "@/lib/blog";
-import { addComment, listenToComments, type Comment } from "@/lib/firebase-actions";
+import { getPostBySlug, getRelatedPosts, blogPosts, type BlogPost } from "@/lib/blog";
+import { addComment, listenToComments, listenToAdminBlogs, type Comment, type AdminBlogPost } from "@/lib/firebase-actions";
 
 function CommentsSection({ slug }: { slug: string }) {
     const [comments, setComments] = useState<Comment[]>([]);
@@ -96,10 +96,48 @@ function CommentsSection({ slug }: { slug: string }) {
     );
 }
 
+function adminToBlogPost(p: AdminBlogPost): BlogPost {
+    return {
+        slug: p.slug,
+        title: p.title,
+        cat: p.cat,
+        excerpt: p.excerpt,
+        body: p.body,
+        author: p.author,
+        date: new Date(p.createdAtMs ?? Date.now()).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" }),
+        readTime: p.readTime,
+        img: p.img,
+    };
+}
+
 export default function BlogPostPage({ params }: { params: { slug: string } }) {
-    const post = getPostBySlug(params.slug);
-    if (!post) notFound();
-    const related = getRelatedPosts(post.slug, 2);
+    const staticPost = getPostBySlug(params.slug);
+    const [adminPosts, setAdminPosts] = useState<AdminBlogPost[]>([]);
+    const [firestoreChecked, setFirestoreChecked] = useState(false);
+
+    useEffect(() => {
+        const unsub = listenToAdminBlogs((posts) => {
+            setAdminPosts(posts);
+            setFirestoreChecked(true);
+        });
+        const t = setTimeout(() => setFirestoreChecked(true), 1500);
+        return () => { unsub(); clearTimeout(t); };
+    }, []);
+
+    const adminPost = adminPosts.find((p) => p.slug === params.slug);
+    const post: BlogPost | undefined = staticPost || (adminPost ? adminToBlogPost(adminPost) : undefined);
+
+    if (!staticPost && firestoreChecked && !adminPost) notFound();
+    if (!post) {
+        return (
+            <main className="min-h-screen bg-bg flex items-center justify-center font-mono text-text-secondary uppercase tracking-widest text-sm animate-pulse">
+                Loading post...
+            </main>
+        );
+    }
+
+    const allPosts: BlogPost[] = [...adminPosts.map(adminToBlogPost), ...blogPosts];
+    const related = allPosts.filter((p) => p.slug !== post.slug).slice(0, 2);
 
     const currentUrl = `cockrochjantaparti.com/blog/${post.slug}`;
     const shareText = encodeURIComponent(`${post.title} — read on @cjp_india`);
