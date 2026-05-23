@@ -7,12 +7,12 @@ export default function BlogIndexPage() {
     const categories = ["News", "Memes", "History", "Tools", "Hindi", "Marathi", "Bengali"];
 
     const posts = [
-        { slug: "how-a-meme-became-a-movement", title: "How a single WhatsApp forward spawned the CJP", cat: "History", excerpt: "It wasn't a master plan. It was just a joke that went too far. Here is the true story behind the initial genesis.", author: "A. Dipke", time: "5m read", img: "bg-alert" },
-        { slug: "top-10-ways-to-use-meme-generator", title: "Top 10 ways to weaponize the CJP Meme Generator", cat: "Tools", excerpt: "Stop downloading templates, just use our unhinged canvas. A complete guide to roasting local MLAs.", author: "CJP Staff", time: "3m read", img: "bg-accent" },
-        { slug: "youth-unemployment-statistics-2026", title: "The numbers they don't want you to see", cat: "News", excerpt: "Deep dive into the terrifying employment statistics that mainstream media refuses to cover on prime time.", author: "Data Roach", time: "8m read", img: "bg-purple-900" },
-        { slug: "maharashtra-infestation-report", title: "Maharashtra Chapter crosses 50k members", cat: "News", excerpt: "The horde is growing faster than anticipated. State elections might actually face a spoiler.", author: "Mh. Dir", time: "4m read", img: "bg-blue-900" },
-        { slug: "understanding-the-5-demands", title: "Why the 5 Demands are actually logical", cat: "History", excerpt: "Breaking down the radical manifesto points and explaining why they are completely legally viable.", author: "Legal Roach", time: "10m read", img: "bg-green-900" },
-        { slug: "main-bhi-cockroach-hindi-guide", title: "मैं भी कॉकरोच: आंदोलन को कैसे समझें", cat: "Hindi", excerpt: "उन सभी के लिए जिन्हें लगता है कि यह सिर्फ एक मजाक है, एक विस्तृत गाइड।", author: "CJP Staff", time: "5m read", img: "bg-orange-800" },
+        { slug: "how-a-meme-became-a-movement", title: "How a single WhatsApp forward spawned the CJP", cat: "History", excerpt: "It wasn't a master plan. It was just a joke that went too far. Here is the true story behind the initial genesis.", author: "A. Dipke", time: "5m read", img: "https://images.unsplash.com/photo-1611605698335-8b1569810432?w=800&q=80&auto=format&fit=crop" },
+        { slug: "top-10-ways-to-use-meme-generator", title: "Top 10 ways to weaponize the CJP Meme Generator", cat: "Tools", excerpt: "Stop downloading templates, just use our unhinged canvas. A complete guide to roasting local MLAs.", author: "CJP Staff", time: "3m read", img: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&q=80&auto=format&fit=crop" },
+        { slug: "youth-unemployment-statistics-2026", title: "The numbers they don't want you to see", cat: "News", excerpt: "Deep dive into the terrifying employment statistics that mainstream media refuses to cover on prime time.", author: "Data Roach", time: "8m read", img: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=800&q=80&auto=format&fit=crop" },
+        { slug: "maharashtra-infestation-report", title: "Maharashtra Chapter crosses 50k members", cat: "News", excerpt: "The horde is growing faster than anticipated. State elections might actually face a spoiler.", author: "Mh. Dir", time: "4m read", img: "https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?w=800&q=80&auto=format&fit=crop" },
+        { slug: "understanding-the-5-demands", title: "Why the 5 Demands are actually logical", cat: "History", excerpt: "Breaking down the radical manifesto points and explaining why they are completely legally viable.", author: "Legal Roach", time: "10m read", img: "https://images.unsplash.com/photo-1589994965851-a8f479c573a9?w=800&q=80&auto=format&fit=crop" },
+        { slug: "main-bhi-cockroach-hindi-guide", title: "मैं भी कॉकरोच: आंदोलन को कैसे समझें", cat: "Hindi", excerpt: "उन सभी के लिए जिन्हें लगता है कि यह सिर्फ एक मजाक है, एक विस्तृत गाइड।", author: "CJP Staff", time: "5m read", img: "https://images.unsplash.com/photo-1542223189-67a03fa0f0bd?w=800&q=80&auto=format&fit=crop" },
     ];
 
     return (
@@ -52,9 +52,9 @@ export default function BlogIndexPage() {
                         <Link href={`/blog/${post.slug}`} key={i} className="flex flex-col bg-card border-4 border-text-primary shadow-[12px_12px_0_0_#000] hover:shadow-[12px_12px_0_0_#FFD60A] hover:-translate-y-2 transition-all group overflow-hidden">
 
                             {/* Cover */}
-                            <div className={`w-full aspect-video ${post.img} border-b-4 border-text-primary relative flex items-center justify-center overflow-hidden`}>
-                                <div className="font-display text-4xl opacity-20">COVER</div>
-                                <div className="absolute top-4 left-4 bg-white text-black font-mono font-bold text-[10px] uppercase px-2 py-1 border-2 border-black tracking-widest z-10">
+                            <div className="w-full aspect-video border-b-4 border-text-primary relative overflow-hidden">
+                                <img src={post.img} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                                <div className="absolute top-4 left-4 bg-white text-rich-black font-mono font-bold text-[10px] uppercase px-2 py-1 border-2 border-rich-black tracking-widest z-10">
                                     {post.cat}
                                 </div>
                             </div>

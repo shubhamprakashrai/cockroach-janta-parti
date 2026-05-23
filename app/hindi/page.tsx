@@ -22,23 +22,25 @@ export default function HindiHomepage() {
             </nav>
 
             {/* Hero */}
-            <header className="relative w-full min-h-[90vh] flex flex-col items-center justify-center border-b-4 border-text-primary bg-bg text-center px-4 overflow-hidden">
-                {/* Background Swarm Mock */}
-                <div className="absolute inset-0 z-0 opacity-10 flex items-center justify-center">
-                    <div className="text-[20rem]">🪳</div>
+            <header className="relative w-full min-h-[90vh] flex flex-col items-center justify-center border-b-4 border-text-primary text-center px-4 overflow-hidden">
+                {/* Photo background */}
+                <div className="absolute inset-0 z-0">
+                    <img src="https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=2000&q=80&auto=format&fit=crop" alt="" className="w-full h-full object-cover" loading="eager" />
+                    <div className="absolute inset-0 bg-rich-black/70"></div>
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-rich-black/80"></div>
                 </div>
 
                 <div className="relative z-10 max-w-5xl mx-auto flex flex-col items-center">
-                    <div className="inline-block bg-alert text-white font-hindi font-bold uppercase px-4 py-2 border-4 border-black shadow-[4px_4px_0_0_#000] mb-8 rotate-[-2deg]">
+                    <div className="inline-block bg-alert text-white font-hindi font-bold uppercase px-4 py-2 border-4 border-rich-black shadow-[4px_4px_0_0_#000] mb-8 rotate-[-2deg]">
                         महान भारतीय राजनीतिक प्रयोग।
                     </div>
 
-                    <h1 className="font-display text-7xl md:text-[10rem] xl:text-[12rem] uppercase leading-[0.8] tracking-tighter text-rich-black drop-shadow-[0_8px_0_var(--accent)] mb-8">
+                    <h1 className="font-display text-7xl md:text-[10rem] xl:text-[12rem] uppercase leading-[0.8] tracking-tighter text-white drop-shadow-[0_8px_0_var(--accent)] mb-8">
                         <span className="block">मैं भी</span>
                         <span className="block text-accent">कॉकरोच।</span>
                     </h1>
 
-                    <p className="font-hindi text-xl md:text-3xl max-w-3xl mb-12 text-text-secondary leading-relaxed bg-black/50 p-4 border-l-8 border-accent">
+                    <p className="font-hindi text-xl md:text-3xl max-w-3xl mb-12 text-white/90 leading-relaxed bg-rich-black/60 backdrop-blur-sm p-6 border-l-8 border-accent">
                         उन्होंने हमें बेरोजगार, आलसी और कीड़े कहा। हमने इसे एक पहचान बना लिया। कॉकरोच जनता पार्टी में आपका स्वागत है। कोई जाति नहीं। कोई धर्म नहीं। केवल शुद्ध अस्तित्व।
                     </p>
 
@@ -65,7 +67,9 @@ export default function HindiHomepage() {
                     </div>
 
                     <div className="bg-bg border-8 border-text-primary p-8 md:p-12 shadow-[16px_16px_0_0_#000] relative overflow-hidden group">
-                        <div className="absolute -right-10 -bottom-10 text-[10rem] opacity-10 group-hover:scale-110 transition-transform">🎧</div>
+                        <div className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity pointer-events-none">
+                            <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=900&q=80&auto=format&fit=crop" alt="" className="w-full h-full object-cover" loading="lazy" />
+                        </div>
                         <h2 className="font-display text-5xl uppercase mb-6 text-rich-black relative z-10 line-clamp-1">पार्टी गान</h2>
                         <p className="font-hindi text-xl text-text-secondary mb-8 relative z-10">सुनें आधिकारिक "एक कदम उठाओ" एंथम और अपना खुद का रीमिक्स बनाएं।</p>
                         <Link href="/anthem" className="relative z-10 inline-flex bg-accent text-black font-display text-2xl uppercase px-8 py-4 border-4 border-black hover:bg-white hover:-translate-y-1 transition-transform">

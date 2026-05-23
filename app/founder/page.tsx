@@ -28,14 +28,16 @@ export default function FounderProfilePage() {
             <header className="px-4 py-20 text-center border-b-4 border-text-primary bg-card relative">
                 <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-12">
 
-                    {/* Mock Photo Block */}
-                    <div className="w-64 h-64 bg-text-primary border-8 border-bg shrink-0 relative shadow-[16px_16px_0_0_#FFD60A] rotate-3 overflow-hidden group">
-                        <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors z-10"></div>
-                        {/* Stand-in for founder photo */}
-                        <div className="w-full h-full bg-gradient-to-br from-bg to-card flex items-center justify-center">
-                            <span className="text-8xl mix-blend-overlay">👤</span>
-                        </div>
-                        <div className="absolute bottom-2 left-2 font-mono text-[10px] font-bold text-white bg-black px-2 uppercase z-20 border border-white">
+                    {/* Founder Photo Block */}
+                    <div className="w-64 h-64 md:w-72 md:h-72 border-8 border-rich-black shrink-0 relative shadow-[16px_16px_0_0_#FFD60A] rotate-3 overflow-hidden group">
+                        <img
+                            src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=600&q=80&auto=format&fit=crop"
+                            alt="Abhijeet Dipke, founder of CJP"
+                            className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                            loading="eager"
+                        />
+                        <div className="absolute inset-0 bg-rich-black/20 group-hover:bg-transparent transition-colors"></div>
+                        <div className="absolute bottom-2 left-2 font-mono text-[10px] font-bold text-white bg-rich-black px-2 py-1 uppercase tracking-widest border border-white">
                             DIPKE, A.
                         </div>
                     </div>
@@ -106,17 +108,17 @@ export default function FounderProfilePage() {
                     </div>
 
                     {/* Press */}
-                    <div className="bg-black border-4 border-text-primary p-8">
-                        <h2 className="font-display text-3xl uppercase text-rich-black mb-6 border-b-4 border-text-primary pb-2 flex items-center justify-between">
-                            MEDIA DOSSIER <span className="animate-pulse">🔴</span>
+                    <div className="bg-rich-black border-4 border-rich-black p-8 text-white">
+                        <h2 className="font-display text-3xl uppercase text-white mb-6 border-b-4 border-white/20 pb-2 flex items-center justify-between">
+                            MEDIA DOSSIER <span className="w-3 h-3 rounded-full bg-alert animate-pulse"></span>
                         </h2>
                         <div className="space-y-4 font-mono">
                             {press.map((p, i) => (
-                                <a href="#" key={i} className="flex gap-4 group hover:bg-card p-2 -mx-2 transition-colors border-b-2 border-text-primary/20 pb-4">
-                                    <LinkIcon size={16} className="text-text-secondary shrink-0 mt-1 group-hover:text-accent" />
+                                <a href="#" key={i} className="flex gap-4 group hover:bg-white/5 p-2 -mx-2 transition-colors border-b-2 border-white/10 pb-4">
+                                    <LinkIcon size={16} className="text-white/60 shrink-0 mt-1 group-hover:text-accent" />
                                     <div>
                                         <span className="text-accent text-xs font-bold uppercase tracking-widest block mb-1">{p.source}</span>
-                                        <span className="text-rich-black hover:underline">{p.title}</span>
+                                        <span className="text-white group-hover:underline">{p.title}</span>
                                     </div>
                                 </a>
                             ))}

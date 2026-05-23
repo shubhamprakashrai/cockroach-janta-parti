@@ -9,6 +9,24 @@ export default function MemeWallPage() {
     const [activeTab, setActiveTab] = useState("Top Today");
     const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
 
+    const memeImages = [
+        "https://images.unsplash.com/photo-1488229297570-58520851e868?w=600&q=80&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1604079628040-94301bb21b91?w=600&q=80&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1532375810709-75b1da00537c?w=600&q=80&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=600&q=80&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?w=600&q=80&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1599054735388-bcb07bdd3574?w=600&q=80&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1577962917302-cd874c4e31d2?w=600&q=80&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1605640840605-14ac1855827b?w=600&q=80&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1517021897933-0e0319cfbc28?w=600&q=80&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1518604666860-9ed391f76460?w=600&q=80&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1542223189-67a03fa0f0bd?w=600&q=80&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&q=80&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1589994965851-a8f479c573a9?w=600&q=80&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&q=80&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=600&q=80&auto=format&fit=crop",
+    ];
+
     return (
         <main className="min-h-screen bg-bg text-text-primary pb-20 relative">
             {/* Top Nav */}
@@ -71,7 +89,7 @@ export default function MemeWallPage() {
                             </div>
 
                             <button onClick={() => setIsUploadModalOpen(false)} className="w-full bg-accent text-black font-display text-3xl uppercase py-4 border-4 border-text-primary shadow-[8px_8px_0_0_#000] hover:-translate-y-1 hover:shadow-[12px_12px_0_0_#000] transition-all">
-                                UPLOAD MEME 🪳
+                                UPLOAD MEME
                             </button>
                         </div>
                     </div>
@@ -81,14 +99,15 @@ export default function MemeWallPage() {
             {/* Masonry Grid */}
             <section className="px-4 py-8 md:py-12 max-w-[1600px] mx-auto z-10 relative">
                 <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-6 space-y-6">
-                    {/* Mock Pinned Meme */}
-                    <div className="break-inside-avoid bg-accent p-2 border-4 border-black shadow-[8px_8px_0_0_#000] mb-6 relative group">
-                        <div className="absolute -top-4 -right-4 bg-black text-accent p-2 border-4 border-black rounded-full animate-bounce z-10"><Crown size={24} /></div>
-                        <div className="bg-black w-full aspect-[4/5] flex items-center justify-center border-4 border-black relative overflow-hidden">
-                            <div className="text-[6rem]">🤡</div>
-                            <div className="absolute inset-x-0 bottom-4 text-center font-display text-4xl text-rich-black uppercase drop-shadow-[0_4px_4px_rgba(0,0,0,1)]">EMPLOYED?</div>
+                    {/* Pinned Meme of the Day */}
+                    <div className="break-inside-avoid bg-accent p-2 border-4 border-rich-black shadow-[8px_8px_0_0_#000] mb-6 relative group">
+                        <div className="absolute -top-4 -right-4 bg-rich-black text-accent p-2 border-4 border-accent rounded-full animate-bounce z-10"><Crown size={24} /></div>
+                        <div className="w-full aspect-[4/5] border-2 border-rich-black relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1542728928-1413d1894ed1?w=800&q=80&auto=format&fit=crop" alt="Meme of the day" className="w-full h-full object-cover" loading="lazy" />
+                            <div className="absolute inset-0 bg-rich-black/45"></div>
+                            <div className="absolute inset-x-0 bottom-4 text-center font-display text-4xl text-white uppercase tracking-widest drop-shadow-[0_4px_4px_rgba(0,0,0,1)]">EMPLOYED?</div>
                         </div>
-                        <div className="pt-3 pb-2 px-2 flex justify-between items-center text-black font-mono">
+                        <div className="pt-3 pb-2 px-2 flex justify-between items-center text-rich-black font-mono">
                             <span className="font-bold uppercase tracking-widest text-xs">@cjp_memer</span>
                             <div className="flex gap-4 text-sm font-bold">
                                 <span className="flex items-center gap-1"><Heart size={16} /> 14K</span>
@@ -98,26 +117,26 @@ export default function MemeWallPage() {
                     </div>
 
                     {/* Standard Memes generated structurally */}
-                    {[...Array(15)].map((_, i) => {
+                    {memeImages.map((src, i) => {
                         const aspectRatios = ["aspect-[3/4]", "aspect-square", "aspect-[4/5]", "aspect-[16/9]"];
                         const ratio = aspectRatios[i % aspectRatios.length];
                         return (
                             <div key={i} className="break-inside-avoid bg-card border-4 border-text-primary shadow-[8px_8px_0_0_#000] hover:shadow-[8px_8px_0_0_#FFD60A] hover:-translate-y-1 transition-all group overflow-hidden mb-6 relative">
-                                <div className={`w-full ${ratio} bg-bg border-b-4 border-text-primary flex items-center justify-center relative`}>
-                                    <span className="text-6xl opacity-20 group-hover:scale-150 transition-transform">🪳</span>
+                                <div className={`w-full ${ratio} border-b-4 border-text-primary relative overflow-hidden`}>
+                                    <img src={src} alt={`Meme ${i + 1}`} className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
                                     {/* Hover Overlay */}
-                                    <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 flex items-center justify-center gap-4 transition-opacity z-10">
-                                        <Link href={`/tools/meme-generator?template=${i}`} className="bg-accent text-black p-3 border-4 border-black hover:scale-110 shadow-[4px_4px_0_0_#000]" title="Remix this template">
+                                    <div className="absolute inset-0 bg-rich-black/80 opacity-0 group-hover:opacity-100 flex items-center justify-center gap-4 transition-opacity z-10">
+                                        <Link href={`/tools/meme-generator?template=${i}`} className="bg-accent text-rich-black p-3 border-4 border-rich-black hover:scale-110 shadow-[4px_4px_0_0_#000]" title="Remix this template">
                                             <Repeat2 size={24} />
                                         </Link>
-                                        <button className="bg-white text-black p-3 border-4 border-black hover:scale-110 shadow-[4px_4px_0_0_#FFD60A]" title="Like text">
+                                        <button className="bg-white text-rich-black p-3 border-4 border-rich-black hover:scale-110 shadow-[4px_4px_0_0_#FFD60A]" title="Like meme">
                                             <Heart size={24} />
                                         </button>
                                     </div>
                                 </div>
                                 <div className="p-3 bg-card font-mono text-xs flex justify-between items-center relative z-20">
                                     <span className="text-text-secondary uppercase">@user_{i + 100}</span>
-                                    <span className="font-bold text-accent">{(Math.random() * 10).toFixed(1)}k 🪳</span>
+                                    <span className="font-bold text-accent">{(Math.random() * 10).toFixed(1)}k ♥</span>
                                 </div>
                             </div>
                         );

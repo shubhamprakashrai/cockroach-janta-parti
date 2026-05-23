@@ -11,12 +11,12 @@ export default function NewsAggregatorPage() {
     const [activeFilter, setActiveFilter] = useState("All");
 
     const newsItems = [
-        { source: "ThePrint", title: "Over 3.5 Lakh Unemployed Youth Join Cockroach Janta Party", time: "2h ago", readTime: "30s", summary: "The newly formed party hits 3.5L members via google form after CJI remark.", img: "bg-blue-900" },
-        { source: "BusinessToday", title: "CJP Surpasses BJP on Instagram with 9.3M Followers", time: "5h ago", readTime: "45s", summary: "Following a massive surge of Gen-Z support, CJP becomes the most followed.", img: "bg-green-900" },
-        { source: "The Wire", title: "Mahua Moitra officially verified as CJP member", time: "1d ago", readTime: "1m", summary: "TMC MP embraces the 'Main Bhi Cockroach' movement publicly on X.", img: "bg-red-900" },
-        { source: "Republic", title: "Is 'Cockroach Janta Party' a Threat to Democracy? Experts Debate", time: "1d ago", readTime: "30s", summary: "A heated panel discussion on the rise of satirical political factions.", img: "bg-yellow-900" },
-        { source: "Al Jazeera", title: "India's Youth Reclaim 'Cockroach' Slur in Viral Political Movement", time: "2d ago", readTime: "2m", summary: "An analysis of the socio-economic factors driving the CJP phenomenon.", img: "bg-purple-900" },
-        { source: "Zee News", title: "लाखों युवा बने 'कॉकरोच', सोशल मीडिया पर छिड़ी नई बहस", time: "2d ago", readTime: "45s", summary: "CJI की टिप्पणी के बाद 'मैं भी कॉकरोच' अभियान ने पकड़ा जोर।", img: "bg-orange-900" },
+        { source: "ThePrint", title: "Over 3.5 Lakh Unemployed Youth Join Cockroach Janta Party", time: "2h ago", readTime: "30s", summary: "The newly formed party hits 3.5L members via google form after CJI remark.", img: "https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=800&q=80&auto=format&fit=crop" },
+        { source: "BusinessToday", title: "CJP Surpasses BJP on Instagram with 9.3M Followers", time: "5h ago", readTime: "45s", summary: "Following a massive surge of Gen-Z support, CJP becomes the most followed.", img: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=800&q=80&auto=format&fit=crop" },
+        { source: "The Wire", title: "Mahua Moitra officially verified as CJP member", time: "1d ago", readTime: "1m", summary: "TMC MP embraces the 'Main Bhi Cockroach' movement publicly on X.", img: "https://images.unsplash.com/photo-1495020689067-958852a7765e?w=800&q=80&auto=format&fit=crop" },
+        { source: "Republic", title: "Is 'Cockroach Janta Party' a Threat to Democracy? Experts Debate", time: "1d ago", readTime: "30s", summary: "A heated panel discussion on the rise of satirical political factions.", img: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&q=80&auto=format&fit=crop" },
+        { source: "Al Jazeera", title: "India's Youth Reclaim 'Cockroach' Slur in Viral Political Movement", time: "2d ago", readTime: "2m", summary: "An analysis of the socio-economic factors driving the CJP phenomenon.", img: "https://images.unsplash.com/photo-1488229297570-58520851e868?w=800&q=80&auto=format&fit=crop" },
+        { source: "Zee News", title: "लाखों युवा बने 'कॉकरोच', सोशल मीडिया पर छिड़ी नई बहस", time: "2d ago", readTime: "45s", summary: "CJI की टिप्पणी के बाद 'मैं भी कॉकरोच' अभियान ने पकड़ा जोर।", img: "https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?w=800&q=80&auto=format&fit=crop" },
     ];
 
     return (
@@ -63,9 +63,9 @@ export default function NewsAggregatorPage() {
                             {newsItems.map((news, i) => (
                                 <div key={i} className="bg-card border-4 border-text-primary shadow-[8px_8px_0_0_#000] hover:shadow-[8px_8px_0_0_#FFD60A] hover:-translate-y-2 transition-all flex flex-col group cursor-pointer">
                                     {/* Thumbnail */}
-                                    <div className={`w-full aspect-video ${news.img} border-b-4 border-text-primary relative overflow-hidden flex items-center justify-center`}>
-                                        <div className="font-display text-4xl opacity-50 group-hover:scale-110 transition-transform">MEDIA</div>
-                                        <div className="absolute bottom-2 right-2 bg-black/80 font-mono text-[10px] text-white px-2 py-1 uppercase tracking-widest border border-text-primary mix-blend-difference">
+                                    <div className="w-full aspect-video border-b-4 border-text-primary relative overflow-hidden">
+                                        <img src={news.img} alt={news.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+                                        <div className="absolute bottom-2 right-2 bg-rich-black/90 font-mono text-[10px] text-white px-2 py-1 uppercase tracking-widest border border-white/30">
                                             <Clock size={10} className="inline mr-1" /> {news.readTime} READ
                                         </div>
                                     </div>

@@ -15,24 +15,27 @@ export default function CjiExplainerPage() {
         <main className="min-h-screen bg-bg text-text-primary pb-24 border-x-[16px] border-alert">
 
             {/* Hero Illustration Block */}
-            <header className="px-4 py-8 md:py-16 text-center border-b-8 border-text-primary bg-black relative">
-                <div className="max-w-4xl mx-auto flex flex-col items-center">
+            <header className="px-4 py-12 md:py-20 text-center border-b-8 border-text-primary bg-rich-black relative overflow-hidden">
+                <div className="absolute inset-0 opacity-15 pointer-events-none">
+                    <img src="https://images.unsplash.com/photo-1589994965851-a8f479c573a9?w=1600&q=80&auto=format&fit=crop" alt="" className="w-full h-full object-cover" />
+                </div>
+                <div className="max-w-4xl mx-auto flex flex-col items-center relative z-10">
 
                     {/* Court Block Mockup */}
-                    <div className="w-full max-w-lg aspect-video border-8 border-text-primary mb-12 shadow-[16px_16px_0_0_rgba(255,59,48,1)] flex items-center justify-center relative overflow-hidden group cursor-pointer bg-bg">
-                        <div className="absolute inset-0 bg-alert/20 pointer-events-none z-10"></div>
-                        <Scale size={120} className="text-text-primary opacity-20" />
+                    <div className="w-full max-w-lg aspect-video border-4 border-white mb-12 shadow-[16px_16px_0_0_#E63946] relative overflow-hidden group cursor-pointer">
+                        <img src="https://images.unsplash.com/photo-1589994965851-a8f479c573a9?w=900&q=80&auto=format&fit=crop" alt="Courtroom hearing" className="w-full h-full object-cover" loading="eager" />
+                        <div className="absolute inset-0 bg-rich-black/55 group-hover:bg-rich-black/30 transition-colors"></div>
                         <div className="absolute inset-0 flex items-center justify-center z-20">
-                            <PlayCircle size={80} className="text-rich-black group-hover:text-accent transition-colors drop-shadow-[0_4px_4px_rgba(0,0,0,1)]" />
+                            <PlayCircle size={80} className="text-white group-hover:text-accent transition-colors drop-shadow-[0_4px_4px_rgba(0,0,0,1)]" />
                         </div>
-                        <div className="absolute bottom-4 left-4 bg-black text-white font-mono text-xs font-bold px-2 py-1 uppercase tracking-widest border-2 border-text-primary z-20">
+                        <div className="absolute bottom-3 left-3 bg-rich-black text-white font-mono text-xs font-bold px-2 py-1 uppercase tracking-widest border border-white/30 z-20">
                             EXHIBIT A: THE GAFFE [0:45]
                         </div>
                     </div>
 
-                    <div className="font-display text-4xl text-alert mb-4 tracking-widest uppercase">THE CATALYST.</div>
-                    <h1 className="font-display text-5xl md:text-7xl xl:text-8xl uppercase tracking-tighter leading-[0.9] text-rich-black">
-                        "THESE <span className="text-alert underline decoration-8 underline-offset-8">COCKROACHES</span> INFEST THE SYSTEM..."
+                    <div className="font-display text-3xl md:text-4xl text-alert mb-4 tracking-widest uppercase">THE CATALYST.</div>
+                    <h1 className="font-display text-5xl md:text-7xl xl:text-8xl uppercase tracking-tighter leading-[0.9] text-white">
+                        &ldquo;THESE <span className="text-accent underline decoration-8 underline-offset-8">COCKROACHES</span> INFEST THE SYSTEM&hellip;&rdquo;
                     </h1>
                 </div>
             </header>
@@ -92,8 +95,8 @@ export default function CjiExplainerPage() {
                             ))}
                         </div>
 
-                        <div className="text-center mt-6">
-                            <div className="text-5xl opacity-50">🪳🪳🪳</div>
+                        <div className="text-center mt-6 font-mono text-xs uppercase tracking-widest text-text-secondary">
+                            + 14,839 more reactions
                         </div>
                     </div>
                 </div>

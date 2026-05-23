@@ -118,19 +118,19 @@ export default function AnthemPage() {
                         </div>
                     </div>
 
-                    <div className="bg-black border-4 border-text-primary p-8">
-                        <h3 className="font-display text-3xl uppercase text-rich-black mb-6 border-b-4 border-text-primary pb-2 flex justify-between">
-                            COMMUNITY TRACKS <span className="text-accent">🔥</span>
+                    <div className="bg-rich-black border-4 border-rich-black p-8 text-white">
+                        <h3 className="font-display text-3xl uppercase text-white mb-6 border-b-4 border-white/20 pb-2 flex justify-between items-center">
+                            COMMUNITY TRACKS <span className="font-mono text-xs text-accent tracking-widest">LIVE</span>
                         </h3>
 
                         <div className="space-y-4">
                             {remixes.map((remix, i) => (
-                                <div key={i} className="flex items-center justify-between group hover:bg-card p-2 -mx-2 transition-colors border-b-2 border-text-primary/20 pb-4 cursor-pointer">
+                                <div key={i} className="flex items-center justify-between group hover:bg-white/5 p-2 -mx-2 transition-colors border-b-2 border-white/10 pb-4 cursor-pointer">
                                     <div className="flex items-center gap-4">
-                                        <div className="w-10 h-10 bg-bg flex items-center justify-center font-display text-accent border-2 border-text-primary">{i + 1}</div>
+                                        <div className="w-10 h-10 bg-accent flex items-center justify-center font-display text-rich-black border-2 border-accent">{i + 1}</div>
                                         <div>
-                                            <div className="font-mono text-[10px] text-text-secondary uppercase mb-1">{remix.creator}</div>
-                                            <div className="font-hindi text-sm text-rich-black font-bold group-hover:text-accent transition-colors">{remix.title}</div>
+                                            <div className="font-mono text-[10px] text-white/50 uppercase mb-1">{remix.creator}</div>
+                                            <div className="font-hindi text-sm text-white font-bold group-hover:text-accent transition-colors">{remix.title}</div>
                                         </div>
                                     </div>
                                     <div className="text-right flex items-center gap-4">

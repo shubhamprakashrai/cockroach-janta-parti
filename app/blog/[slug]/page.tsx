@@ -33,8 +33,8 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
                     </header>
 
                     {/* Featured Image */}
-                    <div className="w-full aspect-video bg-blue-900 border-4 border-text-primary mb-12 shadow-[12px_12px_0_0_#FFD60A] overflow-hidden flex items-center justify-center">
-                        <div className="text-9xl opacity-20 rotate-45">📱</div>
+                    <div className="w-full aspect-video border-4 border-text-primary mb-12 shadow-[12px_12px_0_0_#FFD60A] overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1611605698335-8b1569810432?w=1400&q=80&auto=format&fit=crop" alt="A movement is born — WhatsApp on smartphone" className="w-full h-full object-cover" loading="eager" />
                     </div>
 
                     {/* Body */}
@@ -53,17 +53,17 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
                             We didn't want apologies. Apologies from politicians are as common as potholes in Mumbai. We wanted acknowledgement of the absurdity. Thus, the Google Form was born. It asked very simple questions.
                         </p>
 
-                        {/* Mock Tweet Embed */}
-                        <div className="my-10 bg-black border-4 border-text-primary p-6">
+                        {/* Tweet Embed */}
+                        <div className="my-10 bg-rich-black border-4 border-rich-black p-6 text-white not-prose">
                             <div className="flex items-center gap-4 mb-4">
-                                <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center text-black font-display">AD</div>
+                                <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&q=80&auto=format&fit=crop" alt="Abhijeet Dipke" className="w-12 h-12 rounded-full object-cover border-2 border-white" />
                                 <div>
-                                    <div className="font-bold text-rich-black">Abhijeet Dipke</div>
-                                    <div className="font-mono text-xs text-text-secondary">@abhijeet_dipke</div>
+                                    <div className="font-bold text-white">Abhijeet Dipke</div>
+                                    <div className="font-mono text-xs text-white/60">@abhijeet_dipke</div>
                                 </div>
                             </div>
-                            <p className="text-xl font-hindi mb-4">If they think we are cockroaches, let's count the swarm. Fill this out if you're unemployed, lazy, and chronically online.</p>
-                            <a href="#" className="font-mono text-sm text-accent break-all">forms.google.com/cjp-roach-signup...</a>
+                            <p className="text-xl font-hindi mb-4 text-white">If they think we are cockroaches, let&apos;s count the swarm. Fill this out if you&apos;re unemployed, lazy, and chronically online.</p>
+                            <a href="#" className="font-mono text-sm text-accent break-all hover:underline">forms.google.com/cjp-roach-signup...</a>
                         </div>
 
                         <p>

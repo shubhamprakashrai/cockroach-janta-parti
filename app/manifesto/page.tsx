@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Share2, Printer, Check, X, ArrowRight } from "lucide-react";
+import { Share2, Printer, Check, X, ArrowRight, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
@@ -128,7 +128,7 @@ export default function ManifestoPage() {
                                 <ul className="space-y-4 font-mono">
                                     {demand.why.map((bullet, i) => (
                                         <li key={i} className="flex gap-4 items-start">
-                                            <span className="text-accent mt-1">🪳</span>
+                                            <ChevronRight className="text-accent mt-1 shrink-0" size={20} />
                                             <span className="text-lg">{bullet}</span>
                                         </li>
                                     ))}
@@ -164,21 +164,26 @@ export default function ManifestoPage() {
                         </div>
 
                         {/* Right Col - Context & News */}
-                        <div className="p-8 md:p-12 bg-black flex flex-col justify-between">
-                            <div>
-                                <h3 className="font-display text-3xl uppercase mb-6 text-rich-black border-b-4 border-text-primary pb-2">RELATED NEWS</h3>
+                        <div className="p-8 md:p-12 bg-rich-black text-white flex flex-col justify-between relative overflow-hidden">
+                            <div className="absolute inset-0 opacity-10 pointer-events-none">
+                                <img src="https://images.unsplash.com/photo-1495020689067-958852a7765e?w=600&q=80&auto=format&fit=crop" alt="" className="w-full h-full object-cover" loading="lazy" />
+                            </div>
+                            <div className="relative z-10">
+                                <h3 className="font-display text-3xl uppercase mb-6 text-white border-b-4 border-white/20 pb-2">RELATED NEWS</h3>
                                 <div className="space-y-6">
                                     {demand.news.map((n, i) => (
-                                        <a href="#" key={i} className="block group border-l-4 border-accent pl-4 py-2 hover:bg-card">
-                                            <div className="font-mono text-xs text-text-secondary uppercase mb-2">{n.source} • {n.time}</div>
-                                            <div className="font-hindi font-bold leading-tight group-hover:text-accent transition-colors">{n.title}</div>
+                                        <a href="#" key={i} className="block group border-l-4 border-accent pl-4 py-2 hover:bg-white/5 transition-colors">
+                                            <div className="font-mono text-xs text-white/50 uppercase mb-2">{n.source} • {n.time}</div>
+                                            <div className="font-hindi font-bold leading-tight text-white group-hover:text-accent transition-colors">{n.title}</div>
                                         </a>
                                     ))}
                                 </div>
                             </div>
 
-                            <div className="mt-12 text-center">
-                                <div className="text-[6rem] opacity-20">🪳</div>
+                            <div className="mt-12 text-center relative z-10">
+                                <div className="inline-block bg-accent text-rich-black font-mono text-xs font-bold uppercase tracking-widest px-3 py-1">
+                                    Demand 0{demand.id} / 05
+                                </div>
                             </div>
                         </div>
 

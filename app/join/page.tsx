@@ -126,7 +126,7 @@ export default function JoinPage() {
                                         <p className="font-hindi text-sm font-bold uppercase italic">"{formData.why || 'Main bhi cockroach.'}"</p>
                                     </div>
                                 </div>
-                                <div className="absolute top-1/2 right-4 -translate-y-1/2 text-9xl opacity-10">🪳</div>
+                                <div className="absolute top-1/2 right-4 -translate-y-1/2 font-display text-[7rem] leading-none opacity-[0.08] tracking-tighter">CJP</div>
                             </div>
 
                             <div className="flex gap-4 mt-8">
