@@ -2,7 +2,7 @@
 
 > Single source of truth. Open this first whenever you (or anyone helping you) sits down at the project. Everything you need to operate, deploy, debug, or hand off CJP lives here.
 
-Last updated after Phase 2 deploy (Firebase + Formspree live).
+Last updated after **Phase 2.5 trust rebrand** — Day-1 launch positioning, anonymous founding members, honest live counter (currently 47).
 
 ---
 
@@ -148,11 +148,15 @@ npx --yes firebase-tools deploy --only firestore:rules --project cockroach-janta
 
 Current rules are intentionally permissive for Phase 2 launch. **Tighten in Phase 3** when admin auth is added: require signed-in user for comments/likes; restrict `meta/stats` writes to admin SDK / Cloud Function.
 
-### Seeding the counter
+### Counter management
 ```bash
+# Reset to Day-1 honest number (47)
+node scripts/reset-counter.mjs
+
+# Original seed script (legacy — wrote 350000, do not use post-rebrand)
 node scripts/seed-firestore.mjs
 ```
-Writes `meta/stats { members: 350000 }` (safe to re-run, merge).
+Real members increment the counter live via the join form. Don't seed inflated numbers anymore — the brand is now positioned as Day 1 / Founding Cohort.
 
 ### Firebase CLI auth
 ```bash
@@ -232,10 +236,15 @@ Copy `.env.example` → `.env.local` and paste the values from §3 above. Withou
 2. Add an object with `source`, `title`, `time`, `readTime`, `summary`, `img`, `url`. The card links to `url` (external).
 3. Also mirror on homepage if it's a hero story: `app/page.tsx` → `newsItems`.
 
-### 👥 Add a verified member
+### 👥 Add a founding member
 1. Open `app/page.tsx` → `members` array.
-2. Add `{ name, role, date, quote, avatar }`. Avatar = Unsplash portrait URL.
-3. Done — appears on homepage "WHO'S IN" grid.
+2. Add `{ name, role, date, quote, avatar }`. Format:
+   - `name`: anonymous handle (`@handle_topic`)
+   - `role`: `City · MEM #NNN` (use the next sequential founding number)
+   - `date`: `Founding Roach`
+   - `quote`: short relatable 1-liner about their reason
+   - `avatar`: Unsplash portrait URL
+3. ⚠️ **Do not impersonate real public figures.** No "Mahua Moitra", "Kunal Kamra", etc. Anonymous handles only.
 
 ### 🖼️ Swap a hero image
 1. Find the Unsplash photo ID (the `photo-XXXX` part of any image URL on https://unsplash.com).
