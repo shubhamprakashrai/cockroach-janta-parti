@@ -1,0 +1,35 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Public live counter — anyone can read, increment from client (Phase 2 launch).
+    match /meta/{doc} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Members — anyone can submit a join; nobody can read the full list.
+    match /members/{doc} {
+      allow read: if false;
+      allow create: if request.resource.data.name is string
+                    && request.resource.data.name.size() < 80
+                    && request.resource.data.city is string
+                    && request.resource.data.why is string;
+    }
+
+    // Meme likes — read public, increment public.
+    match /memeLikes/{memeId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Comments — read public, anyone can post short comments.
+    match /comments/{slug}/items/{commentId} {
+      allow read: if true;
+      allow create: if request.resource.data.name is string
+                    && request.resource.data.name.size() <= 60
+                    && request.resource.data.text is string
+                    && request.resource.data.text.size() <= 800;
+    }
+  }
+}
