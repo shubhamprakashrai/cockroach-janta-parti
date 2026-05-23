@@ -64,6 +64,17 @@ export default function BlogIndexPage() {
 
             {/* Grid */}
             <section className="max-w-[1400px] mx-auto px-4 py-16">
+                {posts.length === 0 ? (
+                    <div className="bg-card border-4 border-text-primary p-12 md:p-16 text-center max-w-2xl mx-auto shadow-[12px_12px_0_0_#FFD60A]">
+                        <h2 className="font-display text-4xl md:text-5xl uppercase mb-4 text-rich-black">FIRST POST INCOMING</h2>
+                        <p className="font-mono text-sm text-text-secondary mb-8 uppercase tracking-widest">
+                            The blog will open with the founding manifesto. Drop your email at the join form so you do not miss it.
+                        </p>
+                        <Link href="/join" className="inline-block bg-accent text-rich-black font-display text-xl uppercase px-8 py-3 border-4 border-rich-black hover:bg-rich-black hover:text-accent transition-colors shadow-[4px_4px_0_0_#000]">
+                            JOIN THE SWARM →
+                        </Link>
+                    </div>
+                ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 md:gap-12">
                     {posts.map((post, i) => (
                         <Link href={`/blog/${post.slug}`} key={i} className="flex flex-col bg-card border-4 border-text-primary shadow-[12px_12px_0_0_#000] hover:shadow-[12px_12px_0_0_#FFD60A] hover:-translate-y-2 transition-all group overflow-hidden">
@@ -96,6 +107,7 @@ export default function BlogIndexPage() {
                         </Link>
                     ))}
                 </div>
+                )}
             </section>
 
         </main>

@@ -4,23 +4,26 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Play, Share2, ArrowRight, Upload, Crown, Menu, CheckCircle2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { listenToMemberCount } from "@/lib/firebase-actions";
-import { joinMember } from "@/lib/firebase-actions";
+import { listenToMemberCount, joinMember, listenToAdminNews, listenToAdminBlogs, type AdminNewsItem, type AdminBlogPost } from "@/lib/firebase-actions";
 
 const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID || "movnoogd";
 const FORMSPREE_ENDPOINT = `https://formspree.io/f/${FORMSPREE_ID}`;
 
 export default function HomePage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [memberCount, setMemberCount] = useState(47);
+  const [memberCount, setMemberCount] = useState(1);
   const [manifestoVotes, setManifestoVotes] = useState<Record<number, 'agree' | 'disagree'>>({});
   const [joinForm, setJoinForm] = useState({ name: "", city: "", why: "" });
   const [joinStatus, setJoinStatus] = useState<"idle" | "submitting" | "ok" | "error">("idle");
+  const [adminNews, setAdminNews] = useState<AdminNewsItem[]>([]);
+  const [adminBlogs, setAdminBlogs] = useState<AdminBlogPost[]>([]);
 
   useEffect(() => {
     // Real Firestore listener — no fake drift, only true joins increment the count.
-    const unsub = listenToMemberCount((count) => setMemberCount(count));
-    return () => unsub();
+    const unsubCount = listenToMemberCount((count) => setMemberCount(count));
+    const unsubNews = listenToAdminNews(setAdminNews);
+    const unsubBlogs = listenToAdminBlogs(setAdminBlogs);
+    return () => { unsubCount(); unsubNews(); unsubBlogs(); };
   }, []);
 
   const submitJoin = async (e: React.FormEvent) => {
@@ -71,20 +74,16 @@ export default function HomePage() {
     { id: 5, title: "CANCEL BOUGHT MEDIA", desc: "Cancel Ambani/Adani licenses.", baseAgree: 88 }
   ];
 
-  const newsItems = [
-    { source: "OP-ED", title: "Why India Needs a Cockroach Party — A Manifesto for the Discarded Generation", time: "Read in 30s", img: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=800&q=80&auto=format&fit=crop", url: "https://www.businesstoday.in/topic/unemployment" },
-    { source: "ANALYSIS", title: "The Real Numbers Behind Youth Unemployment in India (2026 Update)", time: "Read in 1m", img: "https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=800&q=80&auto=format&fit=crop", url: "https://theprint.in/tag/unemployment/" },
-    { source: "BACKGROUND", title: "Mahua Moitra Cases: Why Parliament Doesn't Want Loud Voices", time: "Read in 45s", img: "https://images.unsplash.com/photo-1495020689067-958852a7765e?w=800&q=80&auto=format&fit=crop", url: "https://thewire.in/tag/mahua-moitra" },
-  ];
-
-  const members = [
-    { name: "@gutter_engineer", role: "Mumbai · MEM #001", date: "Founding Roach", quote: "B.Tech, 2-year gap, 0 callbacks. Tired of being polite about it.", avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80&auto=format&fit=crop" },
-    { name: "@delhi_dropout", role: "Delhi · MEM #007", date: "Founding Roach", quote: "Coaching mafia ate my parents' savings. Here for the noise.", avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80&auto=format&fit=crop" },
-    { name: "@sarcastic_pune", role: "Pune · MEM #012", date: "Founding Roach", quote: "MBA from a tier-3 college and a Zomato side hustle. Same vibe.", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80&auto=format&fit=crop" },
-    { name: "@civil_aspirant", role: "Allahabad · MEM #019", date: "Founding Roach", quote: "5 attempts, still believing the system. CJP is my Plan B.", avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=400&q=80&auto=format&fit=crop" },
-    { name: "@chennai_coder", role: "Chennai · MEM #024", date: "Founding Roach", quote: "Got laid off twice in 18 months. Here for the rage and memes.", avatar: "https://images.unsplash.com/photo-1463453091185-61582044d556?w=400&q=80&auto=format&fit=crop" },
-    { name: "@calcutta_writer", role: "Kolkata · MEM #031", date: "Founding Roach", quote: "Bengali sarcasm meets generational disappointment. Let's go.", avatar: "https://images.unsplash.com/photo-1542178243-bc20204b769f?w=400&q=80&auto=format&fit=crop" },
-  ];
+  // News + blog teasers are pulled live from Firestore (uploads via /admin).
+  // The members showcase stays empty until founders opt in — for now, the section flips to a CTA.
+  const newsItems = adminNews.slice(0, 3).map((n) => ({
+    source: n.source,
+    title: n.title,
+    time: n.createdAtMs ? new Date(n.createdAtMs).toLocaleDateString("en-IN", { day: "numeric", month: "short" }) : "Just in",
+    img: n.img,
+    url: n.url,
+  }));
+  const members: { name: string; role: string; date: string; quote: string; avatar: string }[] = [];
 
   const memeImages = [
     "https://images.unsplash.com/photo-1542728928-1413d1894ed1?w=600&q=80&auto=format&fit=crop",
@@ -100,12 +99,11 @@ export default function HomePage() {
     "https://images.unsplash.com/photo-1518604666860-9ed391f76460?w=600&q=80&auto=format&fit=crop",
   ];
 
-  const blogPosts = [
-    { title: "Why being lazy is actually a political statement in 2026", img: "https://images.unsplash.com/photo-1611605698335-8b1569810432?w=600&q=80&auto=format&fit=crop" },
-    { title: "The cockroach economy: How 3.5L joined in one week", img: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&q=80&auto=format&fit=crop" },
-    { title: "Decoding the CJI remark that birthed a movement", img: "https://images.unsplash.com/photo-1589994965851-a8f479c573a9?w=600&q=80&auto=format&fit=crop" },
-    { title: "Inside the meme war: CJP vs the Establishment", img: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600&q=80&auto=format&fit=crop" },
-  ];
+  const blogPosts = adminBlogs.slice(0, 4).map((b) => ({
+    slug: b.slug,
+    title: b.title,
+    img: b.img,
+  }));
 
   return (
     <main className="min-h-screen font-body text-text-primary bg-bg overflow-x-hidden selection:bg-accent selection:text-black pb-20 md:pb-0">
@@ -229,29 +227,42 @@ export default function HomePage() {
           </h2>
         </div>
 
-        {/* Mobile uses flex container for horizontal scroll, desktop is grid */}
-        <div className="flex overflow-x-auto md:grid md:grid-cols-3 gap-6 pb-8 snap-x">
-          {newsItems.map((news, i) => (
-            <a key={i} href={news.url} target="_blank" rel="noopener noreferrer" className="min-w-[85vw] md:min-w-0 flex-shrink-0 snap-center bg-card border-4 border-text-primary shadow-[8px_8px_0_0_#000] flex flex-col group hover:-translate-y-2 transition-transform cursor-pointer overflow-hidden">
-              <div className="relative h-52 overflow-hidden border-b-4 border-text-primary">
-                <img src={news.img} alt={news.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-                <span className="absolute top-3 left-3 bg-rich-black text-white font-bold font-mono px-3 py-1 text-xs uppercase tracking-widest shadow-[4px_4px_0_0_#FFD60A]">{news.source}</span>
-              </div>
-              <div className="p-6 flex flex-col flex-1 justify-between">
-                <h3 className="font-bold text-xl md:text-2xl mb-6 font-hindi leading-tight group-hover:text-accent transition-colors">{news.title}</h3>
-                <div className="flex justify-between items-center border-t-2 border-text-primary/20 pt-4">
-                  <span className="text-accent font-mono text-xs font-bold uppercase tracking-widest">{news.time}</span>
-                  <span className="text-text-primary group-hover:text-accent transition-colors" title="Open story">
-                    <Share2 size={20} />
-                  </span>
-                </div>
-              </div>
-            </a>
-          ))}
-        </div>
-        <div className="text-center mt-4">
-          <Link href="/news" className="font-mono font-bold uppercase text-accent hover:text-rich-black underline decoration-2 underline-offset-4 text-lg">See all news →</Link>
-        </div>
+        {newsItems.length === 0 ? (
+          <div className="bg-card border-4 border-text-primary p-10 md:p-16 text-center shadow-[12px_12px_0_0_#FFD60A]">
+            <h3 className="font-display text-3xl md:text-5xl uppercase mb-4 text-rich-black">FIRST NEWS DROP COMING</h3>
+            <p className="font-mono text-sm text-text-secondary uppercase tracking-widest mb-8 max-w-xl mx-auto">
+              We are not aggregating someone else&apos;s noise. The first story posted here will be a CJP original. Subscribe and you will know first.
+            </p>
+            <Link href="/news" className="inline-block bg-accent text-rich-black font-display text-2xl uppercase px-8 py-4 border-4 border-rich-black hover:bg-rich-black hover:text-accent transition-colors shadow-[8px_8px_0_0_#000]">
+              READING LIST →
+            </Link>
+          </div>
+        ) : (
+          <>
+            <div className="flex overflow-x-auto md:grid md:grid-cols-3 gap-6 pb-8 snap-x">
+              {newsItems.map((news, i) => (
+                <a key={i} href={news.url} target="_blank" rel="noopener noreferrer" className="min-w-[85vw] md:min-w-0 flex-shrink-0 snap-center bg-card border-4 border-text-primary shadow-[8px_8px_0_0_#000] flex flex-col group hover:-translate-y-2 transition-transform cursor-pointer overflow-hidden">
+                  <div className="relative h-52 overflow-hidden border-b-4 border-text-primary">
+                    <img src={news.img} alt={news.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                    <span className="absolute top-3 left-3 bg-rich-black text-white font-bold font-mono px-3 py-1 text-xs uppercase tracking-widest shadow-[4px_4px_0_0_#FFD60A]">{news.source}</span>
+                  </div>
+                  <div className="p-6 flex flex-col flex-1 justify-between">
+                    <h3 className="font-bold text-xl md:text-2xl mb-6 font-hindi leading-tight group-hover:text-accent transition-colors">{news.title}</h3>
+                    <div className="flex justify-between items-center border-t-2 border-text-primary/20 pt-4">
+                      <span className="text-accent font-mono text-xs font-bold uppercase tracking-widest">{news.time}</span>
+                      <span className="text-text-primary group-hover:text-accent transition-colors" title="Open story">
+                        <Share2 size={20} />
+                      </span>
+                    </div>
+                  </div>
+                </a>
+              ))}
+            </div>
+            <div className="text-center mt-4">
+              <Link href="/news" className="font-mono font-bold uppercase text-accent hover:text-rich-black underline decoration-2 underline-offset-4 text-lg">See all news →</Link>
+            </div>
+          </>
+        )}
       </section>
 
       {/* 6. INTERACTIVE MANIFESTO */}
@@ -390,32 +401,43 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 9. VERIFIED MEMBERS WALL */}
+      {/* 9. FOUNDING COHORT WALL */}
       <section className="px-4 py-24 bg-card border-b-4 border-text-primary">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <div className="inline-block bg-rich-black text-accent px-4 py-1 mb-4 font-mono text-xs font-bold uppercase tracking-[0.2em]">Founding Cohort · First 50</div>
             <h2 className="font-display text-6xl md:text-7xl uppercase tracking-widest text-rich-black">WHO&apos;S IN</h2>
-            <p className="font-mono text-xs md:text-sm text-text-secondary mt-4 max-w-xl mx-auto uppercase tracking-widest">Real submissions, anonymous handles. Your founding number is permanent.</p>
+            <p className="font-mono text-xs md:text-sm text-text-secondary mt-4 max-w-xl mx-auto uppercase tracking-widest">All 50 founding spots open. Your number is locked the moment you join.</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {members.map((m, i) => (
-              <div key={i} className="bg-bg border-4 border-text-primary p-6 shadow-[8px_8px_0_0_#FFD60A] relative hover:-translate-y-2 transition-transform">
-                <div className="absolute -top-4 -right-4 bg-success p-2 border-4 border-text-primary rounded-full z-10">
-                  <CheckCircle2 fill="white" stroke="white" size={28} />
+          {members.length === 0 ? (
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-3xl mx-auto mb-12">
+              {Array.from({ length: 10 }).map((_, i) => (
+                <div key={i} className="aspect-square bg-bg border-4 border-dashed border-text-primary/40 flex flex-col items-center justify-center hover:border-accent transition-colors">
+                  <div className="font-display text-3xl md:text-4xl text-text-secondary/60">#{(memberCount + i + 1).toString().padStart(3, "0")}</div>
+                  <div className="font-mono text-[10px] uppercase tracking-widest text-text-secondary/60 mt-1">Open</div>
                 </div>
-                <div className="w-24 h-24 border-4 border-text-primary mb-4 overflow-hidden shadow-[4px_4px_0_0_#000]">
-                  <img src={m.avatar} alt={m.name} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" loading="lazy" />
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {members.map((m, i) => (
+                <div key={i} className="bg-bg border-4 border-text-primary p-6 shadow-[8px_8px_0_0_#FFD60A] relative hover:-translate-y-2 transition-transform">
+                  <div className="absolute -top-4 -right-4 bg-success p-2 border-4 border-text-primary rounded-full z-10">
+                    <CheckCircle2 fill="white" stroke="white" size={28} />
+                  </div>
+                  <div className="w-24 h-24 border-4 border-text-primary mb-4 overflow-hidden shadow-[4px_4px_0_0_#000]">
+                    <img src={m.avatar} alt={m.name} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" loading="lazy" />
+                  </div>
+                  <h3 className="font-display text-3xl uppercase tracking-wider mb-1">{m.name}</h3>
+                  <p className="font-mono text-xs font-bold uppercase tracking-widest mb-4 inline-block bg-rich-black text-accent px-2 py-1">{m.role}</p>
+                  <div className="border-t-2 border-rich-black/20 pt-4 mt-2">
+                    <p className="font-hindi text-lg italic text-text-primary mb-2 leading-snug">&ldquo;{m.quote}&rdquo;</p>
+                    <p className="font-mono text-xs text-text-secondary uppercase tracking-widest">{m.date}</p>
+                  </div>
                 </div>
-                <h3 className="font-display text-3xl uppercase tracking-wider mb-1">{m.name}</h3>
-                <p className="font-mono text-xs font-bold uppercase tracking-widest mb-4 inline-block bg-rich-black text-accent px-2 py-1">{m.role}</p>
-                <div className="border-t-2 border-rich-black/20 pt-4 mt-2">
-                  <p className="font-hindi text-lg italic text-text-primary mb-2 leading-snug">&ldquo;{m.quote}&rdquo;</p>
-                  <p className="font-mono text-xs text-text-secondary uppercase tracking-widest">{m.date}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -497,16 +519,23 @@ export default function HomePage() {
                 <h2 className="font-display text-5xl text-rich-black">BLOG TEASER</h2>
                 <Link href="/blog" className="font-mono uppercase text-sm text-accent hover:underline decoration-2"><ArrowRight size={24} /></Link>
               </div>
-              <div className="grid grid-cols-2 gap-4">
-                {blogPosts.map((post, i) => (
-                  <Link href={`/blog/post-${i + 1}`} key={i} className="group bg-bg border-4 border-text-primary hover:border-accent shadow-[4px_4px_0_0_#000] transition-all overflow-hidden">
-                    <div className="h-28 overflow-hidden border-b-2 border-text-primary">
-                      <img src={post.img} alt={post.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
-                    </div>
-                    <h4 className="font-bold font-hindi line-clamp-2 leading-snug group-hover:text-accent p-3 text-sm">{post.title}</h4>
-                  </Link>
-                ))}
-              </div>
+              {blogPosts.length === 0 ? (
+                <div className="bg-bg border-4 border-dashed border-text-primary/40 p-6 text-center">
+                  <h4 className="font-display text-2xl uppercase text-rich-black mb-2">FIRST POST INCOMING</h4>
+                  <p className="font-mono text-xs uppercase tracking-widest text-text-secondary">The blog opens with the founding manifesto. Stay tuned.</p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-2 gap-4">
+                  {blogPosts.map((post, i) => (
+                    <Link href={`/blog/${post.slug}`} key={i} className="group bg-bg border-4 border-text-primary hover:border-accent shadow-[4px_4px_0_0_#000] transition-all overflow-hidden">
+                      <div className="h-28 overflow-hidden border-b-2 border-text-primary">
+                        <img src={post.img} alt={post.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+                      </div>
+                      <h4 className="font-bold font-hindi line-clamp-2 leading-snug group-hover:text-accent p-3 text-sm">{post.title}</h4>
+                    </Link>
+                  ))}
+                </div>
+              )}
               <Link href="/blog" className="inline-block mt-8 font-mono font-bold uppercase text-accent hover:text-rich-black hover:underline decoration-2 text-lg">
                 READ MORE COCKROACH WISDOM →
               </Link>

@@ -16,14 +16,8 @@ export default function NewsAggregatorPage() {
         return () => unsub();
     }, []);
 
-    const staticItems = [
-        { source: "ANALYSIS", title: "Youth Unemployment in India — The Numbers Behind The Rage", time: "Live", readTime: "5m", summary: "Real data on graduate unemployment, the degree premium collapse, and why a generation is fed up.", img: "https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=800&q=80&auto=format&fit=crop", url: "https://theprint.in/tag/unemployment/" },
-        { source: "OP-ED", title: "Social Media Is Where Indian Politics Actually Lives Now", time: "Live", readTime: "3m", summary: "Why Gen-Z political organising no longer needs press releases, podiums, or party offices.", img: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=800&q=80&auto=format&fit=crop", url: "https://www.businesstoday.in/topic/social-media" },
-        { source: "CONTEXT", title: "Mahua Moitra & The Politicians Parliament Loves To Silence", time: "Live", readTime: "4m", summary: "A reading list on what happens to political voices that refuse to stay in line.", img: "https://images.unsplash.com/photo-1495020689067-958852a7765e?w=800&q=80&auto=format&fit=crop", url: "https://thewire.in/tag/mahua-moitra" },
-        { source: "SATIRE", title: "If India Had A Party For The Discarded — A Thought Experiment", time: "Live", readTime: "2m", summary: "What would a political party for the underemployed, the chronically online, and the gutter-dwellers actually look like?", img: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&q=80&auto=format&fit=crop", url: "https://www.republicworld.com/search?q=political+satire" },
-        { source: "GLOBAL", title: "Coverage Of India's Political Movements — From Outside", time: "Live", readTime: "5m", summary: "How international outlets read Indian protests, organising, and Gen-Z politics.", img: "https://images.unsplash.com/photo-1488229297570-58520851e868?w=800&q=80&auto=format&fit=crop", url: "https://www.aljazeera.com/where/india/" },
-        { source: "EXPLAINER", title: "Background: Unemployment In India — The Wikipedia Read", time: "Live", readTime: "6m", summary: "The structural, historical, and definitional foundations behind the unemployment crisis.", img: "https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?w=800&q=80&auto=format&fit=crop", url: "https://en.wikipedia.org/wiki/Unemployment_in_India" },
-    ];
+    // No static news. Items come from /admin uploads only.
+    const staticItems: { source: string; title: string; time: string; readTime: string; summary: string; img: string; url: string }[] = [];
 
     // Admin-uploaded news appears first, then static fallbacks
     const newsItems = [
@@ -79,6 +73,17 @@ export default function NewsAggregatorPage() {
 
                     {/* News Grid */}
                     <div className="p-4 md:p-8">
+                        {newsItems.length === 0 ? (
+                            <div className="bg-card border-4 border-text-primary p-12 md:p-16 text-center max-w-2xl mx-auto shadow-[12px_12px_0_0_#FFD60A]">
+                                <h2 className="font-display text-4xl md:text-5xl uppercase mb-4 text-rich-black">NO STORIES YET</h2>
+                                <p className="font-mono text-sm text-text-secondary mb-8 uppercase tracking-widest">
+                                    The first piece of news will be a CJP original. Drop your email at the join form so you do not miss it.
+                                </p>
+                                <Link href="/join" className="inline-block bg-accent text-rich-black font-display text-xl uppercase px-8 py-3 border-4 border-rich-black hover:bg-rich-black hover:text-accent transition-colors shadow-[4px_4px_0_0_#000]">
+                                    JOIN THE SWARM →
+                                </Link>
+                            </div>
+                        ) : (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                             {newsItems.map((news, i) => (
                                 <a key={i} href={news.url} target="_blank" rel="noopener noreferrer" className="bg-card border-4 border-text-primary shadow-[8px_8px_0_0_#000] hover:shadow-[8px_8px_0_0_#FFD60A] hover:-translate-y-2 transition-all flex flex-col group cursor-pointer">
@@ -108,6 +113,7 @@ export default function NewsAggregatorPage() {
                                 </a>
                             ))}
                         </div>
+                        )}
 
                         {/* Skeleton Loaders for Infinite Scroll */}
                         <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">

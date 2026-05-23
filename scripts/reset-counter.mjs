@@ -1,4 +1,4 @@
-// One-off: reset meta/stats to honest Day-1 number. Run when you want to wipe inflated counts.
+// One-off: reset meta/stats to Day-0. Run when you want a truly fresh count.
 import { initializeApp } from "firebase/app";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 
@@ -14,6 +14,6 @@ const config = {
 const app = initializeApp(config);
 const db = getFirestore(app);
 
-await setDoc(doc(db, "meta", "stats"), { members: 47 });
-console.log("✓ Counter reset to 47 (Day 1 founding cohort)");
+await setDoc(doc(db, "meta", "stats"), { members: 1 });
+console.log("✓ Counter reset to 1 (you, the founder)");
 process.exit(0);
