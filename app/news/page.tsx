@@ -1,22 +1,42 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Search, Clock, Share2, CornerRightUp } from "lucide-react";
+import { listenToAdminNews, type AdminNewsItem } from "@/lib/firebase-actions";
 
 export default function NewsAggregatorPage() {
     const filters = ["All", "Today", "This Week", "Hindi", "English"];
     const sources = ["All Sources", "Republic", "BusinessToday", "Al Jazeera", "ThePrint"];
 
     const [activeFilter, setActiveFilter] = useState("All");
+    const [adminNews, setAdminNews] = useState<AdminNewsItem[]>([]);
+    useEffect(() => {
+        const unsub = listenToAdminNews(setAdminNews);
+        return () => unsub();
+    }, []);
 
-    const newsItems = [
+    const staticItems = [
         { source: "ANALYSIS", title: "Youth Unemployment in India — The Numbers Behind The Rage", time: "Live", readTime: "5m", summary: "Real data on graduate unemployment, the degree premium collapse, and why a generation is fed up.", img: "https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=800&q=80&auto=format&fit=crop", url: "https://theprint.in/tag/unemployment/" },
         { source: "OP-ED", title: "Social Media Is Where Indian Politics Actually Lives Now", time: "Live", readTime: "3m", summary: "Why Gen-Z political organising no longer needs press releases, podiums, or party offices.", img: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=800&q=80&auto=format&fit=crop", url: "https://www.businesstoday.in/topic/social-media" },
         { source: "CONTEXT", title: "Mahua Moitra & The Politicians Parliament Loves To Silence", time: "Live", readTime: "4m", summary: "A reading list on what happens to political voices that refuse to stay in line.", img: "https://images.unsplash.com/photo-1495020689067-958852a7765e?w=800&q=80&auto=format&fit=crop", url: "https://thewire.in/tag/mahua-moitra" },
         { source: "SATIRE", title: "If India Had A Party For The Discarded — A Thought Experiment", time: "Live", readTime: "2m", summary: "What would a political party for the underemployed, the chronically online, and the gutter-dwellers actually look like?", img: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&q=80&auto=format&fit=crop", url: "https://www.republicworld.com/search?q=political+satire" },
         { source: "GLOBAL", title: "Coverage Of India's Political Movements — From Outside", time: "Live", readTime: "5m", summary: "How international outlets read Indian protests, organising, and Gen-Z politics.", img: "https://images.unsplash.com/photo-1488229297570-58520851e868?w=800&q=80&auto=format&fit=crop", url: "https://www.aljazeera.com/where/india/" },
         { source: "EXPLAINER", title: "Background: Unemployment In India — The Wikipedia Read", time: "Live", readTime: "6m", summary: "The structural, historical, and definitional foundations behind the unemployment crisis.", img: "https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?w=800&q=80&auto=format&fit=crop", url: "https://en.wikipedia.org/wiki/Unemployment_in_India" },
+    ];
+
+    // Admin-uploaded news appears first, then static fallbacks
+    const newsItems = [
+        ...adminNews.map((n) => ({
+            source: n.source,
+            title: n.title,
+            time: n.createdAtMs ? new Date(n.createdAtMs).toLocaleDateString("en-IN", { day: "numeric", month: "short" }) : "Just in",
+            readTime: "Read",
+            summary: n.summary,
+            img: n.img,
+            url: n.url,
+        })),
+        ...staticItems,
     ];
 
     return (

@@ -100,29 +100,34 @@ export default function ReelsPage() {
                                             title={reel.title}
                                         />
                                     ) : (
-                                        <a href={reel.videoUrl} target="_blank" rel="noopener noreferrer" className="w-full h-full flex flex-col items-center justify-center text-white hover:bg-accent hover:text-rich-black transition-colors group">
+                                        <Link href={`/reels/${reel.id}`} className="w-full h-full flex flex-col items-center justify-center text-white hover:bg-accent hover:text-rich-black transition-colors group relative">
                                             {reel.thumbnailUrl && <img src={reel.thumbnailUrl} alt={reel.title} className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-30" />}
                                             <Play size={64} className="relative z-10" />
                                             <span className="font-mono text-xs uppercase tracking-widest mt-2 relative z-10">OPEN VIDEO</span>
-                                        </a>
+                                        </Link>
                                     )}
                                 </div>
                                 <div className="p-5 flex flex-col gap-3 flex-1">
                                     <div className="flex justify-between items-start gap-3">
-                                        <h3 className="font-display text-xl md:text-2xl uppercase leading-tight text-rich-black">{reel.title}</h3>
+                                        <Link href={`/reels/${reel.id}`} className="font-display text-xl md:text-2xl uppercase leading-tight text-rich-black hover:text-accent transition-colors">{reel.title}</Link>
                                         <PlatformBadge platform={reel.platform} />
                                     </div>
                                     {reel.description && (
                                         <p className="font-mono text-xs text-text-secondary leading-relaxed">{reel.description}</p>
                                     )}
-                                    <a
-                                        href={reel.videoUrl}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="mt-auto font-mono text-xs font-bold uppercase tracking-widest text-accent hover:underline decoration-2 underline-offset-4"
-                                    >
-                                        Open on {reel.platform} →
-                                    </a>
+                                    <div className="mt-auto flex justify-between items-center gap-3 pt-2 border-t-2 border-text-primary/20">
+                                        <Link href={`/reels/${reel.id}`} className="font-mono text-xs font-bold uppercase tracking-widest text-rich-black hover:text-accent">
+                                            Open · share →
+                                        </Link>
+                                        <a
+                                            href={reel.videoUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="font-mono text-xs font-bold uppercase tracking-widest text-accent hover:underline decoration-2 underline-offset-4"
+                                        >
+                                            On {reel.platform} ↗
+                                        </a>
+                                    </div>
                                 </div>
                             </article>
                         ))}

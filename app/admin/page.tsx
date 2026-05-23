@@ -128,6 +128,7 @@ function BlogForm() {
         img: "",
     });
     const [status, setStatus] = useState<"idle" | "submitting" | "ok" | "error">("idle");
+    const [liveLink, setLiveLink] = useState<string | null>(null);
 
     const onSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -138,12 +139,13 @@ function BlogForm() {
             slug: form.slug.trim() || form.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""),
         };
         const result = await createBlogPost(post);
-        if (result.ok) {
+        if (result.ok && result.slug) {
             setStatus("ok");
+            setLiveLink(`/blog/${result.slug}`);
             setForm({ slug: "", title: "", cat: "News", excerpt: "", body: "", author: "CJP Editor", readTime: "5 min read", img: "" });
-            setTimeout(() => setStatus("idle"), 3000);
         } else {
             setStatus("error");
+            setLiveLink(null);
         }
     };
 
@@ -165,7 +167,7 @@ function BlogForm() {
                 rows={14}
                 placeholder={`Write paragraphs separated by a blank line.\n\nUse ## at the start of a line for a section heading.\n\n## Why this matters\n\nBecause the system already broke. We just stopped pretending.`}
             />
-            <SubmitButton status={status} label="PUBLISH BLOG POST" />
+            <SubmitButton status={status} label="PUBLISH BLOG POST" liveLink={liveLink} liveLabel="VIEW LIVE POST" />
         </form>
     );
 }
@@ -179,6 +181,7 @@ function ReelForm() {
         thumbnailUrl: "",
     });
     const [status, setStatus] = useState<"idle" | "submitting" | "ok" | "error">("idle");
+    const [liveLink, setLiveLink] = useState<string | null>(null);
 
     const platform = form.videoUrl ? detectPlatform(form.videoUrl) : "other";
     const embedPreview = form.videoUrl ? buildEmbedUrl(form.videoUrl) : "";
@@ -187,12 +190,13 @@ function ReelForm() {
         e.preventDefault();
         setStatus("submitting");
         const result = await createReel(form);
-        if (result.ok) {
+        if (result.ok && result.id) {
             setStatus("ok");
+            setLiveLink(`/reels/${result.id}`);
             setForm({ title: "", description: "", videoUrl: "", thumbnailUrl: "" });
-            setTimeout(() => setStatus("idle"), 3000);
         } else {
             setStatus("error");
+            setLiveLink(null);
         }
     };
 
@@ -213,7 +217,7 @@ function ReelForm() {
             )}
             <FormField label="THUMBNAIL URL (optional fallback)" value={form.thumbnailUrl} onChange={(v) => setForm({ ...form, thumbnailUrl: v })} placeholder="https://i.ytimg.com/vi/abc123/maxresdefault.jpg" />
             <FormTextarea label="DESCRIPTION" value={form.description} onChange={(v) => setForm({ ...form, description: v })} rows={3} placeholder="1-2 lines of context shown under the video." />
-            <SubmitButton status={status} label="PUBLISH REEL" />
+            <SubmitButton status={status} label="PUBLISH REEL" liveLink={liveLink} liveLabel="VIEW LIVE REEL" />
         </form>
     );
 }
@@ -249,7 +253,7 @@ function NewsForm() {
             <FormField label="EXTERNAL URL *" value={form.url} onChange={(v) => setForm({ ...form, url: v })} placeholder="https://theprint.in/..." />
             <FormField label="COVER IMAGE URL *" value={form.img} onChange={(v) => setForm({ ...form, img: v })} placeholder="https://images.unsplash.com/photo-XXXX?w=800&q=80&auto=format&fit=crop" />
             <FormTextarea label="SUMMARY" value={form.summary} onChange={(v) => setForm({ ...form, summary: v })} rows={3} placeholder="2-3 sentences shown on the news card." />
-            <SubmitButton status={status} label="PUBLISH NEWS ITEM" />
+            <SubmitButton status={status} label="PUBLISH NEWS ITEM" liveLink="/news" liveLabel="OPEN NEWS PAGE" />
         </form>
     );
 }
@@ -302,7 +306,7 @@ function FormSelect({ label, value, onChange, options }: { label: string; value:
     );
 }
 
-function SubmitButton({ status, label }: { status: "idle" | "submitting" | "ok" | "error"; label: string }) {
+function SubmitButton({ status, label, liveLink, liveLabel }: { status: "idle" | "submitting" | "ok" | "error"; label: string; liveLink?: string | null; liveLabel?: string }) {
     return (
         <div className="space-y-3">
             <button
@@ -313,8 +317,13 @@ function SubmitButton({ status, label }: { status: "idle" | "submitting" | "ok" 
                 {status === "submitting" ? "PUBLISHING..." : label}
             </button>
             {status === "ok" && (
-                <div className="bg-success text-white font-mono text-xs font-bold uppercase tracking-widest p-3 border-2 border-rich-black flex items-center gap-2">
-                    <CheckCircle2 size={16} /> Published. It is live on the site right now.
+                <div className="bg-success text-white font-mono text-xs font-bold uppercase tracking-widest p-3 border-2 border-rich-black flex items-center justify-between gap-2 flex-wrap">
+                    <span className="flex items-center gap-2"><CheckCircle2 size={16} /> Published. Live right now.</span>
+                    {liveLink && (
+                        <a href={liveLink} target="_blank" rel="noopener noreferrer" className="bg-white text-success px-3 py-1 border-2 border-rich-black hover:bg-accent hover:text-rich-black transition-colors">
+                            {liveLabel || "VIEW LIVE"} →
+                        </a>
+                    )}
                 </div>
             )}
             {status === "error" && (

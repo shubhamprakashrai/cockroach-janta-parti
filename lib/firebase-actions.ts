@@ -10,6 +10,7 @@ import {
     serverTimestamp,
     setDoc,
     updateDoc,
+    type DocumentData,
 } from "firebase/firestore";
 import { getDb } from "./firebase";
 
@@ -180,7 +181,7 @@ export function listenToComments(slug: string, onChange: (comments: Comment[]) =
 
 // ---------- Admin: Blog Posts ----------
 
-export async function createBlogPost(post: Omit<AdminBlogPost, "id" | "createdAtMs">): Promise<{ ok: boolean; reason?: string }> {
+export async function createBlogPost(post: Omit<AdminBlogPost, "id" | "createdAtMs">): Promise<{ ok: boolean; reason?: string; slug?: string }> {
     const db = getDb();
     if (!db) return { ok: false, reason: "firebase-not-configured" };
     if (!post.slug || !post.title) return { ok: false, reason: "missing-required" };
@@ -189,7 +190,7 @@ export async function createBlogPost(post: Omit<AdminBlogPost, "id" | "createdAt
             ...post,
             createdAt: serverTimestamp(),
         });
-        return { ok: true };
+        return { ok: true, slug: post.slug };
     } catch (err) {
         return { ok: false, reason: (err as Error).message };
     }
@@ -248,22 +249,44 @@ export function buildEmbedUrl(url: string): string {
     return url;
 }
 
-export async function createReel(reel: Omit<Reel, "id" | "createdAtMs" | "embedUrl" | "platform">): Promise<{ ok: boolean; reason?: string }> {
+export async function createReel(reel: Omit<Reel, "id" | "createdAtMs" | "embedUrl" | "platform">): Promise<{ ok: boolean; reason?: string; id?: string }> {
     const db = getDb();
     if (!db) return { ok: false, reason: "firebase-not-configured" };
     if (!reel.videoUrl || !reel.title) return { ok: false, reason: "missing-required" };
     try {
         const platform = detectPlatform(reel.videoUrl);
         const embedUrl = buildEmbedUrl(reel.videoUrl);
-        await addDoc(collection(db, "reels"), {
+        const docRef = await addDoc(collection(db, "reels"), {
             ...reel,
             platform,
             embedUrl,
             createdAt: serverTimestamp(),
         });
-        return { ok: true };
+        return { ok: true, id: docRef.id };
     } catch (err) {
         return { ok: false, reason: (err as Error).message };
+    }
+}
+
+export async function getReelById(id: string): Promise<Reel | null> {
+    const db = getDb();
+    if (!db) return null;
+    try {
+        const snap = await getDoc(doc(db, "reels", id));
+        if (!snap.exists()) return null;
+        const data = snap.data() as DocumentData;
+        return {
+            id: snap.id,
+            title: data.title ?? "Untitled",
+            description: data.description ?? "",
+            videoUrl: data.videoUrl ?? "",
+            embedUrl: data.embedUrl ?? data.videoUrl ?? "",
+            thumbnailUrl: data.thumbnailUrl ?? "",
+            platform: (data.platform ?? "other") as Reel["platform"],
+            createdAtMs: data.createdAt?.toMillis?.() ?? Date.now(),
+        };
+    } catch {
+        return null;
     }
 }
 
@@ -292,16 +315,16 @@ export function listenToReels(onChange: (reels: Reel[]) => void): () => void {
 
 // ---------- Admin: News Items ----------
 
-export async function createNewsItem(item: Omit<AdminNewsItem, "id" | "createdAtMs">): Promise<{ ok: boolean; reason?: string }> {
+export async function createNewsItem(item: Omit<AdminNewsItem, "id" | "createdAtMs">): Promise<{ ok: boolean; reason?: string; id?: string }> {
     const db = getDb();
     if (!db) return { ok: false, reason: "firebase-not-configured" };
     if (!item.title || !item.url) return { ok: false, reason: "missing-required" };
     try {
-        await addDoc(collection(db, "news"), {
+        const docRef = await addDoc(collection(db, "news"), {
             ...item,
             createdAt: serverTimestamp(),
         });
-        return { ok: true };
+        return { ok: true, id: docRef.id };
     } catch (err) {
         return { ok: false, reason: (err as Error).message };
     }
