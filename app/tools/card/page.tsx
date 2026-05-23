@@ -1,13 +1,18 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Link from "next/link";
 import { Download, QrCode, Upload, Smartphone, Film } from "lucide-react";
+import { toPng } from "html-to-image";
 
 export default function CardGeneratorPage() {
     const [formData, setFormData] = useState({ name: "", city: "", state: "", age: "", tagline: "Main bhi cockroach." });
     const [imgUrl, setImgUrl] = useState<string | null>(null);
     const [cardStyle, setCardStyle] = useState("classic");
+    const [memberId] = useState(() => Math.floor(Math.random() * 9999 + 1000));
+    const [isGenerating, setIsGenerating] = useState(false);
+    const cardRef = useRef<HTMLDivElement | null>(null);
+    const fileInputRef = useRef<HTMLInputElement | null>(null);
 
     const styles = [
         { id: "classic", name: "Classic Brutal", classes: "bg-bg border-accent" },
@@ -18,13 +23,45 @@ export default function CardGeneratorPage() {
 
     const currentStyle = styles.find(s => s.id === cardStyle);
 
+    const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = () => setImgUrl(reader.result as string);
+        reader.readAsDataURL(file);
+    };
+
+    const downloadCard = async () => {
+        if (!cardRef.current) return;
+        setIsGenerating(true);
+        try {
+            const dataUrl = await toPng(cardRef.current, {
+                cacheBust: true,
+                pixelRatio: 2,
+                backgroundColor: "#FCF8F8",
+            });
+            const link = document.createElement("a");
+            const safeName = (formData.name || "ANONYMOUS_ROACH").replace(/\s+/g, "_").toUpperCase();
+            link.download = `cjp-card-${safeName}-${memberId}.png`;
+            link.href = dataUrl;
+            link.click();
+        } catch (err) {
+            console.error("Card export failed:", err);
+            alert("Card download failed. Try a smaller photo or different browser.");
+        } finally {
+            setIsGenerating(false);
+        }
+    };
+
+    const shareOnWhatsApp = () => {
+        const name = formData.name || "ANONYMOUS ROACH";
+        const text = `I just generated my official Cockroach Janta Parti card. Main bhi cockroach. Tum bhi banno. 🪳\n\nhttps://cockrochjantaparti.com/tools/card\n\n— ${name}, Member #CJP-${memberId}`;
+        const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+        window.open(url, "_blank");
+    };
+
     return (
         <main className="min-h-screen bg-bg text-text-primary pb-24 relative overflow-hidden flex flex-col items-center">
-
-            {/* Background decorations */}
-            <div className="absolute inset-0 pointer-events-none opacity-10 flex items-center justify-center">
-                <div className="text-[30rem] -rotate-12">🪳</div>
-            </div>
 
             <header className="w-full px-4 py-8 md:py-12 flex justify-between items-center relative z-10">
                 <Link href="/tools" className="font-mono text-sm uppercase font-bold hover:text-accent bg-card px-4 py-2 border-2 border-text-primary shadow-[4px_4px_0_0_#000]">
@@ -40,7 +77,7 @@ export default function CardGeneratorPage() {
                         <h1 className="font-display text-5xl md:text-7xl uppercase mb-4 text-rich-black leading-none">
                             GENERATE YOUR<br /><span className="text-accent underline decoration-8 underline-offset-8">ROACH CARD.</span>
                         </h1>
-                        <p className="font-mono text-text-secondary text-lg">Input your details below to instantly generate your official CJP membership ID card.</p>
+                        <p className="font-mono text-text-secondary text-lg">Input your details below and download an official CJP membership ID as a high-res PNG.</p>
                     </div>
 
                     <div className="bg-card border-4 border-text-primary p-6 md:p-8 shadow-[12px_12px_0_0_#FFD60A]">
@@ -52,9 +89,10 @@ export default function CardGeneratorPage() {
                                 <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
                                     {styles.map(s => (
                                         <button
+                                            type="button"
                                             key={s.id}
                                             onClick={() => setCardStyle(s.id)}
-                                            className={`py-2 px-2 font-mono text-[10px] uppercase font-bold border-2 transition-all ${cardStyle === s.id ? 'border-accent bg-accent text-black scale-105' : 'border-text-primary bg-bg hover:bg-text-primary hover:text-bg'}`}
+                                            className={`py-2 px-2 font-mono text-[10px] uppercase font-bold border-2 transition-all ${cardStyle === s.id ? 'border-accent bg-accent text-rich-black scale-105' : 'border-text-primary bg-bg hover:bg-text-primary hover:text-bg'}`}
                                         >
                                             {s.name}
                                         </button>
@@ -87,10 +125,23 @@ export default function CardGeneratorPage() {
                                 </div>
                                 <div className="col-span-2">
                                     <label className="font-mono uppercase font-bold text-xs block mb-2 text-text-secondary">Photo (Optional)</label>
-                                    <div className="border-4 border-dashed border-text-primary p-6 flex flex-col items-center justify-center cursor-pointer hover:border-accent hover:text-accent transition-colors bg-bg/50">
+                                    <input
+                                        ref={fileInputRef}
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={handlePhotoChange}
+                                        className="hidden"
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={() => fileInputRef.current?.click()}
+                                        className="w-full border-4 border-dashed border-text-primary p-6 flex flex-col items-center justify-center cursor-pointer hover:border-accent hover:text-accent transition-colors bg-bg/50"
+                                    >
                                         <Upload size={24} className="mb-2" />
-                                        <span className="font-mono text-xs uppercase font-bold">CLICK TO UPLOAD</span>
-                                    </div>
+                                        <span className="font-mono text-xs uppercase font-bold">
+                                            {imgUrl ? "REPLACE PHOTO" : "CLICK TO UPLOAD"}
+                                        </span>
+                                    </button>
                                 </div>
                             </div>
                         </form>
@@ -101,7 +152,7 @@ export default function CardGeneratorPage() {
                 <div className="flex flex-col items-center xl:items-end justify-center h-full w-full">
 
                     {/* Card Canvas Component */}
-                    <div id="card-generator-canvas" className={`w-full max-w-[420px] aspect-[4/5] ${currentStyle?.classes} border-8 p-6 relative flex flex-col shadow-[16px_16px_0_0_#000] xl:hover:scale-105 transition-transform duration-500`}>
+                    <div ref={cardRef} id="card-generator-canvas" className={`w-full max-w-[420px] aspect-[4/5] ${currentStyle?.classes} border-8 p-6 relative flex flex-col shadow-[16px_16px_0_0_#000] xl:hover:scale-105 transition-transform duration-500`}>
                         {/* Header */}
                         <div className={`flex justify-between items-start border-b-4 pb-4 ${cardStyle === 'classic' || cardStyle === 'gold' ? 'border-text-primary' : 'border-black'}`}>
                             <div>
@@ -117,12 +168,12 @@ export default function CardGeneratorPage() {
                         <div className={`w-full h-48 bg-card border-4 mt-6 mb-4 flex items-center justify-center overflow-hidden relative ${cardStyle === 'classic' || cardStyle === 'gold' ? 'border-text-primary' : 'border-black'}`}>
                             {imgUrl ? (
                                 /* eslint-disable-next-line @next/next/no-img-element */
-                                <img src={imgUrl} alt="User" className="w-full h-full object-cover" />
+                                <img src={imgUrl} alt="Member photo" crossOrigin="anonymous" className="w-full h-full object-cover" />
                             ) : (
-                                <span className="text-[5rem] opacity-30 z-10 relative">👤</span>
+                                <div className="font-display text-6xl text-text-secondary tracking-tighter opacity-40">{(formData.name || "AR").split(" ").map(w => w[0]).join("").slice(0, 2).toUpperCase()}</div>
                             )}
-                            <div className="absolute bottom-2 right-2 z-20 bg-accent text-black font-mono text-[10px] font-bold px-2 py-1 border-2 border-black uppercase shadow-[2px_2px_0_0_#000]">
-                                MEMBER #CJP-{Math.floor(Math.random() * 9999 + 1000)}
+                            <div className="absolute bottom-2 right-2 z-20 bg-accent text-rich-black font-mono text-[10px] font-bold px-2 py-1 border-2 border-black uppercase shadow-[2px_2px_0_0_#000]">
+                                MEMBER #CJP-{memberId}
                             </div>
                         </div>
 
@@ -143,30 +194,44 @@ export default function CardGeneratorPage() {
                                 </div>
                             </div>
 
-                            <div className="bg-text-primary text-bg p-3 border-l-4 border-black shadow-[4px_4px_0_0_#000]">
+                            <div className="bg-rich-black text-bg p-3 border-l-4 border-accent shadow-[4px_4px_0_0_#000]">
                                 <p className="font-hindi text-lg font-bold uppercase italic break-words leading-tight">
-                                    "{formData.tagline || 'Main bhi cockroach.'}"
+                                    &ldquo;{formData.tagline || 'Main bhi cockroach.'}&rdquo;
                                 </p>
                             </div>
                         </div>
 
-                        <div className={`absolute bottom-3 right-6 font-mono text-[9px] font-bold uppercase z-10 tracking-widest ${cardStyle === 'classic' ? 'text-text-secondary' : 'text-black'}`}>
+                        <div className={`absolute bottom-3 right-6 font-mono text-[9px] font-bold uppercase z-10 tracking-widest ${cardStyle === 'classic' ? 'text-text-secondary' : cardStyle === 'gold' ? 'text-rich-black' : 'text-white/80'}`}>
                             JOINED: 21 MAY 2026
                         </div>
 
                         {/* Background graphic */}
-                        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[15rem] pointer-events-none rotate-45 z-0 ${cardStyle === 'classic' ? 'opacity-[0.03]' : 'opacity-10 mix-blend-overlay'}`}>🪳</div>
+                        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-display text-[12rem] pointer-events-none rotate-12 z-0 leading-none tracking-tighter ${cardStyle === 'classic' ? 'opacity-[0.04] text-rich-black' : 'opacity-[0.08] text-white'}`}>CJP</div>
                     </div>
 
                     <div className="w-full max-w-[420px] mt-8 flex flex-col gap-4">
-                        <button className="w-full bg-accent text-black font-display text-2xl uppercase py-5 border-4 border-black hover:bg-white hover:text-black transition-colors shadow-[8px_8px_0_0_#000] flex justify-center items-center gap-3">
-                            <Download size={24} /> GENERATE PNG
+                        <button
+                            type="button"
+                            onClick={downloadCard}
+                            disabled={isGenerating}
+                            className="w-full bg-accent text-rich-black font-display text-2xl uppercase py-5 border-4 border-rich-black hover:bg-white transition-colors shadow-[8px_8px_0_0_#000] hover:translate-x-1 hover:translate-y-1 hover:shadow-[4px_4px_0_0_#000] flex justify-center items-center gap-3 disabled:opacity-50 disabled:cursor-wait"
+                        >
+                            <Download size={24} /> {isGenerating ? "GENERATING..." : "DOWNLOAD PNG"}
                         </button>
-                        <button className="w-full bg-text-primary text-bg font-display text-xl uppercase py-4 border-4 border-black hover:bg-card hover:text-rich-black hover:border-text-primary transition-colors shadow-[4px_4px_0_0_#000] flex justify-center items-center gap-3">
-                            <Film size={20} /> GENERATE ANIMATED MP4
+                        <button
+                            type="button"
+                            onClick={shareOnWhatsApp}
+                            className="w-full bg-success text-white font-mono font-bold text-sm uppercase py-4 border-4 border-rich-black hover:bg-white hover:text-success flex justify-center items-center gap-2 shadow-[4px_4px_0_0_#000]"
+                        >
+                            <Smartphone size={18} /> SHARE ON WHATSAPP
                         </button>
-                        <button className="w-full bg-success text-white font-mono font-bold text-sm uppercase py-4 border-4 border-black hover:bg-white flex justify-center items-center gap-2 shadow-[4px_4px_0_0_#000]">
-                            <Smartphone size={18} /> SHARE ON WA STATUS
+                        <button
+                            type="button"
+                            disabled
+                            className="w-full bg-card text-text-secondary font-display text-xl uppercase py-4 border-4 border-text-primary opacity-50 cursor-not-allowed flex justify-center items-center gap-3"
+                            title="Animated MP4 export — coming in Phase 2"
+                        >
+                            <Film size={20} /> ANIMATED MP4 (SOON)
                         </button>
                     </div>
 

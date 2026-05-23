@@ -4,9 +4,37 @@ import { useState } from "react";
 import Link from "next/link";
 import { CheckCircle2, QrCode } from "lucide-react";
 
+const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID || "movnoogd";
+const FORMSPREE_ENDPOINT = `https://formspree.io/f/${FORMSPREE_ID}`;
+
 export default function JoinPage() {
     const [step, setStep] = useState(1);
     const [formData, setFormData] = useState({ name: "", email: "", city: "", why: "" });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitError, setSubmitError] = useState<string | null>(null);
+
+    const submitToFormspree = async () => {
+        setIsSubmitting(true);
+        setSubmitError(null);
+        try {
+            const res = await fetch(FORMSPREE_ENDPOINT, {
+                method: "POST",
+                headers: { "Content-Type": "application/json", Accept: "application/json" },
+                body: JSON.stringify({
+                    ...formData,
+                    _subject: `New CJP member: ${formData.name || "Anonymous Roach"}`,
+                    source: "https://cockrochjantaparti.com/join",
+                }),
+            });
+            if (!res.ok) throw new Error(`Formspree returned ${res.status}`);
+            setStep(4);
+        } catch (err) {
+            console.error(err);
+            setSubmitError("Submission failed. Check your network or try again in a moment.");
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
 
     return (
         <main className="min-h-screen bg-bg text-text-primary flex flex-col md:flex-row pb-20 md:pb-0">
@@ -130,14 +158,20 @@ export default function JoinPage() {
                             </div>
 
                             <div className="flex gap-4 mt-8">
-                                <button onClick={() => setStep(2)} className="bg-bg text-text-primary font-display text-4xl uppercase px-8 border-4 border-text-primary hover:bg-white hover:text-black transition-colors">←</button>
+                                <button onClick={() => setStep(2)} disabled={isSubmitting} className="bg-bg text-text-primary font-display text-4xl uppercase px-8 border-4 border-text-primary hover:bg-white hover:text-black transition-colors disabled:opacity-50">←</button>
                                 <button
-                                    onClick={() => setStep(4)}
-                                    className="flex-1 bg-success text-white font-display text-4xl uppercase py-6 border-4 border-black shadow-[8px_8px_0_0_#000] hover:-translate-y-1 transition-transform"
+                                    onClick={submitToFormspree}
+                                    disabled={isSubmitting}
+                                    className="flex-1 bg-success text-white font-display text-4xl uppercase py-6 border-4 border-black shadow-[8px_8px_0_0_#000] hover:-translate-y-1 transition-transform disabled:opacity-50 disabled:cursor-wait"
                                 >
-                                    CONFIRM & JOIN ✓
+                                    {isSubmitting ? "JOINING..." : "CONFIRM & JOIN ✓"}
                                 </button>
                             </div>
+                            {submitError && (
+                                <div className="mt-4 bg-alert text-white font-mono text-sm font-bold uppercase p-4 border-4 border-rich-black">
+                                    {submitError}
+                                </div>
+                            )}
                         </div>
                     )}
 

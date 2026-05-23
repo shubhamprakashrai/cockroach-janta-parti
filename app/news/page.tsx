@@ -11,12 +11,12 @@ export default function NewsAggregatorPage() {
     const [activeFilter, setActiveFilter] = useState("All");
 
     const newsItems = [
-        { source: "ThePrint", title: "Over 3.5 Lakh Unemployed Youth Join Cockroach Janta Party", time: "2h ago", readTime: "30s", summary: "The newly formed party hits 3.5L members via google form after CJI remark.", img: "https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=800&q=80&auto=format&fit=crop" },
-        { source: "BusinessToday", title: "CJP Surpasses BJP on Instagram with 9.3M Followers", time: "5h ago", readTime: "45s", summary: "Following a massive surge of Gen-Z support, CJP becomes the most followed.", img: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=800&q=80&auto=format&fit=crop" },
-        { source: "The Wire", title: "Mahua Moitra officially verified as CJP member", time: "1d ago", readTime: "1m", summary: "TMC MP embraces the 'Main Bhi Cockroach' movement publicly on X.", img: "https://images.unsplash.com/photo-1495020689067-958852a7765e?w=800&q=80&auto=format&fit=crop" },
-        { source: "Republic", title: "Is 'Cockroach Janta Party' a Threat to Democracy? Experts Debate", time: "1d ago", readTime: "30s", summary: "A heated panel discussion on the rise of satirical political factions.", img: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&q=80&auto=format&fit=crop" },
-        { source: "Al Jazeera", title: "India's Youth Reclaim 'Cockroach' Slur in Viral Political Movement", time: "2d ago", readTime: "2m", summary: "An analysis of the socio-economic factors driving the CJP phenomenon.", img: "https://images.unsplash.com/photo-1488229297570-58520851e868?w=800&q=80&auto=format&fit=crop" },
-        { source: "Zee News", title: "लाखों युवा बने 'कॉकरोच', सोशल मीडिया पर छिड़ी नई बहस", time: "2d ago", readTime: "45s", summary: "CJI की टिप्पणी के बाद 'मैं भी कॉकरोच' अभियान ने पकड़ा जोर।", img: "https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?w=800&q=80&auto=format&fit=crop" },
+        { source: "ThePrint", title: "Over 3.5 Lakh Unemployed Youth Join Cockroach Janta Party", time: "2h ago", readTime: "30s", summary: "The newly formed party hits 3.5L members via google form after CJI remark.", img: "https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=800&q=80&auto=format&fit=crop", url: "https://theprint.in/politics/" },
+        { source: "BusinessToday", title: "CJP Surpasses BJP on Instagram with 9.3M Followers", time: "5h ago", readTime: "45s", summary: "Following a massive surge of Gen-Z support, CJP becomes the most followed.", img: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=800&q=80&auto=format&fit=crop", url: "https://www.businesstoday.in/latest/economy" },
+        { source: "The Wire", title: "Mahua Moitra officially verified as CJP member", time: "1d ago", readTime: "1m", summary: "TMC MP embraces the 'Main Bhi Cockroach' movement publicly on X.", img: "https://images.unsplash.com/photo-1495020689067-958852a7765e?w=800&q=80&auto=format&fit=crop", url: "https://thewire.in/politics" },
+        { source: "Republic", title: "Is 'Cockroach Janta Party' a Threat to Democracy? Experts Debate", time: "1d ago", readTime: "30s", summary: "A heated panel discussion on the rise of satirical political factions.", img: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&q=80&auto=format&fit=crop", url: "https://www.republicworld.com/india" },
+        { source: "Al Jazeera", title: "India's Youth Reclaim 'Cockroach' Slur in Viral Political Movement", time: "2d ago", readTime: "2m", summary: "An analysis of the socio-economic factors driving the CJP phenomenon.", img: "https://images.unsplash.com/photo-1488229297570-58520851e868?w=800&q=80&auto=format&fit=crop", url: "https://www.aljazeera.com/where/india/" },
+        { source: "Zee News", title: "लाखों युवा बने 'कॉकरोच', सोशल मीडिया पर छिड़ी नई बहस", time: "2d ago", readTime: "45s", summary: "CJI की टिप्पणी के बाद 'मैं भी कॉकरोच' अभियान ने पकड़ा जोर।", img: "https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?w=800&q=80&auto=format&fit=crop", url: "https://zeenews.india.com/india" },
     ];
 
     return (
@@ -61,7 +61,7 @@ export default function NewsAggregatorPage() {
                     <div className="p-4 md:p-8">
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                             {newsItems.map((news, i) => (
-                                <div key={i} className="bg-card border-4 border-text-primary shadow-[8px_8px_0_0_#000] hover:shadow-[8px_8px_0_0_#FFD60A] hover:-translate-y-2 transition-all flex flex-col group cursor-pointer">
+                                <a key={i} href={news.url} target="_blank" rel="noopener noreferrer" className="bg-card border-4 border-text-primary shadow-[8px_8px_0_0_#000] hover:shadow-[8px_8px_0_0_#FFD60A] hover:-translate-y-2 transition-all flex flex-col group cursor-pointer">
                                     {/* Thumbnail */}
                                     <div className="w-full aspect-video border-b-4 border-text-primary relative overflow-hidden">
                                         <img src={news.img} alt={news.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
@@ -81,11 +81,11 @@ export default function NewsAggregatorPage() {
                                         <p className="font-hindi text-text-secondary text-sm md:text-base leading-relaxed mb-6 flex-1">{news.summary}</p>
 
                                         <div className="flex justify-between items-center border-t-2 border-border pt-4 mt-auto">
-                                            <span className="font-mono uppercase font-bold text-sm hover:underline decoration-2 underline-offset-4 flexItems-center gap-1">READ FULL <CornerRightUp size={14} className="inline" /></span>
-                                            <button className="text-text-primary hover:text-accent"><Share2 size={18} /></button>
+                                            <span className="font-mono uppercase font-bold text-sm group-hover:underline decoration-2 underline-offset-4 flex items-center gap-1">READ FULL <CornerRightUp size={14} className="inline" /></span>
+                                            <span className="text-text-primary group-hover:text-accent"><Share2 size={18} /></span>
                                         </div>
                                     </div>
-                                </div>
+                                </a>
                             ))}
                         </div>
 

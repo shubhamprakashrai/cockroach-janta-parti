@@ -5,10 +5,15 @@ import Link from "next/link";
 import { Play, Share2, ArrowRight, Upload, Crown, Menu, CheckCircle2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
+const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID || "movnoogd";
+const FORMSPREE_ENDPOINT = `https://formspree.io/f/${FORMSPREE_ID}`;
+
 export default function HomePage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [memberCount, setMemberCount] = useState(350000);
   const [manifestoVotes, setManifestoVotes] = useState<Record<number, 'agree' | 'disagree'>>({});
+  const [joinForm, setJoinForm] = useState({ name: "", city: "", why: "" });
+  const [joinStatus, setJoinStatus] = useState<"idle" | "submitting" | "ok" | "error">("idle");
 
   useEffect(() => {
     // Fake live counter
@@ -17,6 +22,23 @@ export default function HomePage() {
     }, 3000);
     return () => clearInterval(interval);
   }, []);
+
+  const submitJoin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (joinStatus === "submitting") return;
+    setJoinStatus("submitting");
+    try {
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({ ...joinForm, _subject: `New CJP member: ${joinForm.name || "Anonymous"}`, source: "homepage" }),
+      });
+      if (!res.ok) throw new Error("submit failed");
+      setJoinStatus("ok");
+    } catch {
+      setJoinStatus("error");
+    }
+  };
 
   const handleVote = (id: number, type: 'agree' | 'disagree') => {
     setManifestoVotes(prev => ({ ...prev, [id]: type }));
@@ -37,9 +59,9 @@ export default function HomePage() {
   ];
 
   const newsItems = [
-    { source: "BusinessToday", title: "CJP Surpasses BJP on Instagram with 9.3M Followers", time: "Read in 30s", img: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=800&q=80&auto=format&fit=crop" },
-    { source: "ThePrint", title: "Over 3.5 Lakh Youth Drop Resumes to Join Cockroach Janta Party", time: "Read in 1m", img: "https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=800&q=80&auto=format&fit=crop" },
-    { source: "The Wire", title: "Mahua Moitra officially verified as CJP member", time: "Read in 45s", img: "https://images.unsplash.com/photo-1495020689067-958852a7765e?w=800&q=80&auto=format&fit=crop" },
+    { source: "BusinessToday", title: "CJP Surpasses BJP on Instagram with 9.3M Followers", time: "Read in 30s", img: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=800&q=80&auto=format&fit=crop", url: "https://www.businesstoday.in/latest/economy" },
+    { source: "ThePrint", title: "Over 3.5 Lakh Youth Drop Resumes to Join Cockroach Janta Party", time: "Read in 1m", img: "https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=800&q=80&auto=format&fit=crop", url: "https://theprint.in/politics/" },
+    { source: "The Wire", title: "Mahua Moitra officially verified as CJP member", time: "Read in 45s", img: "https://images.unsplash.com/photo-1495020689067-958852a7765e?w=800&q=80&auto=format&fit=crop", url: "https://thewire.in/politics" },
   ];
 
   const members = [
@@ -196,7 +218,7 @@ export default function HomePage() {
         {/* Mobile uses flex container for horizontal scroll, desktop is grid */}
         <div className="flex overflow-x-auto md:grid md:grid-cols-3 gap-6 pb-8 snap-x">
           {newsItems.map((news, i) => (
-            <div key={i} className="min-w-[85vw] md:min-w-0 flex-shrink-0 snap-center bg-card border-4 border-text-primary shadow-[8px_8px_0_0_#000] flex flex-col group hover:-translate-y-2 transition-transform cursor-pointer overflow-hidden">
+            <a key={i} href={news.url} target="_blank" rel="noopener noreferrer" className="min-w-[85vw] md:min-w-0 flex-shrink-0 snap-center bg-card border-4 border-text-primary shadow-[8px_8px_0_0_#000] flex flex-col group hover:-translate-y-2 transition-transform cursor-pointer overflow-hidden">
               <div className="relative h-52 overflow-hidden border-b-4 border-text-primary">
                 <img src={news.img} alt={news.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
                 <span className="absolute top-3 left-3 bg-rich-black text-white font-bold font-mono px-3 py-1 text-xs uppercase tracking-widest shadow-[4px_4px_0_0_#FFD60A]">{news.source}</span>
@@ -205,12 +227,12 @@ export default function HomePage() {
                 <h3 className="font-bold text-xl md:text-2xl mb-6 font-hindi leading-tight group-hover:text-accent transition-colors">{news.title}</h3>
                 <div className="flex justify-between items-center border-t-2 border-text-primary/20 pt-4">
                   <span className="text-accent font-mono text-xs font-bold uppercase tracking-widest">{news.time}</span>
-                  <button className="text-text-primary hover:text-accent transition-colors" title="Share News">
+                  <span className="text-text-primary group-hover:text-accent transition-colors" title="Open story">
                     <Share2 size={20} />
-                  </button>
+                  </span>
                 </div>
               </div>
-            </div>
+            </a>
           ))}
         </div>
         <div className="text-center mt-4">
@@ -414,23 +436,40 @@ export default function HomePage() {
           {/* Join Form */}
           <div className="bg-bg border-4 border-accent p-8 md:p-12 shadow-[16px_16px_0_0_#FFD60A]">
             <h2 className="font-display text-6xl uppercase text-rich-black mb-8 border-l-8 border-accent pl-4">JOIN FORM</h2>
-            <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-              <div>
-                <label className="font-mono uppercase font-bold text-sm block mb-2 text-accent">NAME</label>
-                <input type="text" className="w-full bg-card border-4 border-text-primary p-4 font-mono text-xl uppercase focus:border-accent focus:outline-none text-rich-black placeholder-text-secondary" placeholder="YOUR NAME" />
+            {joinStatus === "ok" ? (
+              <div className="space-y-6">
+                <div className="bg-success text-white p-6 border-4 border-rich-black">
+                  <p className="font-display text-3xl uppercase">Welcome to the gutter, {joinForm.name || "Roach"}.</p>
+                  <p className="font-mono text-sm uppercase mt-2 tracking-widest">You&apos;re in. Now make it official.</p>
+                </div>
+                <Link href="/tools/card" className="block text-center bg-accent text-rich-black font-display text-2xl uppercase py-5 border-4 border-rich-black hover:bg-white transition-colors shadow-[8px_8px_0_0_#000]">
+                  GENERATE YOUR ID CARD →
+                </Link>
               </div>
-              <div>
-                <label className="font-mono uppercase font-bold text-sm block mb-2 text-accent">CITY</label>
-                <input type="text" className="w-full bg-card border-4 border-text-primary p-4 font-mono text-xl uppercase focus:border-accent focus:outline-none text-rich-black placeholder-text-secondary" placeholder="WHERE DO YOU LURK?" />
-              </div>
-              <div>
-                <label className="font-mono uppercase font-bold text-sm block mb-2 text-accent">WHY ARE YOU A COCKROACH?</label>
-                <input type="text" className="w-full bg-card border-4 border-text-primary p-4 font-mono text-xl uppercase focus:border-accent focus:outline-none text-rich-black placeholder-text-secondary" placeholder="1 LINE ONLY" />
-              </div>
-              <button className="w-full bg-accent text-rich-black font-display text-3xl uppercase py-6 border-4 border-rich-black hover:bg-rich-black hover:text-accent transition-colors shadow-[8px_8px_0_0_#000] active:translate-y-2 active:shadow-none">
-                GENERATE MY MEMBERSHIP CARD
-              </button>
-            </form>
+            ) : (
+              <form className="space-y-6" onSubmit={submitJoin}>
+                <div>
+                  <label className="font-mono uppercase font-bold text-sm block mb-2 text-accent">NAME</label>
+                  <input type="text" required value={joinForm.name} onChange={e => setJoinForm({ ...joinForm, name: e.target.value })} className="w-full bg-card border-4 border-text-primary p-4 font-mono text-xl uppercase focus:border-accent focus:outline-none text-rich-black placeholder-text-secondary" placeholder="YOUR NAME" />
+                </div>
+                <div>
+                  <label className="font-mono uppercase font-bold text-sm block mb-2 text-accent">CITY</label>
+                  <input type="text" required value={joinForm.city} onChange={e => setJoinForm({ ...joinForm, city: e.target.value })} className="w-full bg-card border-4 border-text-primary p-4 font-mono text-xl uppercase focus:border-accent focus:outline-none text-rich-black placeholder-text-secondary" placeholder="WHERE DO YOU LURK?" />
+                </div>
+                <div>
+                  <label className="font-mono uppercase font-bold text-sm block mb-2 text-accent">WHY ARE YOU A COCKROACH?</label>
+                  <input type="text" required value={joinForm.why} onChange={e => setJoinForm({ ...joinForm, why: e.target.value })} className="w-full bg-card border-4 border-text-primary p-4 font-mono text-xl uppercase focus:border-accent focus:outline-none text-rich-black placeholder-text-secondary" placeholder="1 LINE ONLY" />
+                </div>
+                <button type="submit" disabled={joinStatus === "submitting"} className="w-full bg-accent text-rich-black font-display text-3xl uppercase py-6 border-4 border-rich-black hover:bg-rich-black hover:text-accent transition-colors shadow-[8px_8px_0_0_#000] active:translate-y-2 active:shadow-none disabled:opacity-50 disabled:cursor-wait">
+                  {joinStatus === "submitting" ? "JOINING..." : "JOIN THE SWARM"}
+                </button>
+                {joinStatus === "error" && (
+                  <div className="bg-alert text-white font-mono text-sm font-bold uppercase p-4 border-4 border-rich-black">
+                    Submission failed. Check your network and try again.
+                  </div>
+                )}
+              </form>
+            )}
           </div>
 
           {/* Content right side: Blog Teaser & Newsletter */}
