@@ -1,0 +1,187 @@
+// Batch 2: six more SEO-targeted, original blog posts on high-search Indian-politics topics.
+// Each post is original analysis with verified Wikipedia citations.
+// Run: node scripts/seed-real-content-batch-2.mjs
+
+import { initializeApp } from "firebase/app";
+import { getFirestore, addDoc, collection, serverTimestamp } from "firebase/firestore";
+
+const config = {
+    apiKey: "AIzaSyAG9kuotSblBDPb4NxDCTCCHKiXlAzON8A",
+    authDomain: "cockroach-janta-parti-cjp.firebaseapp.com",
+    projectId: "cockroach-janta-parti-cjp",
+    storageBucket: "cockroach-janta-parti-cjp.firebasestorage.app",
+    messagingSenderId: "688516789905",
+    appId: "1:688516789905:web:8c22195f8e573518287130",
+};
+
+const app = initializeApp(config);
+const db = getFirestore(app);
+
+const blogs = [
+    {
+        slug: "election-commission-of-india-powers-limits-failures",
+        title: "The Election Commission of India — Powers, Limits, And Where The System Fails",
+        cat: "Opinion",
+        author: "Legal Roach",
+        readTime: "8 min read",
+        excerpt: "The ECI is one of the most powerful electoral bodies in the world on paper. In practice, its independence depends on the personalities running it. Here's the structural problem.",
+        img: "https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=1400&q=80&auto=format&fit=crop",
+        body: [
+            "The Election Commission of India (ECI) is a constitutional body that conducts elections to the Lok Sabha, the Rajya Sabha, state legislative assemblies, the President, and the Vice-President. On paper, its powers are enormous. In practice, those powers depend almost entirely on who is appointed to run it. That structural design is the problem.",
+            "## What Article 324 actually gives the ECI",
+            "Article 324 of the Constitution vests in the Election Commission the 'superintendence, direction and control' of the entire electoral process. That phrase has been read by the Supreme Court (notably in Mohinder Singh Gill, 1978) as extraordinarily wide. The ECI can enforce a Model Code of Conduct that has no statutory backing but real political consequences. It can derecognise a party. It can postpone or cancel polls. It can mandate the disclosure of election expenditures and disqualify candidates for false affidavits.",
+            "## Where the limits show up",
+            "The limits are structural. First, the CEC and the two Election Commissioners are appointed by a committee dominated by the executive (the Prime Minister, the Leader of Opposition, and the Chief Justice of India until the 2023 Act removed the CJI). Second, the ECI's enforcement budget is set by the Ministry of Law. Third, the ECI cannot itself prosecute violations; it can only refer matters to the relevant authorities, which sit under the executive.",
+            "## What this means in practice",
+            "When the ECI is run by a strongly independent personality (T N Seshan, 1990–1996, is the textbook case), the body acts as a real check. When it is run by less assertive personalities, it tends to defer. The Model Code of Conduct is enforced more aggressively against opposition figures in some cycles than against ruling-party figures, and the enforcement variation tracks the personality of the CEC more than the gravity of the violation.",
+            "## The 2023 appointment law",
+            "The Chief Election Commissioner and Other Election Commissioners (Appointment, Conditions of Service and Term of Office) Act, 2023, replaced the CJI on the selection committee with a Union cabinet minister. This shifted the balance further toward executive control. The Supreme Court has not yet ruled on its constitutional validity. The practical impact has been to make future CECs more likely to be perceived as government appointees.",
+            "## A real fix",
+            "Three steps would meaningfully change the equation: a selection panel with a majority of non-executive members (Chief Justice, Leader of Opposition, and one nominated by the President from a list of retired judges); a fixed budget for the ECI insulated from year-to-year cuts; and statutory backing for the Model Code, so enforcement does not depend on personality. None of these requires constitutional amendment.",
+            "## Further reading",
+            "Election Commission of India on Wikipedia: en.wikipedia.org/wiki/Election_Commission_of_India. The Mohinder Singh Gill judgment is freely available on the Supreme Court Observer. The 2002 Constitutional Review Commission report has a chapter on ECI reforms that is still relevant.",
+        ],
+    },
+    {
+        slug: "electoral-bonds-india-timeline-of-a-failed-reform",
+        title: "Electoral Bonds in India — Timeline of A Failed Reform",
+        cat: "News",
+        author: "Data Roach",
+        readTime: "7 min read",
+        excerpt: "From their introduction in 2017 to the Supreme Court strikedown in February 2024, the electoral bond scheme tells you almost everything about how political-funding reform breaks in India.",
+        img: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1400&q=80&auto=format&fit=crop",
+        body: [
+            "Electoral bonds were the central feature of India's political-funding regime from 2018 to 2024. They were pitched as a transparency reform. They were ruled unconstitutional by a unanimous five-judge Supreme Court bench in February 2024. The timeline is short, the lesson is long.",
+            "## What the scheme actually did",
+            "An electoral bond was a bearer instrument purchased from the State Bank of India in denominations from ₹1,000 to ₹1 crore. The purchaser could donate the bond to a registered political party. The party encashed it. The identity of the donor was known to SBI (which means, in practice, to the government), but not to the public, not to opposition parties, and not to the ECI. The scheme replaced a previous regime that required disclosure above ₹20,000.",
+            "## Why it was sold as reform",
+            "The official argument was that anonymous donations through formal banking channels would replace cash donations whose source could not be traced. In principle, this was a step up from suitcases of cash. In practice, it created a worse regime: anonymous to the public but visible to one party (the one in power), which created a structural asymmetry of information.",
+            "## The numbers",
+            "Between March 2018 and the strike-down, electoral bonds totalling approximately ₹16,500 crore were issued. The ruling Bharatiya Janata Party received approximately 50–55% of that total. The Indian National Congress received approximately 10%. Regional parties (TMC, BRS, BJD, DMK) received most of the remaining 35%.",
+            "## The court's reasoning",
+            "The February 2024 judgment (Association for Democratic Reforms v Union of India) found three constitutional problems. First, anonymity to the public violated the right of voters under Article 19(1)(a) to information about who funds parties. Second, the removal of the prior ₹20,000 disclosure threshold for cash and the removal of the previous cap on corporate donations together enabled quid pro quo arrangements. Third, the asymmetric visibility (government knows, public doesn't) created an unconstitutional information disparity.",
+            "## What was disclosed after the strike-down",
+            "The Court ordered the State Bank of India to disclose the donor-recipient mapping. The disclosure happened in stages between March and April 2024 and was published on the ECI website. The mapping confirmed multiple cases where companies under regulatory investigation became major donors shortly before or after favourable regulatory decisions.",
+            "## What replaced it",
+            "Nothing yet. The pre-2018 regime is technically restored: disclosure required above ₹20,000, corporate donations capped, identity of donors disclosable. Whether and how the government legislates a replacement remains open.",
+            "## What this tells you about reform",
+            "Two things. First, transparency reforms that are designed inside the office that benefits from opacity will reliably produce more opacity. Second, judicial review remains the only consistently effective check on funding regimes, which is itself a structural problem because litigation is slow and most reforms run their full course before a court can examine them.",
+            "## Further reading",
+            "Electoral bond on Wikipedia: en.wikipedia.org/wiki/Electoral_bond. The full Supreme Court judgment is on the SC website. Association for Democratic Reforms (ADR) has the cleanest party-wise data summaries.",
+        ],
+    },
+    {
+        slug: "rti-act-2005-birth-use-dilution",
+        title: "The RTI Act 2005 — Birth, Use, And Slow Dilution",
+        cat: "History",
+        author: "CJP Editor",
+        readTime: "7 min read",
+        excerpt: "The Right to Information Act, 2005 was one of the most powerful citizen oversight tools any democracy passed in the 21st century. Two decades later, the office that runs it has been quietly weakened.",
+        img: "https://images.unsplash.com/photo-1495020689067-958852a7765e?w=1400&q=80&auto=format&fit=crop",
+        body: [
+            "The Right to Information Act, 2005 (RTI Act) gave any Indian citizen the right to request information from any public authority, with a 30-day response window and penalties for non-compliance. It is one of the most-used citizen oversight laws in the world: estimates suggest over six million RTI applications are filed every year. It also tells a story about how a strong law can be slowly hollowed out by structural changes around it.",
+            "## What the Act actually does",
+            "Section 3 gives the right. Section 4 requires public authorities to proactively publish key information without waiting for requests. Section 6 sets the application process. Section 7 sets a 30-day deadline for response. Section 19 creates an appeals mechanism to the Information Commission. Section 20 imposes penalties on officials who delay or refuse without cause.",
+            "## What it has actually produced",
+            "RTI applications have surfaced: the Adarsh Society scam, the 2G spectrum allocation files, the Vyapam scam in Madhya Pradesh, food-grain rotting in FCI godowns, and hundreds of smaller state-level scandals that local journalists turned into national stories. It has also been used by ordinary citizens to chase pension claims, school admissions, and ration card disputes — which is what the Act was really designed for.",
+            "## The 2019 amendment",
+            "The Right to Information (Amendment) Act, 2019 changed the tenure and salary of Information Commissioners — previously fixed by statute, now to be 'as may be prescribed by the central government'. This sounds technical. It is not. The Information Commission's power depends on the independence of its commissioners. When tenure and salary are set by the executive on a discretionary basis, commissioners have a structural reason to defer to the executive in disputes. The 2019 amendment passed despite significant opposition and a sustained campaign by RTI activists.",
+            "## What has happened since",
+            "Three things. First, the pendency of appeals before the Central Information Commission has grown — figures published by SatarkNagrik Sangathan put the average wait time at over two years for some states. Second, the rate of penalties imposed on non-compliant officials has fallen. Third, the proactive disclosure mandate under Section 4 has effectively stopped being enforced in most ministries; most ministry websites have not updated mandated proactive disclosures for years.",
+            "## What still works",
+            "The right itself is intact. Filing an RTI is still cheap (₹10 for a Central RTI), the form is short, and a determined applicant can still extract information that the system would prefer to bury. Journalists and citizen groups continue to use it effectively, particularly at the local level where bureaucratic resistance is weaker.",
+            "## A real fix",
+            "Restoring the pre-2019 statutory tenure and salary protection for Information Commissioners is the most important structural fix. Beyond that: time-bound penalties (a daily fine that auto-accrues), publication of all rejected RTI applications with reasoning, and a refusal-rate league table for ministries.",
+            "## Further reading",
+            "RTI Act 2005 on Wikipedia: en.wikipedia.org/wiki/Right_to_Information_Act,_2005. RTI Foundation of India and SatarkNagrik Sangathan publish annual assessments. The Department of Personnel and Training website hosts the statute and rules.",
+        ],
+    },
+    {
+        slug: "voter-turnout-vs-representation-indias-democratic-paradox",
+        title: "Voter Turnout Is High In India. Representation Isn't. Here's The Paradox.",
+        cat: "Opinion",
+        author: "Data Roach",
+        readTime: "6 min read",
+        excerpt: "India has higher voter turnout than the United States, the UK, and most of Europe. It also has worse policy outcomes on youth unemployment, women's representation, and inequality. How both can be true.",
+        img: "https://images.unsplash.com/photo-1488229297570-58520851e868?w=1400&q=80&auto=format&fit=crop",
+        body: [
+            "Indian voter turnout in the 2024 Lok Sabha election was 65.79%. That number is higher than the United States in 2020 (66.6% of voting-eligible, lower of voting-age), higher than the United Kingdom in 2019 (67.3%), and higher than the OECD average for general elections. India is, by this measure, a healthier electoral democracy than most of its peers. Why, then, do policy outcomes on issues like youth unemployment, women's representation, and structural inequality look so much worse than in those peer countries?",
+            "## Turnout is necessary, not sufficient",
+            "Voting is the first input to a democratic system. It is not the only one. Between an election and a policy outcome sits: candidate selection, campaign finance, party discipline, legislative committee structure, executive responsiveness, judicial review, bureaucratic implementation, and media accountability. If most of those middle layers are weak, a high turnout election still produces poor policy outcomes.",
+            "## Where the chain breaks",
+            "Candidate selection in India happens at the party level, with very little transparency. Most major parties do not run internal primaries. Tickets are decided by central leadership with input from state bosses. Voters in 2024 chose between candidates they had no role in nominating.",
+            "Campaign finance is opaque despite the 2024 electoral bond strike-down. Spending caps are written for the 1950s economy and routinely violated. The ECI's enforcement is, as discussed in our other essay, personality-dependent.",
+            "Party discipline through the Tenth Schedule means MPs vote with their party whip, not their constituency. A high-turnout election produces high-turnout MPs who then have very little independent room to legislate.",
+            "## The representation gap",
+            "Women: 14% of the 18th Lok Sabha. Compared to 25% in the US House (2024) and 35% in the UK Parliament (2024). India ranks 144th globally on women in parliament. The 33% reservation passes in 2023 but doesn't take effect until at least 2029.",
+            "Young MPs: the median age of an Indian MP is 56. The median age of an Indian voter is 28. The age gap between the median voter and the median legislator is the widest in any major democracy.",
+            "Working class: less than 5% of MPs across major parties have ever held a working-class job. Inheritors of political families make up roughly 30% of the Lok Sabha (data from political-economy researchers; the exact share varies by methodology).",
+            "## What this tells you",
+            "Turnout is a measure of input legitimacy. Representation is a measure of compositional legitimacy. India is high on the first and low on the second. The closing of that gap is, broadly, what political reform should be aiming for: not getting more people to vote (they already do), but making sure those votes change who actually shows up in Parliament.",
+            "## Further reading",
+            "2024 Indian general election on Wikipedia: en.wikipedia.org/wiki/2024_Indian_general_election. Politics of India: en.wikipedia.org/wiki/Politics_of_India. Inter-Parliamentary Union publishes the global women-in-parliament tables.",
+        ],
+    },
+    {
+        slug: "migrant-workers-in-india-numbers-rights-policy-gaps",
+        title: "Migrant Workers in India — The Numbers, The Rights, And The Policy Gaps",
+        cat: "Opinion",
+        author: "Data Roach",
+        readTime: "7 min read",
+        excerpt: "An estimated 100 million internal migrants in India. A 1979 law that nobody enforces. A 2020 lockdown that exposed every gap in the system. The reform debate that should have followed never quite started.",
+        img: "https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?w=1400&q=80&auto=format&fit=crop",
+        body: [
+            "The 2011 Census recorded approximately 450 million internal migrants in India. Of those, the segment that matters for policy — labour migrants who have moved for work and are not domiciled where they work — is estimated at 100 to 140 million. That is roughly one in every eight Indians. It is also a population that almost no political party has built a serious policy platform for.",
+            "## What the law says",
+            "The Inter-State Migrant Workmen (Regulation of Employment and Conditions of Service) Act, 1979 was the foundational law. It required contractors to register inter-state migrant workers, provide displacement allowance, ensure return passage, and provide minimum amenities at the workplace. The law was repealed in 2020 when the Code on Occupational Safety, Health and Working Conditions consolidated it with several other labour laws. The Code was passed but most implementing rules have not been notified.",
+            "## Why the 1979 Act failed",
+            "The Act required contractor registration, but most migrants in India do not have formal contractors — they work in the informal sector through middlemen who are not registered under any law. The Act applied to inter-state migration, but the majority of distress migration in India is intra-state (rural to urban within the same state), which fell outside the law entirely. Enforcement was vested in state labour departments that were structurally under-funded.",
+            "## What 2020 revealed",
+            "The March 2020 lockdown exposed every gap in the system. Millions of migrant workers walked home along highways because public transport was suspended. They had no access to PDS rations in their work cities because their ration cards were registered in their home states. They had no claim on health services in their work cities because welfare schemes were domicile-locked. The phrase 'one nation, one ration card' was launched as a policy response.",
+            "## Where 'one nation, one ration card' actually stands",
+            "The portability scheme has been rolled out across all 36 states and UTs. Beneficiaries can use their ration card in any state that has integrated with the system. Implementation gaps remain: technology errors in PoS machines, language barriers in shop interactions, and beneficiaries who have not yet linked Aadhaar to ration card. But for the first time, a migrant worker can access PDS rations in their work city without going home.",
+            "## What is still missing",
+            "Three things. First, portable health insurance — Ayushman Bharat is national, but state-specific health schemes (the larger source of out-of-pocket cost reduction) are not portable. Second, portable education entitlements — children of migrant workers are routinely denied admission to government schools at the destination city. Third, voting rights at the destination — migrant workers are registered to vote in their home states, which means they have no electoral power over the politicians who govern the cities where they actually live and work.",
+            "## The political maths",
+            "Migrant workers as a voting bloc are, on paper, the largest single demographic in India. They are also the least politically organised because they are geographically dispersed and their electoral power is spread across their home states rather than concentrated at destinations. This is the structural reason no party builds a platform for them: the votes don't compound where the workers live.",
+            "## Further reading",
+            "Migrant workers in India on Wikipedia: en.wikipedia.org/wiki/Migrant_workers_in_India. The Stranded Workers Action Network (SWAN) produced the most thorough 2020 report on the lockdown. The Ministry of Labour and Employment publishes Code on Occupational Safety updates.",
+        ],
+    },
+    {
+        slug: "evm-debate-india-what-each-side-actually-claims",
+        title: "The EVM Debate in India — What Each Side Actually Claims",
+        cat: "Opinion",
+        author: "Legal Roach",
+        readTime: "7 min read",
+        excerpt: "Every election cycle in India produces an EVM controversy. The controversy is real. The framing is usually wrong. Here is what the two sides actually claim and where the evidence sits.",
+        img: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=1400&q=80&auto=format&fit=crop",
+        body: [
+            "Every Indian election produces a fresh round of allegations about Electronic Voting Machines (EVMs). The 'EVMs are rigged' camp wants paper ballots back. The 'EVMs are foolproof' camp dismisses all concerns as conspiracy. Both framings miss the actual technical question. Here is what each side claims, and what the evidence supports.",
+            "## What an Indian EVM is",
+            "An Indian EVM is a standalone two-piece machine: a Ballot Unit (with the candidate buttons) and a Control Unit (where the count accumulates). The machines run firmware burned to a one-time-programmable chip, are not networked, and store votes in a serial-write memory that cannot be wirelessly accessed. Since 2017, every Polling Station also has a Voter-Verifiable Paper Audit Trail (VVPAT) printer that produces a paper slip the voter can verify before it drops into a sealed compartment.",
+            "## What the critics claim",
+            "Three categories of claim. First, hardware tampering — that machines can be physically modified before polling day to favour a particular candidate. Second, software tampering — that the firmware itself can be altered or that compromised machines can be substituted. Third, manipulation of the VVPAT-EVM count reconciliation — that VVPAT slips are not actually counted in enough constituencies to verify the EVM count.",
+            "## What the ECI claims",
+            "First, EVMs are not networked, so remote tampering is impossible. Second, the firmware is burned to a chip that cannot be reprogrammed without physically replacing the chip, and chip-level manipulation requires factory access. Third, every EVM is sealed and the seals are checked before polling by candidates' agents. Fourth, the VVPAT reconciliation is done in five randomly-selected booths per assembly constituency.",
+            "## Where the evidence actually sits",
+            "On the hardware/software side: the ECI's claims are technically defensible. The architecture is conservative by design (no networking, OTP firmware, physical seals). No public demonstration of an in-the-wild EVM manipulation that survives ECI's seal-checking has been produced. Some demonstrations have been made on prototype machines or simulated environments, which are not the same as production machines.",
+            "On the VVPAT reconciliation side: the critics have a stronger point. The 2019 Supreme Court ruling (N Chandrababu Naidu v Union of India) increased VVPAT reconciliation from one booth per constituency to five. Critics argue that five booths is a tiny statistical sample given the scale (a Lok Sabha constituency has roughly 2,000 booths). The April 2024 Supreme Court ruling (Association for Democratic Reforms) declined to mandate 100% VVPAT counting, but did mandate that any mismatch in the reconciliation would trigger 100% recount for that constituency.",
+            "## The proportionate position",
+            "Neither 'paper ballots back' nor 'EVMs are perfect'. The proportionate reform is: expand VVPAT reconciliation to a statistically rigorous sample (10–15% of booths per constituency), publish booth-level VVPAT vs EVM count data, and make all chip-level audits independently verifiable. None of this requires returning to paper ballots, and all of it would close the credibility gap.",
+            "## Further reading",
+            "Electronic voting in India on Wikipedia: en.wikipedia.org/wiki/Electronic_voting_in_India. The N Chandrababu Naidu v Union of India judgment (2019) and the Association for Democratic Reforms v ECI judgment (April 2024) are both on the Supreme Court website.",
+        ],
+    },
+];
+
+console.log(`Uploading ${blogs.length} blog posts...`);
+for (const post of blogs) {
+    const ref = await addDoc(collection(db, "blogs"), {
+        ...post,
+        createdAt: serverTimestamp(),
+    });
+    console.log(`  ✓ ${post.slug}  →  /blog/${post.slug}  (doc ${ref.id})`);
+}
+console.log(`\n✅ Done. ${blogs.length} more blog posts live.`);
+process.exit(0);

@@ -1,56 +1,44 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Quote, Link as LinkIcon, Download } from "lucide-react";
+import { ArrowRight, Quote, Link as LinkIcon, Lock } from "lucide-react";
 
 export default function FounderProfilePage() {
     const timeline = [
         { date: "Phase 0", title: "THE PROVOCATION", desc: "A hypothetical CJI remark calls youth groups 'cockroaches'. The thought experiment begins." },
-        { date: "Phase 1", title: "THE GOOGLE FORM", desc: "Site launches with a single question: Are you a cockroach too? Anyone can sign up, anonymously." },
-        { date: "Phase 2", title: "FOUNDING COHORT", desc: "First 50 founding roaches get permanent numbers + cards. Cohort fills up fast." },
+        { date: "Phase 1", title: "THE OPEN FORM", desc: "Site launches with a single question: Are you a cockroach too? Anyone can sign up, anonymously." },
+        { date: "Phase 2", title: "FOUNDING COHORT", desc: "First 50 founding roaches get permanent numbers + cards. Cohort fills up." },
         { date: "Phase 3 — Next", title: "STATE CHAPTERS", desc: "Once 5,000 sign-ups across 5 states, regional chapters open. WhatsApp groups, local meet-ups." }
-    ];
-
-    const press = [
-        { source: "EDITORIAL NOTE", title: "Press coverage will appear here as we earn it — not before." },
-        { source: "GOAL", title: "Mainstream pickup by Day 90. Get featured on TheWire / Newslaundry / Mojo." },
-        { source: "PROCESS", title: "No paid PR. Only organic earned media." }
     ];
 
     return (
         <main className="min-h-screen bg-bg text-text-primary pb-24">
             {/* Top Nav */}
             <nav className="sticky top-0 z-50 bg-bg border-b-4 border-text-primary px-4 py-4 flex justify-center shadow-[0_4px_0_0_#000]">
-                <div className="font-mono text-sm font-bold uppercase tracking-widest text-text-secondary">CJP ARCHIVES / SUBJECT 001</div>
+                <div className="font-mono text-sm font-bold uppercase tracking-widest text-text-secondary">CJP ARCHIVES / CREATOR FILE</div>
             </nav>
 
             {/* Hero */}
             <header className="px-4 py-20 text-center border-b-4 border-text-primary bg-card relative">
                 <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-12">
 
-                    {/* Founder Photo Block */}
-                    <div className="w-64 h-64 md:w-72 md:h-72 border-8 border-rich-black shrink-0 relative shadow-[16px_16px_0_0_#FFD60A] rotate-3 overflow-hidden group">
-                        <img
-                            src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=600&q=80&auto=format&fit=crop"
-                            alt="Abhijeet Dipke, founder of CJP"
-                            className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-                            loading="eager"
-                        />
-                        <div className="absolute inset-0 bg-rich-black/20 group-hover:bg-transparent transition-colors"></div>
+                    {/* Anonymous Placeholder Block */}
+                    <div className="w-64 h-64 md:w-72 md:h-72 border-8 border-rich-black shrink-0 relative shadow-[16px_16px_0_0_#FFD60A] rotate-3 overflow-hidden bg-rich-black flex items-center justify-center">
+                        <Lock size={96} className="text-accent" strokeWidth={2.5} />
                         <div className="absolute bottom-2 left-2 font-mono text-[10px] font-bold text-white bg-rich-black px-2 py-1 uppercase tracking-widest border border-white">
-                            DIPKE, A.
+                            CREATOR · WITHHELD
                         </div>
                     </div>
 
                     <div className="text-left">
                         <h1 className="font-display text-5xl md:text-8xl uppercase leading-none tracking-tighter mb-4 text-rich-black">
-                            ABHIJEET <span className="text-accent">DIPKE.</span>
+                            ANON.<br /><span className="text-accent">CREATOR.</span>
                         </h1>
                         <p className="font-mono text-xl md:text-2xl font-bold uppercase bg-rich-black inline-block px-4 py-2 text-white border-2 border-text-primary mb-3">
                             CREATOR · CJP
                         </p>
                         <p className="font-mono text-xs uppercase tracking-widest text-text-secondary max-w-md">
-                            Fan-built satirical political art project. Started solo, growing as a cohort.
+                            The CJP project is being run anonymously. Focus on the manifesto, not the messenger.
                         </p>
                     </div>
                 </div>
@@ -58,42 +46,46 @@ export default function FounderProfilePage() {
 
             <section className="max-w-6xl mx-auto px-4 py-16 grid lg:grid-cols-2 gap-16">
 
-                {/* Left Col - Context */}
+                {/* Left Col — The Brief */}
                 <div className="space-y-12">
 
                     <div className="bg-card border-4 border-text-primary p-8 shadow-[8px_8px_0_0_#000]">
-                        <h2 className="font-display text-3xl uppercase text-rich-black mb-6 border-b-4 border-text-primary pb-2 flex justify-between">
-                            BACKGROUND <span className="text-accent text-3xl">🎓</span>
+                        <h2 className="font-display text-3xl uppercase text-rich-black mb-6 border-b-4 border-text-primary pb-2">
+                            THE BRIEF
                         </h2>
                         <div className="space-y-6 font-mono text-sm leading-relaxed text-text-secondary font-bold">
-                            <div className="p-4 border-l-4 border-blue-500 bg-bg">
-                                <h3 className="font-display text-2xl text-blue-500 mb-2">BOSTON UNIVERSITY</h3>
-                                <p>Holding a degree from BU, Abhijeet merges international political campaign strategies with grassroots Indian meme culture. This lethal combination birthed the CJP infrastructure.</p>
+                            <div className="p-4 border-l-4 border-accent bg-bg">
+                                <h3 className="font-display text-2xl text-accent mb-2">WHY ANONYMOUS</h3>
+                                <p>This project lives or dies on the strength of the manifesto, the data, and the visual language. The creator&apos;s identity does not strengthen any of those. So it stays withheld. If we ever earn institutional press coverage, the creator will go on record then — not before.</p>
                             </div>
-                            <div className="p-4 border-l-4 border-green-500 bg-bg">
-                                <h3 className="font-display text-2xl text-green-500 mb-2">AAP CONNECTION</h3>
-                                <p>A former strategist linked to the Aam Aadmi Party's digital wings. Left the traditional structure realizing that modern Gen-Z electorate prefers unhinged satire over press releases.</p>
+                            <div className="p-4 border-l-4 border-alert bg-bg">
+                                <h3 className="font-display text-2xl text-alert mb-2">WHAT THIS IS NOT</h3>
+                                <p>Not a registered political party. Not affiliated with the Election Commission, any sitting politician, judge, or media organisation. CJP is a satirical political-art project. The hypothetical scenarios on the site (including the CJI remark) are thought experiments, not events.</p>
+                            </div>
+                            <div className="p-4 border-l-4 border-success bg-bg">
+                                <h3 className="font-display text-2xl text-success mb-2">CONTACT</h3>
+                                <p>Press, partnerships, or anyone who wants to verify the project: write through the join form with subject &lsquo;PRESS&rsquo;. The creator reads every submission tagged that way.</p>
                             </div>
                         </div>
                     </div>
 
-                    {/* Quotes Carousel (Static Mockup) */}
-                    <div className="bg-accent text-black p-8 border-4 border-black relative">
+                    {/* Quote */}
+                    <div className="bg-accent text-rich-black p-8 border-4 border-rich-black relative">
                         <Quote size={64} className="absolute top-4 right-4 opacity-20" />
                         <p className="font-display text-4xl uppercase leading-tight italic mb-6 relative z-10">
-                            "They called us pests because we survive everything they throw at us. We just decided to organize the hive."
+                            &ldquo;They called us pests because we survive everything they throw at us. We just decided to organize the hive.&rdquo;
                         </p>
-                        <p className="font-mono font-bold uppercase tracking-widest text-xs">— A. Dipke, May 2026</p>
+                        <p className="font-mono font-bold uppercase tracking-widest text-xs">— from the CJP manifesto</p>
                     </div>
 
                 </div>
 
-                {/* Right Col - Timelines & Press */}
+                {/* Right Col — Timelines */}
                 <div className="space-y-16">
 
                     {/* Timeline */}
                     <div>
-                        <h2 className="font-display text-4xl uppercase text-rich-black mb-8 border-b-4 border-text-primary pb-2">THE GENESIS TIMELINE</h2>
+                        <h2 className="font-display text-4xl uppercase text-rich-black mb-8 border-b-4 border-text-primary pb-2">THE PROJECT ROADMAP</h2>
                         <div className="space-y-6 relative before:absolute before:inset-0 before:ml-2 before:-translate-x-px before:h-full before:w-1 before:bg-text-primary">
                             {timeline.map((item, i) => (
                                 <div key={i} className="relative flex items-center justify-between group">
@@ -110,22 +102,20 @@ export default function FounderProfilePage() {
                         </div>
                     </div>
 
-                    {/* Press */}
+                    {/* Press Goal */}
                     <div className="bg-rich-black border-4 border-rich-black p-8 text-white">
-                        <h2 className="font-display text-3xl uppercase text-white mb-6 border-b-4 border-white/20 pb-2 flex items-center justify-between">
-                            MEDIA DOSSIER <span className="w-3 h-3 rounded-full bg-alert animate-pulse"></span>
+                        <h2 className="font-display text-3xl uppercase text-white mb-6 border-b-4 border-white/20 pb-2">
+                            PRESS COVERAGE
                         </h2>
-                        <div className="space-y-4 font-mono">
-                            {press.map((p, i) => (
-                                <a href="#" key={i} className="flex gap-4 group hover:bg-white/5 p-2 -mx-2 transition-colors border-b-2 border-white/10 pb-4">
-                                    <LinkIcon size={16} className="text-white/60 shrink-0 mt-1 group-hover:text-accent" />
-                                    <div>
-                                        <span className="text-accent text-xs font-bold uppercase tracking-widest block mb-1">{p.source}</span>
-                                        <span className="text-white group-hover:underline">{p.title}</span>
-                                    </div>
-                                </a>
-                            ))}
-                        </div>
+                        <p className="font-mono text-sm uppercase tracking-widest text-white/70 mb-8 leading-relaxed">
+                            This space is empty by design. Press coverage will appear here as we earn it &mdash; not before. No paid PR. Only organic earned media.
+                        </p>
+                        <Link
+                            href="/manifesto"
+                            className="inline-flex items-center gap-2 bg-accent text-rich-black font-mono font-bold text-xs uppercase tracking-widest px-4 py-2 border-2 border-accent hover:bg-white transition-colors"
+                        >
+                            READ THE MANIFESTO INSTEAD <ArrowRight size={14} />
+                        </Link>
                     </div>
 
                 </div>
