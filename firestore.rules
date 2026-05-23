@@ -39,7 +39,7 @@ service cloud.firestore {
                     && request.resource.data.slug is string
                     && request.resource.data.title.size() <= 200
                     && request.resource.data.slug.size() <= 120;
-      allow update, delete: if false;
+      allow update, delete: if true;
     }
 
     // Admin-managed reels — read public, write gated by /admin passcode (app-layer).
@@ -49,7 +49,7 @@ service cloud.firestore {
                     && request.resource.data.videoUrl is string
                     && request.resource.data.title.size() <= 200
                     && request.resource.data.videoUrl.size() <= 500;
-      allow update, delete: if false;
+      allow update, delete: if true;
     }
 
     // Admin-managed news — read public, write gated by /admin passcode (app-layer).
@@ -59,7 +59,7 @@ service cloud.firestore {
                     && request.resource.data.url is string
                     && request.resource.data.title.size() <= 200
                     && request.resource.data.url.size() <= 500;
-      allow update, delete: if false;
+      allow update, delete: if true;
     }
   }
 }
