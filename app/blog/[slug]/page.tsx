@@ -1,9 +1,100 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Clock, Facebook, Instagram, Twitter, MessageSquare, Quote } from "lucide-react";
+import { Clock, Facebook, Instagram, Twitter, MessageSquare, Quote, Send } from "lucide-react";
 import { getPostBySlug, getRelatedPosts } from "@/lib/blog";
+import { addComment, listenToComments, type Comment } from "@/lib/firebase-actions";
+
+function CommentsSection({ slug }: { slug: string }) {
+    const [comments, setComments] = useState<Comment[]>([]);
+    const [name, setName] = useState("");
+    const [text, setText] = useState("");
+    const [status, setStatus] = useState<"idle" | "submitting" | "ok" | "error" | "notconfigured">("idle");
+
+    useEffect(() => {
+        const unsub = listenToComments(slug, setComments);
+        return () => unsub();
+    }, [slug]);
+
+    const onSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (status === "submitting") return;
+        setStatus("submitting");
+        const result = await addComment(slug, name, text);
+        if (result.ok) {
+            setStatus("ok");
+            setText("");
+            setTimeout(() => setStatus("idle"), 2500);
+        } else if (result.reason === "firebase-not-configured") {
+            setStatus("notconfigured");
+        } else {
+            setStatus("error");
+        }
+    };
+
+    return (
+        <div className="space-y-6">
+            <form onSubmit={onSubmit} className="bg-card border-4 border-text-primary p-6 space-y-4 shadow-[8px_8px_0_0_#000]">
+                <input
+                    type="text"
+                    required
+                    maxLength={60}
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="YOUR NAME / HANDLE"
+                    className="w-full bg-bg border-2 border-text-primary p-3 font-mono text-sm uppercase text-rich-black focus:border-accent focus:outline-none placeholder-text-secondary"
+                />
+                <textarea
+                    required
+                    rows={3}
+                    maxLength={800}
+                    value={text}
+                    onChange={(e) => setText(e.target.value)}
+                    placeholder="DROP YOUR THOUGHT — KEEP IT GUTTER."
+                    className="w-full bg-bg border-2 border-text-primary p-3 font-mono text-sm text-rich-black focus:border-accent focus:outline-none placeholder-text-secondary resize-none"
+                />
+                <button
+                    type="submit"
+                    disabled={status === "submitting" || status === "notconfigured"}
+                    className="w-full bg-accent text-rich-black font-display text-xl uppercase py-3 border-4 border-rich-black hover:bg-rich-black hover:text-accent transition-colors shadow-[4px_4px_0_0_#000] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                >
+                    <Send size={18} /> {status === "submitting" ? "POSTING..." : "POST COMMENT"}
+                </button>
+                {status === "ok" && <p className="font-mono text-xs uppercase text-success font-bold">✓ Comment posted.</p>}
+                {status === "error" && <p className="font-mono text-xs uppercase text-alert font-bold">Comment failed — try again.</p>}
+                {status === "notconfigured" && (
+                    <p className="font-mono text-xs uppercase text-text-secondary">
+                        Comments go live once the admin enables Firebase. (Wiring complete — env vars pending.)
+                    </p>
+                )}
+            </form>
+
+            {comments.length === 0 ? (
+                <p className="font-mono text-sm text-text-secondary uppercase tracking-widest text-center py-6 border-2 border-dashed border-text-primary/30">
+                    No comments yet. Be the first cockroach to crawl out.
+                </p>
+            ) : (
+                <ul className="space-y-4">
+                    {comments.map((c) => (
+                        <li key={c.id} className="bg-card border-4 border-text-primary p-4">
+                            <div className="flex items-center justify-between mb-2">
+                                <span className="font-mono text-xs font-bold uppercase tracking-widest text-accent">{c.name}</span>
+                                {c.createdAtMs && (
+                                    <span className="font-mono text-[10px] uppercase text-text-secondary">
+                                        {new Date(c.createdAtMs).toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" })}
+                                    </span>
+                                )}
+                            </div>
+                            <p className="font-hindi text-sm text-rich-black leading-relaxed whitespace-pre-line">{c.text}</p>
+                        </li>
+                    ))}
+                </ul>
+            )}
+        </div>
+    );
+}
 
 export default function BlogPostPage({ params }: { params: { slug: string } }) {
     const post = getPostBySlug(params.slug);
@@ -112,13 +203,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
                     <h3 className="font-display text-4xl uppercase text-rich-black mb-8 border-b-4 border-text-primary pb-2 flex items-center justify-between">
                         THE GUTTER (COMMENTS) <MessageSquare size={32} />
                     </h3>
-                    <div className="p-8 bg-card border-4 border-text-primary text-center">
-                        <h4 className="font-display text-2xl uppercase mb-2">COMMENTS COMING SOON</h4>
-                        <p className="font-mono text-sm text-text-secondary mb-6">Generate your Roach ID first. Comments will go live in Phase 2 with your verified card.</p>
-                        <Link href="/tools/card" className="inline-block bg-accent text-rich-black font-mono font-bold uppercase px-6 py-3 border-2 border-rich-black hover:bg-white shadow-[4px_4px_0_0_#000]">
-                            GET YOUR CARD
-                        </Link>
-                    </div>
+                    <CommentsSection slug={post.slug} />
                 </div>
 
                 <div>

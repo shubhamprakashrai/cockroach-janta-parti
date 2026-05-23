@@ -1,8 +1,42 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { UploadCloud, MessageSquare, Repeat2, Heart, Search, Crown, X } from "lucide-react";
+import { hasLikedMeme, likeMeme, listenToMemeLikes } from "@/lib/firebase-actions";
+
+function MemeLikeButton({ memeId }: { memeId: string }) {
+    const [count, setCount] = useState(0);
+    const [liked, setLiked] = useState(false);
+    const [busy, setBusy] = useState(false);
+
+    useEffect(() => {
+        setLiked(hasLikedMeme(memeId));
+        const unsub = listenToMemeLikes(memeId, setCount);
+        return () => unsub();
+    }, [memeId]);
+
+    const onClick = async () => {
+        if (liked || busy) return;
+        setBusy(true);
+        const result = await likeMeme(memeId);
+        if (result.ok) setLiked(true);
+        setBusy(false);
+    };
+
+    return (
+        <button
+            type="button"
+            onClick={onClick}
+            disabled={liked || busy}
+            aria-label={liked ? "Already liked" : "Like meme"}
+            className={`p-3 border-4 border-rich-black hover:scale-110 transition-transform shadow-[4px_4px_0_0_#FFD60A] flex items-center gap-2 ${liked ? "bg-alert text-white" : "bg-white text-rich-black"}`}
+        >
+            <Heart size={20} fill={liked ? "currentColor" : "none"} />
+            <span className="font-mono text-xs font-bold">{count}</span>
+        </button>
+    );
+}
 
 export default function MemeWallPage() {
     const filters = ["Top Today", "Top Week", "All Time", "Hindi", "Regional"];
@@ -129,9 +163,7 @@ export default function MemeWallPage() {
                                         <Link href={`/tools/meme-generator?template=${i}`} className="bg-accent text-rich-black p-3 border-4 border-rich-black hover:scale-110 shadow-[4px_4px_0_0_#000]" title="Remix this template">
                                             <Repeat2 size={24} />
                                         </Link>
-                                        <button className="bg-white text-rich-black p-3 border-4 border-rich-black hover:scale-110 shadow-[4px_4px_0_0_#FFD60A]" title="Like meme">
-                                            <Heart size={24} />
-                                        </button>
+                                        <MemeLikeButton memeId={`meme-${i}`} />
                                     </div>
                                 </div>
                                 <div className="p-3 bg-card font-mono text-xs flex justify-between items-center relative z-20">

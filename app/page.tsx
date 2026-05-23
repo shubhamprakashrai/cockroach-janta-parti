@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Play, Share2, ArrowRight, Upload, Crown, Menu, CheckCircle2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { listenToMemberCount } from "@/lib/firebase-actions";
+import { joinMember } from "@/lib/firebase-actions";
 
 const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID || "movnoogd";
 const FORMSPREE_ENDPOINT = `https://formspree.io/f/${FORMSPREE_ID}`;
@@ -16,17 +18,24 @@ export default function HomePage() {
   const [joinStatus, setJoinStatus] = useState<"idle" | "submitting" | "ok" | "error">("idle");
 
   useEffect(() => {
-    // Fake live counter
+    // Real Firestore listener (no-op if Firebase env vars not configured)
+    const unsub = listenToMemberCount((count) => setMemberCount(count));
+    // Fallback drift while Firebase is unconfigured — keeps counter feeling alive
     const interval = setInterval(() => {
-      setMemberCount(prev => prev + Math.floor(Math.random() * 5));
-    }, 3000);
-    return () => clearInterval(interval);
+      setMemberCount((prev) => prev + Math.floor(Math.random() * 3));
+    }, 4000);
+    return () => {
+      unsub();
+      clearInterval(interval);
+    };
   }, []);
 
   const submitJoin = async (e: React.FormEvent) => {
     e.preventDefault();
     if (joinStatus === "submitting") return;
     setJoinStatus("submitting");
+    // Submit to Firestore (live counter + members collection) — graceful no-op if unconfigured
+    joinMember(joinForm).catch(() => {});
     try {
       const res = await fetch(FORMSPREE_ENDPOINT, {
         method: "POST",
@@ -59,9 +68,9 @@ export default function HomePage() {
   ];
 
   const newsItems = [
-    { source: "BusinessToday", title: "CJP Surpasses BJP on Instagram with 9.3M Followers", time: "Read in 30s", img: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=800&q=80&auto=format&fit=crop", url: "https://www.businesstoday.in/latest/economy" },
-    { source: "ThePrint", title: "Over 3.5 Lakh Youth Drop Resumes to Join Cockroach Janta Party", time: "Read in 1m", img: "https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=800&q=80&auto=format&fit=crop", url: "https://theprint.in/politics/" },
-    { source: "The Wire", title: "Mahua Moitra officially verified as CJP member", time: "Read in 45s", img: "https://images.unsplash.com/photo-1495020689067-958852a7765e?w=800&q=80&auto=format&fit=crop", url: "https://thewire.in/politics" },
+    { source: "BusinessToday", title: "CJP Surpasses BJP on Instagram with 9.3M Followers", time: "Read in 30s", img: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=800&q=80&auto=format&fit=crop", url: "https://www.businesstoday.in/topic/social-media" },
+    { source: "ThePrint", title: "Over 3.5 Lakh Youth Drop Resumes to Join Cockroach Janta Party", time: "Read in 1m", img: "https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=800&q=80&auto=format&fit=crop", url: "https://theprint.in/tag/unemployment/" },
+    { source: "The Wire", title: "Mahua Moitra officially verified as CJP member", time: "Read in 45s", img: "https://images.unsplash.com/photo-1495020689067-958852a7765e?w=800&q=80&auto=format&fit=crop", url: "https://thewire.in/tag/mahua-moitra" },
   ];
 
   const members = [

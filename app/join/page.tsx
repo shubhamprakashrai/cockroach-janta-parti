@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { CheckCircle2, QrCode } from "lucide-react";
+import { joinMember } from "@/lib/firebase-actions";
 
 const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID || "movnoogd";
 const FORMSPREE_ENDPOINT = `https://formspree.io/f/${FORMSPREE_ID}`;
@@ -16,6 +17,8 @@ export default function JoinPage() {
     const submitToFormspree = async () => {
         setIsSubmitting(true);
         setSubmitError(null);
+        // Write to Firestore (live counter + members collection) — graceful no-op if unconfigured
+        joinMember({ name: formData.name, email: formData.email, city: formData.city, why: formData.why }).catch(() => {});
         try {
             const res = await fetch(FORMSPREE_ENDPOINT, {
                 method: "POST",
