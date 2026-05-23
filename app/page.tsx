@@ -410,34 +410,27 @@ export default function HomePage() {
             <p className="font-mono text-xs md:text-sm text-text-secondary mt-4 max-w-xl mx-auto uppercase tracking-widest">All 50 founding spots open. Your number is locked the moment you join.</p>
           </div>
           {members.length === 0 ? (
-            <>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-6 max-w-3xl mx-auto mb-12">
-                {/* #001 — Founder */}
-                <div className="aspect-square bg-accent border-4 border-rich-black flex flex-col items-center justify-center shadow-[8px_8px_0_0_#000]">
-                  <div className="font-display text-4xl md:text-5xl text-rich-black">#001</div>
-                  <div className="font-mono text-[10px] uppercase tracking-widest text-rich-black mt-1 font-bold">Founder</div>
-                  <div className="font-mono text-[10px] uppercase tracking-widest text-rich-black/70 mt-1">@cjp_creator</div>
-                </div>
-                {/* Open spots */}
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <div key={i} className="aspect-square bg-bg border-4 border-dashed border-text-primary/40 flex flex-col items-center justify-center hover:border-accent transition-colors">
-                    <div className="font-display text-3xl md:text-4xl text-text-secondary/60">#{(memberCount + i + 1).toString().padStart(3, "0")}</div>
-                    <div className="font-mono text-[10px] uppercase tracking-widest text-text-secondary/60 mt-1">Open</div>
-                  </div>
-                ))}
+            <div className="bg-rich-black text-white p-8 md:p-16 border-4 border-rich-black shadow-[16px_16px_0_0_#FFD60A] text-center">
+              <div className="font-display text-7xl md:text-9xl uppercase mb-4 leading-none">
+                0<span className="text-text-secondary/40">/50</span>
               </div>
-              <div className="text-center">
-                <Link
-                  href="/join"
-                  className="inline-block bg-rich-black text-accent font-display text-2xl md:text-3xl uppercase px-10 py-5 border-4 border-rich-black hover:bg-accent hover:text-rich-black transition-colors shadow-[8px_8px_0_0_#FFD60A] hover:translate-x-1 hover:translate-y-1 hover:shadow-[4px_4px_0_0_#FFD60A]"
-                >
-                  CLAIM #{(memberCount + 1).toString().padStart(3, "0")} →
-                </Link>
-                <p className="font-mono text-xs uppercase tracking-widest text-text-secondary mt-4">
-                  44 founding spots after that. Then we lock the cohort.
-                </p>
-              </div>
-            </>
+              <p className="font-mono text-xs md:text-sm uppercase tracking-[0.3em] text-white/70 mb-8">
+                Founding cohort spots claimed.
+              </p>
+              <p className="font-hindi text-xl md:text-3xl max-w-2xl mx-auto mb-10 leading-relaxed">
+                Be the first.<br />
+                The first 50 founding members get a permanent number, a card, and bragging rights forever.
+              </p>
+              <Link
+                href="/join"
+                className="inline-block bg-accent text-rich-black font-display text-3xl md:text-4xl uppercase px-10 md:px-16 py-5 md:py-6 border-4 border-accent hover:bg-white transition-colors shadow-[8px_8px_0_0_#FFD60A] hover:translate-x-1 hover:translate-y-1 hover:shadow-[4px_4px_0_0_#FFD60A]"
+              >
+                CLAIM #001 →
+              </Link>
+              <p className="font-mono text-[10px] md:text-xs uppercase tracking-widest text-white/50 mt-6">
+                Whoever fills the join form first locks the #001 spot.
+              </p>
+            </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {members.map((m, i) => (
