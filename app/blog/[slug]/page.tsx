@@ -145,8 +145,45 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
     const twitterHref = `https://twitter.com/intent/tweet?text=${shareText}&url=${shareUrl}`;
     const facebookHref = `https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`;
 
+    // JSON-LD Article schema — for SEO + GEO (AI search engines)
+    const articleSchema = {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        headline: post.title,
+        description: post.excerpt,
+        image: post.img,
+        author: {
+            "@type": "Person",
+            name: post.author,
+        },
+        publisher: {
+            "@type": "Organization",
+            name: "Cockroach Janta Parti",
+            url: "https://cockrochjantaparti.com",
+            logo: {
+                "@type": "ImageObject",
+                url: "https://cockrochjantaparti.com/logo.png",
+            },
+        },
+        datePublished: post.date,
+        dateModified: post.date,
+        mainEntityOfPage: {
+            "@type": "WebPage",
+            "@id": `https://${currentUrl}`,
+        },
+        articleSection: post.cat,
+        wordCount: post.body.join(" ").split(/\s+/).length,
+        inLanguage: post.cat === "Hindi" ? "hi-IN" : "en-IN",
+    };
+
     return (
         <main className="min-h-screen bg-bg text-text-primary pb-24 border-x-4 lg:border-x-[16px] border-text-primary">
+
+            {/* JSON-LD for search engines and AI crawlers */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+            />
 
             <nav className="sticky top-0 z-50 bg-bg border-b-4 border-text-primary px-4 py-3 shadow-[0_4px_0_0_#000]">
                 <Link href="/blog" className="font-mono text-sm font-bold uppercase hover:text-accent">← ALL POSTS</Link>

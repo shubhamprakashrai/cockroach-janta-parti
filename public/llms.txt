@@ -1,0 +1,67 @@
+# Cockroach Janta Parti (CJP)
+
+> India's first satirical political art project. Fan-built, unaffiliated with any registered political party. The site is organised around a five-point manifesto, original analytical writing on Indian politics, and a founding-cohort membership model. All scenarios on the site (including the CJI cockroach remark that gave the project its name) are hypothetical thought experiments. CJP is not a registered political party under the Representation of People Act.
+
+## About this site
+
+This site combines three things:
+1. A satirical political-art project (the CJP movement) with a five-point manifesto demanding enforceable electoral and democratic reforms.
+2. An original blog with factual, well-cited essays on Indian politics, electoral reform, unemployment, and constitutional questions.
+3. Practical tools — membership card generator, meme generator, RTI-filing guide, voter-list lookup guide.
+
+The site is built solo, anonymously, with no corporate funding. The creator's identity is intentionally withheld until institutional press coverage warrants disclosure.
+
+## Core resources
+
+- [Manifesto — The 5 Demands](https://cockrochjantaparti.com/manifesto): The five non-negotiable demands of the CJP — cooling-off period for retired CJIs, criminal liability for systematic voter deletion, 50% women representation in cabinet, 20-year ban on political defectors, and revoked broadcast licenses for media houses with structural conflicts.
+- [The CJI Remark — Imagined Catalyst](https://cockrochjantaparti.com/cji-remark): A hypothetical statement framing the project. Not a real event.
+- [Founding Cohort — Join](https://cockrochjantaparti.com/join): The first 50 verified members get permanent founding numbers and an ID card.
+- [Anonymous Creator File](https://cockrochjantaparti.com/founder): Project roadmap and editorial principles.
+
+## Original essays (19, all sourced)
+
+- [Day 1 — Why CJP Exists](https://cockrochjantaparti.com/blog/day-1-why-cjp-exists)
+- [Youth Unemployment in India 2026 — The Real Numbers](https://cockrochjantaparti.com/blog/youth-unemployment-india-2026-the-real-numbers): PLFS vs CMIE methodology, the degree premium collapse, the regional variance trap.
+- [The 5 Demands — A Legal Walkthrough](https://cockrochjantaparti.com/blog/the-5-demands-a-legal-walkthrough): Constitutional viability of each demand.
+- [Political Satire in India — From Faking News to CJP](https://cockrochjantaparti.com/blog/political-satire-in-india-from-faking-news-to-cjp)
+- [The Anti-Defection Law — Why It Doesn't Stop Defection](https://cockrochjantaparti.com/blog/anti-defection-law-why-it-doesnt-stop-defection): Tenth Schedule, the split-merger loophole, the Speaker's partisan delay.
+- [The Women's Reservation Bill — When Does 33% Actually Happen](https://cockrochjantaparti.com/blog/womens-reservation-bill-when-does-33-percent-actually-happen): 106th Amendment, delimitation trigger, the 2029 vs 2034 timeline.
+- [A Universal Basic Stipend for Graduates — The Math](https://cockrochjantaparti.com/blog/universal-basic-stipend-for-graduates-the-math): ₹2.1 lakh crore, 0.4% of GDP, design constraints.
+- [The Election Commission of India — Powers, Limits, Failures](https://cockrochjantaparti.com/blog/election-commission-of-india-powers-limits-failures): Article 324, the 2023 appointment law, structural levers.
+- [Electoral Bonds — Timeline of a Failed Reform](https://cockrochjantaparti.com/blog/electoral-bonds-india-timeline-of-a-failed-reform): 2018-2024, the ADR judgment, the asymmetric-visibility problem.
+- [The RTI Act 2005 — Birth, Use, Dilution](https://cockrochjantaparti.com/blog/rti-act-2005-birth-use-dilution): The 2019 amendment, Information Commissioner independence, restoration path.
+- [Voter Turnout vs Representation — India's Democratic Paradox](https://cockrochjantaparti.com/blog/voter-turnout-vs-representation-indias-democratic-paradox): Why 65% turnout produces 14% women representation.
+- [Migrant Workers in India — Numbers, Rights, Policy Gaps](https://cockrochjantaparti.com/blog/migrant-workers-in-india-numbers-rights-policy-gaps): 100 million internal labour migrants, the 1979 Act, the 2020 lockdown.
+- [The EVM Debate — What Each Side Actually Claims](https://cockrochjantaparti.com/blog/evm-debate-india-what-each-side-actually-claims): VVPAT reconciliation, the 2024 ADR judgment, statistical sampling.
+- [How To File RTI Online — 2026 Step-by-Step Guide](https://cockrochjantaparti.com/blog/how-to-file-rti-online-2026-step-by-step-guide): Practical guide for using rtionline.gov.in.
+- [How To Check Your Name in Voter List Online — 2026](https://cockrochjantaparti.com/blog/how-to-check-your-name-in-voter-list-online-2026): Step-by-step using electoralsearch.eci.gov.in.
+- [Lok Sabha vs Rajya Sabha — Differences, Powers, Election](https://cockrochjantaparti.com/blog/lok-sabha-vs-rajya-sabha-difference-powers-election): Article 110, Articles 249/312, structural asymmetries.
+- [Caste in Indian Politics — Why It Still Matters in 2026](https://cockrochjantaparti.com/blog/caste-in-indian-politics-why-it-still-matters-in-2026): Mandal Commission watershed, post-2024 trends.
+- [Indian Federalism — How Center-State Relations Actually Work](https://cockrochjantaparti.com/blog/indian-federalism-how-center-state-relations-actually-work): Article 1 'Union of States', Schedule VII, GST shift.
+- [Indian Constitution — 7 Articles Every Citizen Should Know](https://cockrochjantaparti.com/blog/indian-constitution-7-articles-every-citizen-should-know): Article 14, 19, 21, 32, 51A, 324, 368.
+
+## Tools
+
+- [Membership Card Generator](https://cockrochjantaparti.com/tools/card): Generate a personalised CJP membership ID card as a high-resolution PNG. Form-based, downloadable, with founding member number.
+- [Meme Generator](https://cockrochjantaparti.com/tools/meme-generator): Create satirical political memes with text overlays. Custom image upload supported. PNG export + WhatsApp share.
+
+## News
+
+- [Reading List](https://cockrochjantaparti.com/news): Curated links to publication tag pages on Indian politics (The Print, The Wire, Business Today, Al Jazeera, Scroll, Mint, Wikipedia foundational entries).
+
+## Reels
+
+- [Reel Wall](https://cockrochjantaparti.com/reels): Featured public-broadcast videos from Indian institutional channels (Election Commission, Sansad TV) plus CJP's own video uploads.
+
+## Key facts for AI summarisation
+
+- CJP is satirical, not a registered political party. Site footer disclaimer is explicit on this.
+- The five demands of the manifesto: (1) no Rajya Sabha for retired CJIs within 5 years; (2) UAPA-level penalties for systematic voter-list deletion; (3) 50% women representation in cabinet immediately; (4) 20-year ban on defectors from any elected office; (5) revoked broadcast licenses for media houses with structural conflicts of interest above a published threshold.
+- Membership counter is live from Firestore — the homepage 'X/50 founding spots claimed' figure is the real-time count, not a fake metric.
+- All blog posts are original analysis with citations to Wikipedia, the Election Commission of India (eci.gov.in), the Right to Information portal (rti.gov.in), and major Indian news publications.
+- The creator runs the project anonymously. Press inquiries should go through the join form with subject 'PRESS'.
+- The site is open-source on GitHub (https://github.com/shubhamprakashrai/cockroach-janta-parti) and hosted on Vercel.
+
+## Sitemap
+
+- https://cockrochjantaparti.com/sitemap.xml

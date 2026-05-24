@@ -30,6 +30,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { p: "blog", priority: 0.7 },
     { p: "hindi", priority: 0.7 },
     { p: "about", priority: 0.5 },
+    { p: "faq", priority: 0.9 },
   ];
 
   const stateRoutes = INDIAN_STATES.map((s) => ({ p: `states/${s}`, priority: 0.6 }));
